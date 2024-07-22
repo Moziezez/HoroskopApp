@@ -1,0 +1,43 @@
+{
+  "name": "web-horoscope",
+  "version": "1.0.0",
+  "description": "Horoscope Project offline",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maurice Schollmeyer",
+  "license": "ISC",
+  "dependencies": {
+    "@geoapify/geocoder-autocomplete": "^1.5.1",
+    "alert": "^5.1.4",
+    "axios": "^1.4.0",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.18.0",
+    "html2pdf": "0.0.11",
+    "html2pdf.js": "^0.10.1",
+    "jsdom": "^23.0.1",
+    "jspdf": "^2.5.1",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "pdf-lib": "^1.17.1",
+    "pdf-parse": "^1.1.1",
+    "pdfkit": "^0.14.0",
+    "pg": "^8.12.0",
+    "sharp": "^0.33.1",
+    "svg-parser": "^2.0.4",
+    "svg-to-pdfkit": "^0.1.8",
+    "svg2img": "^1.0.0-beta.2",
+    "svg2pdf.js": "^2.2.3",
+    "xmlbuilder": "^15.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.38.0"
+  }
+}

@@ -1,0 +1,217 @@
+@keyframes pop-in {
+  from { background-color: rgba(174, 134, 69, 0.703); opacity: 0.1;}
+  to { background-color: rgb(255, 255, 255); }
+}
+
+@media only screen and (min-width: 403px) {
+	.text-container{
+		width: 390px;
+	}
+	.input-container {
+		width: 95%;
+	}
+}
+
+@media only screen and (max-width: 423px) {
+	.input-container {
+		width: 100%;
+	}
+	.border {
+		width: 100% !important;
+	}
+}
+
+.coords-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.coord-input {
+	width: 43px !important;
+	text-align: end;
+}
+.coord-line {
+
+}
+.text-container {
+	height: auto;
+	background-color: white;
+	margin: 5px 5.5px;
+	text-align: justify; 
+	box-sizing: border-box;
+	border-style: outset;
+	border-color: lightgray;
+	border-radius: 3px;
+	border-width: 0;
+  	padding: 19px; 
+	opacity: 1;
+  	animation-name: pop-in;
+  	animation-duration: 1s;
+	animation-timing-function: ease-out;
+}
+.border{
+	border: 1.5px solid #fcd9a9;
+	border-radius: 5px;
+	width: 401px;
+	height: auto;
+	margin: 12px auto;
+}
+#checkbox {
+	margin-left: 22px;
+}
+.aspect-check {
+	width: 14px !important;
+	height: 14px !important;
+}
+#che {
+	width: 14px;
+	height: 14px;	
+}
+.grid-item {
+	position: relative;
+	margin-bottom: 24px;
+}
+.dotted-line {   
+	position: relative;
+	width: 100%;
+	height: 1px;
+	background-image: linear-gradient(to right, #fcd9a9 50%, transparent 50%);
+	background-size: 2px 2px; /* space between dots */
+	background-repeat: repeat-x;
+}
+.horo-inpfield, .geoapify-autocomplete-input {
+	border: none;
+	outline: none;
+	height: 29px;
+	width: 100%;
+	margin-bottom: -5px;
+}
+::placeholder {
+  color:rgba(121, 121, 121, 0.741);
+}
+.autocomplete-container {
+	/*the container must be positioned relative: input.geoapify-autocomplete-input*/
+	position: relative;
+	width: 100%;
+}
+.geoapify-autocomplete-items {
+	position: absolute;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	  border-top-width: 1px;
+	  border-top-style: solid;
+	  border-top-color: rgba(0, 0, 0, 0.3);
+	border-top: none;
+	border-radius: 5px;
+	background-color: #fff;
+	z-index: 99;
+	top: 100%;
+	left: 0;
+	right: 0;
+	width: 100%; 
+	cursor: pointer;
+}
+.geoapify-autocomplete-item {
+	padding: 6px !important;
+	margin: 1px;
+	display: flex;
+}
+span.address>span.secondary-part {
+	margin-left: 22px;
+}
+label {
+	display: block;
+	margin-bottom: 4px;
+}	
+span.marTop{
+	display: block;
+	margin-top: 12px;
+}
+span.sublabel {
+	font-family: "Arial";
+	font-size: 9px;
+	color: black;
+}
+span.sublabel.bold {
+	font-weight: bold;
+	font-size: 9px;
+}
+span.address>span.min-part {
+	color:rgba(219, 49, 49, 0.877);
+}
+.geoapify-autocomplete-input {
+	display: flex;
+  	flex-direction: row;
+  	align-items: center;
+	height: 31.5px !important;
+}
+.geoapify-close-button.visible {
+	display: flex;
+}
+.geoapify-close-button {
+	cursor: pointer;
+	position: absolute;
+	right: 5px;
+	top: 0;
+	height: 100%;
+	align-items: center;
+	visibility: collapse;
+}
+.geoapify-autocomplete-item .icon {
+	padding: 0 6px;
+	display: inline-block;
+	width: 27px;
+	height: 27px;
+}
+.geoapify-autocomplete-item .icon > svg {
+	width: 14px;
+}
+#but {
+	color: rgb(255, 255, 255);
+	background-color: rgb(252, 169, 45);
+	width: 100%;
+	height: 31px;
+	border-radius: 5px;
+	border-width: 1px;
+  	cursor: pointer;
+}
+#House {
+	height: 25px;
+	width: 131px;
+	border-radius: 2px;	
+	border-width: 1.5px;
+	border-color: orange;
+	background-color: white;
+	margin-left: 3px;
+	text-align: center;
+}
+option {
+	padding: 8px 2px;
+}
+.input-time {
+	width: 6.6%;
+}
+#minu{
+	text-align: left;
+}
+#hour{
+	text-align: center;
+}
+.flex-time {
+	display: flex;
+	align-items: center;
+}
+.flex-radio {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 14px;
+}
+#signsSystem {
+	display: flex;
+	gap: 14px;
+}
+span.ddot-time {
+	color: black;
+}
+iframe {
+	height: 234px;
+}
