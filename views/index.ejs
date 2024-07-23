@@ -8,7 +8,6 @@
 		<link rel="stylesheet" href="../css/styles.css">
 
     <link rel="stylesheet" href="../public/css/jquery.datetimepicker.min.css"/>
-    <!-- <link rel="stylesheet" type="text/css" href="https://unpkg.com/@geoapify/geocoder-autocomplete@^1/styles/minimal.css">  -->
     <link rel="icon" href="favicon.ico?v=1"></link>
     <script src="../../assets/datetimepicker-master/jquery.js"></script>
     <script src="../../assets/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
@@ -181,24 +180,10 @@
             window.onload = onPageLoad();
 
             function onPageLoad() {
-              // document.getElementById("cheConjunction").checked = true;
-              // document.getElementById("cheTrine").checked = true;
-              // document.getElementById("cheOpposition").checked = true;
-              // document.getElementById("cheSextile").checked = true;
-              // document.getElementById("cheSemiSextile").checked = true;
-              // document.getElementById("cheSquare").checked = true;
-              // document.getElementById("cheSemiSquare").checked = true;
-              // document.getElementById("cheQuintile").checked = true;
               var aspectChecks = document.querySelectorAll(".aspect-check");
               aspectChecks.forEach(element => {
                 element.checked = true;
               });
-              document.getElementById('nam').value = 'Maurice';
-              document.getElementById('dat').value = '23.04.1994';
-              document.getElementById('hour').value = '16';
-              document.getElementById('minu').value = '05';
-              document.getElementById('lat').value = '52.4';
-              document.getElementById('lon').value = '9.7';
             }
           </script>
 
