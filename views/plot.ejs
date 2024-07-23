@@ -604,13 +604,13 @@
 						maxTime: "01:00",
 					});
 					try {
-						if (document.getElementById("search_loc").children.length === 0) {
+						// if (document.getElementById("search_loc").children.length === 0) {				
 							const autocompleteInput = new autocomplete.GeocoderAutocomplete(
 								document.getElementById("search_loc"),
 								`<%= geo_key %>`,
 								{ placeholder: "Ort finden", lang: "de", delay: 0.1 }
 							);
-						}
+						
 					} catch (err) {
 						console.log(err);
 					}
@@ -660,7 +660,6 @@
 					document.getElementById("lat").value = user_data.lat;
 					document.getElementById("lon").value = user_data.lon;
 
-					
 					function popUpForm(key) {
 						var idKeys = ["Sun", "Ac", "Moon", "SunAc", "SunMoon"];
 						$(".flexText4, .popup").fadeOut(108);
