@@ -1,4 +1,4 @@
-const { Origin, Horoscope } = require('./circular-natal-horoscope-js/dist/index.js');
+const { Origin, Horoscope } = require('./circular-natal-horoscope-js');
 var { getAspectTraces } = require('./components/xyAspects.js');
 var { plotData } = require('./components/plotData.js');
 var { plotStyle, plotXyStyle } = require('./components/plotStyle.js');
