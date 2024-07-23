@@ -732,6 +732,8 @@
 					}
 					async function fetchHtmlData(event) {
 						event.preventDefault();
+						var get_uri = <%- JSON.stringify( get_uri ) %>;
+
 						const params = {
 							name: document.getElementById("nam").value,
 							date: document.getElementById("dat").value,
@@ -745,7 +747,7 @@
 							check: document.getElementById("che").checked,
 						};
 						await axios
-							.get("https://vedaversum.eu-4.evennode.com/get-html", { params })
+							.get( get_uri+"/get-html", { params } )
 							.then((response) => {
 								document.open();
 								document.write(response.data);

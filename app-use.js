@@ -4,13 +4,14 @@ const express = require( "express" );
 const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
-const Strategy = require("passport-local");
+// const Strategy = require("passport-local");
+// const env = require("dotenv");
 
 const router = Router();
 
 // Use Cors Options
 const corsOptions = {
-	origin: ["http://localhost:3030/", "https://horoskop.vedaversum.com/"],
+	origin: [process.env.HOST, process.env.CLI1],
 	optionsSuccessStatus: 200,
 };
 // router.use( cors(corsOptions) );
@@ -30,7 +31,7 @@ router.use( session({
     resave: false,
     saveUninitialized: true,
 }))
-router.use(passport.initialize());
-router.use(passport.session());
+router.use( passport.initialize() );
+router.use( passport.session() );
 
 module.exports = router;

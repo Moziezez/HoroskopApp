@@ -27,7 +27,7 @@ env.config();
 
 // const dbEntry = require( "./assets/dbEntry.js" );
 const corsOptions = {
-	origin: ["http://localhost:3030/", "https://horoskop.vedaversum.com/"],
+	origin: [process.env.HOST, process.env.CLI1],
 	optionsSuccessStatus: 200,
 };
 const app = express();
@@ -72,6 +72,8 @@ app.get("/", async (req, res) => {
 	// db.end();
 
 	var geo_key = process.env.GEO_KEY;
+	var get_uri = process.env.HOST; // XXX
+
 	var user_data = {
 		data: {
 			name: "Max",
@@ -92,7 +94,7 @@ app.get("/", async (req, res) => {
 			loca: "",
 		},
 	};
-	res.render("index", { geo_key, user_data });
+	res.render("index", { geo_key, user_data, get_uri });
 });
 app.get("/api/environment", cors(corsOptions), (req, res) => {
 	const geo_key = process.env.GEO_KEY;
@@ -135,6 +137,7 @@ app.get("/get-html", cors(corsOptions), function (req, res) {
 			xyAspects: aspects,
 			symbols: symbols,
 			geo_key: geo_key,
+			get_uri: process.env.HOST,
 		});
 	} catch (err) {
 		console.error(err);

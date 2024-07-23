@@ -212,6 +212,14 @@
           });
         });
 
+        // XXX
+        document.getElementById('nam').value = "Random";
+        document.getElementById('dat').value = "25.06.1997";
+        document.getElementById('hour').value = "12";
+        document.getElementById('minu').value ="25";
+        document.getElementById('lon').value = "33";
+        document.getElementById('lat').value = "22";
+
         $('#che').click( function(event) {
           var isChecked = event.target.checked;
 
@@ -265,8 +273,7 @@
               aspectCheckBinary.push( 0 );
             }
           })
-          // hier geht kaputt...
-          // console.log("logged", document.getElementById('che').checked + "HE" );
+        
           var params = {
             name: document.getElementById('nam').value,
             date: document.getElementById('dat').value,
@@ -280,8 +287,8 @@
             check: document.getElementById('che').checked,
             aspectChecks: aspectCheckBinary,
           };
-          await axios.get('https://vedaversum.eu-4.evennode.com/get-html', { params } )
-          // await axios.get('https://vedaversum.eu-4.evennode.com/get-html', { params })
+          var get_uri = <%- JSON.stringify( get_uri ) %>;
+          await axios.get(get_uri +'/get-html', { params } ) // XXX
           .then(response => {
             //document.getElementById('htmlContainer').innerHTML = response.data
             document.write(response.data);
