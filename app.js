@@ -69,7 +69,7 @@ app.get("/", async (req, res) => {
 	// } catch (error) {
 	// 	console.log("ERROR ON INSERTING VALUES", error);
 	// }
-	db.end();
+	// db.end();
 
 	var geo_key = process.env.GEO_KEY;
 	var user_data = {
