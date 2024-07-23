@@ -13,7 +13,6 @@ const {
   borderLightColor 
 } = require("./colorCodes.js");
 const bgColorDark = bgSecondaryColor;
-const { createText } = require("./aspectTexts");
 const fs = require("fs");
 const path = require("path");
 
@@ -199,7 +198,7 @@ function createAspects( aspect_planets, isChecked, invalid_keys ) {
             color: color
           },
           type: 'scatter',
-          hovertext: name+" "+deg+"<br>"+marker +": "+planets_style_dict[ key1 ].utf8+" + "+planets_style_dict[ key2 ].utf8+"<br>Orbis: "+orbi+"°", // + createText(aspect_key , key1, key2),
+          hovertext: name+" "+deg+"<br>"+marker +": "+planets_style_dict[ key1 ].utf8+" + "+planets_style_dict[ key2 ].utf8+"<br>Orbis: "+orbi+"°", 
           hoverinfo: 'text',
           hoverlabel: { bgcolor: color },
         });  
