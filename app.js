@@ -94,7 +94,7 @@ app.get("/", async (req, res) => {
 	};
 	res.render("index", { geo_key, user_data });
 });
-app.get("/api/environment", (req, res) => {
+app.get("/api/environment", cors(corsOptions), (req, res) => {
 	const geo_key = process.env.GEO_KEY;
 	res.json({ geo_key });
 });
