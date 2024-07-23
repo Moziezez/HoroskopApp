@@ -4,7 +4,6 @@ const { plotXyStyle, circles } = require("./assets/components/plotStyle.js");
 const {	signs_style_dict, houses_style_dict, planets_style_dict, house_system_dict } = require("./assets/components/planetStyles.js");
 var { plotStyle } = require("./assets/components/plotStyle.js");
 const path = require("path");
-const cors = require("cors");
 const bodyParser = require("body-parser");
 const express = require("express");
 const fs = require("fs");
@@ -26,10 +25,10 @@ env.config();
 // }
 
 // const dbEntry = require( "./assets/dbEntry.js" );
-const corsOptions = {
-	origin: [process.env.HOST, process.env.CLI1],
-	optionsSuccessStatus: 200,
-};
+// const corsOptions = {
+// 	origin: [process.env.HOST, process.env.CLI1],
+// 	optionsSuccessStatus: 200,
+// };
 const app = express();
 app.set("view engine", "ejs");
 app.use(require('./app-use'));
@@ -96,11 +95,11 @@ app.get("/", async (req, res) => {
 	};
 	res.render("index", { geo_key, user_data, get_uri });
 });
-app.get("/api/environment", cors(corsOptions), (req, res) => {
+app.get("/api/environment", (req, res) => {
 	const geo_key = process.env.GEO_KEY;
 	res.json({ geo_key });
 });
-app.get("/get-html", cors(corsOptions), function (req, res) {
+app.get("/get-html", function (req, res) {
 	var plot_style = plotStyle;
 	var geo_key = process.env.GEO_KEY;
 	try {

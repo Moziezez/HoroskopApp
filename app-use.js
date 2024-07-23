@@ -4,6 +4,7 @@ const express = require( "express" );
 const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
+const cors = require("cors");
 // const Strategy = require("passport-local");
 // const env = require("dotenv");
 
@@ -14,7 +15,7 @@ const corsOptions = {
 	origin: [process.env.HOST, process.env.CLI1],
 	optionsSuccessStatus: 200,
 };
-// router.use( cors(corsOptions) );
+router.use( cors(corsOptions) );
 
 // Use Body Parsers
 router.use( bodyParser.json({ limit: '5000kb' }));
