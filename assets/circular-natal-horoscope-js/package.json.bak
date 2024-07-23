@@ -62,7 +62,7 @@
     "Natal Chart"
   ],
   "license": "Unlicense",
-  "main": "dist/index.js",
+  "main": "dist/index",
   "module": "src/index.js",
   "name": "circular-natal-horoscope-js",
   "repository": {
