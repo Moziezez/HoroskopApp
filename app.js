@@ -43,20 +43,20 @@ app.get("/authenticated", (req, res) => {
 })
 
 app.get("/", async (req, res) => {
-	const db = new pg.Client({
-		user: "postgres",
-		host: "localhost",
-		database: "horoscope",
-		password: "12345",
-		port: 5432,
-	});
-	db.connect();
-	const user_db = await db.query("SELECT * FROM users");
-	let user_names = [];
-	user_db.rows.forEach((user) => {
-		user_names.push(user.name);
-	});
-	console.log(user_names);
+	// const db = new pg.Client({
+	// 	user: "postgres",
+	// 	host: "localhost",
+	// 	database: "horoscope",
+	// 	password: "12345",
+	// 	port: 5432,
+	// });
+	// db.connect();
+	// const user_db = await db.query("SELECT * FROM users");
+	// let user_names = [];
+	// user_db.rows.forEach((user) => {
+	// 	user_names.push(user.name);
+	// });
+	// console.log(user_names);
 	// try {
 	// 	db.query(
 	// 		`
