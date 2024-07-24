@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="de" dir="ltr">
 	<head>
-		
 		<base href="https://vedaversum.eu-4.evennode.com">
 		<meta
 			name="viewport"
@@ -605,10 +604,10 @@
 					});
 					try {
 						// if (document.getElementById("search_loc").children.length === 0) {				
-							const autocompleteInput = new autocomplete.GeocoderAutocomplete(
+							var autocompleteInput = new autocomplete.GeocoderAutocomplete(
 								document.getElementById("search_loc"),
 								`<%= geo_key %>`,
-								{ placeholder: "Ort finden", lang: "de", delay: 0.1 }
+								{ placeholder: "Ort findden", lang: "de", delay: 0.1 }
 							);
 						
 					} catch (err) {

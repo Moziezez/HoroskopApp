@@ -4,14 +4,12 @@ const { plotXyStyle, circles } = require("./assets/components/plotStyle.js");
 const {	signs_style_dict, houses_style_dict, planets_style_dict, house_system_dict } = require("./assets/components/planetStyles.js");
 var { plotStyle } = require("./assets/components/plotStyle.js");
 const path = require("path");
-const bodyParser = require("body-parser");
 const express = require("express");
 const fs = require("fs");
-const pg = require("pg");
-const PDFDocument = require("pdfkit");
-const SVGtoPDF = require("svg-to-pdfkit");
+// const pg = require("pg");
+// const PDFDocument = require("pdfkit");
+// const SVGtoPDF = require("svg-to-pdfkit");
 const { JSDOM } = require("jsdom");
-const passport = require("passport");
 const env = require("dotenv");
 env.config();
 
