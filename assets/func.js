@@ -37,7 +37,6 @@ function userInput(req) { // Save User Input to Variables
 	var valid_keys = [];
 	try {
 		var aspectChecksDict = zipArraysIntoObject( keys, aspectChecksBinary );
-		console.log(aspectChecksDict)
 		Object.entries( aspectChecksDict ).forEach( ([ key, value ]) => {
 			if ( value === "1" ) {
 				valid_keys.push(key);

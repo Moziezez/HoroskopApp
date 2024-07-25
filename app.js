@@ -71,27 +71,7 @@ app.get("/", async (req, res) => {
 	var geo_key = process.env.GEO_KEY;
 	var get_uri = process.env.HOST; // XXX
 
-	var user_data = {
-		data: {
-			name: "Max",
-			day: "23",
-			month: "04",
-			year: "1994",
-			minute: "36",
-			hour: "12",
-			lon: "33",
-			lat: "22",
-			house: "placidus",
-			sunsign: "taurus",
-			moonsign: "virgo",
-			asc: {
-				key: "ascendant",
-				label: "Ascendant",
-			},
-			loca: "",
-		},
-	};
-	res.render("index", { geo_key, user_data, get_uri });
+	res.render("index", { geo_key, get_uri });
 });
 app.get("/api/environment", (req, res) => {
 	const geo_key = process.env.GEO_KEY;
@@ -115,6 +95,7 @@ app.get("/get-html", function (req, res) {
 		var asc_utf8 = signs_style_dict[user.asc.Sign.key].utf8;
 		var asc = asc_utf8 + " " + asc_name;
 		var isChecked = req.body.Check;
+		console.log(user);
 		res.render("plot.ejs", {
 			checked: isChecked,
 			userData: user,
@@ -144,7 +125,6 @@ app.get("/get-html", function (req, res) {
 app.get("/render-pdf", async (req, res) => {
 	const svgFilePath = "assets/undefined.svg";
 	const pdfFilePath = "assets/converted-image.pdf";
-	// createPngAndPdf();
 	convertSVGtoPDF(svgFilePath, pdfFilePath);
 });
 app.get("/favicon.ico", function (req, res) {
