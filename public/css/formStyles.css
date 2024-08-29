@@ -71,7 +71,7 @@ body.horo {
 	background-size: 2px 2px; /* space between dots */
 	background-repeat: repeat-x;
 }
-.horo-inpfield, .geoapify-autocomplete-input {
+input.horo-inpfield, input.geoapify-autocomplete-input {
 	border: none;
 	outline: none;
 	height: 29px;
@@ -80,7 +80,7 @@ body.horo {
 	background-color: white;
 }
 ::placeholder {
-color:rgba(121, 121, 121, 0.741);
+	color:rgba(121, 121, 121, 0.741) !important;
 }
 .autocomplete-container {
 	/*the container must be positioned relative: input.geoapify-autocomplete-input*/

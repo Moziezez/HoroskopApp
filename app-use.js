@@ -12,7 +12,7 @@ const router = Router();
 
 // Use Cors Options
 const corsOptions = {
-	origin: [process.env.HOST, process.env.CLI1, process.env.CLI2],
+	origin: [process.env.HOST, process.env.CLI1, process.env.CLI2, process.env.CLI3],
 	optionsSuccessStatus: 200,
 };
 router.use( cors(corsOptions) );
