@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="de">
-      <iframe src="https://www.vedaversum.com/astrologie/sternzeichen/" width="100%" height="100%"></iframe>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8"> 
 
@@ -24,7 +23,7 @@
           <div class="border">
             <div class="text-container">  
               <h3 class="horo cntr"> Trage deine Daten ein </h3>
-              <form id="frm">
+              <form action="#" id="frm" novalidate>
                 <div class="w3-animate-top">      
                   <div class="grid-item">
                     <label for="Name" class="horo"> Name: </label>
@@ -33,7 +32,9 @@
                       type="text" 
                       name="Name" 
                       id="nam" 
-                      placeholder="Anzeigename" required
+                      placeholder="Anzeigename" 
+                      pattern="^[a-zA-Z\s]+$"
+                      required oninvalid="this.setCustomValidity('Trage einen Anzeigenamen ein.')"
                     />
                     <div class="dotted-line"></div>
                   </div>
@@ -43,7 +44,8 @@
                     <span class="horo sublabel"> DATUM </span>
                     <input 
                       type="text" name="Datum" id="dat" class="horo-inpfield"
-                      placeholder="Geburtsdatum" autocomplete="off" required
+                      placeholder="Geburtsdatum" autocomplete="off" pattern="^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}$"
+                      required oninvalid="this.setCustomValidity('Datum muss im Format dd.mm.yyyy sein.')"
                     />
                     <div class="dotted-line"></div>
           
@@ -52,7 +54,8 @@
                       <div class="input-time">
                         <input 
                           type="text" name="Stunde" id="hour" class="horo-inpfield time"
-                          placeholder="00" autocomplete="off" required
+                          placeholder="00" autocomplete="off" pattern="^(2[0-4]|1[0-9]|0[0-9])$"
+                          required oninvalid="this.setCustomValidity('Stunde muss im 24h-Format sein.')"
                         />
                         <div class="dotted-line"></div>
                       </div>
@@ -60,7 +63,8 @@
                       <div class="input-time">
                         <input 
                           type="text" name="Minute" id="minu" class="horo-inpfield"
-                          placeholder="00" autocomplete="off" required
+                          placeholder="00" autocomplete="off" pattern="^([1-5]?[0-9]|60)$"
+                          required oninvalid="this.setCustomValidity('Minute muss zwischen 0 und 60 liegen.')"
                         />
                         <div class="dotted-line"></div>
                       </div>
@@ -83,7 +87,8 @@
                       <div>
                         <input 
                           type="text" name="Lati" class="horo-inpfield coord-input"
-                          id="lat" placeholder="Breiten" autocomplete="off" required
+                          id="lat" placeholder="Breiten" autocomplete="off" pattern="^-?(90|[1-8]?\d)$" 
+                          required oninvalid="this.setCustomValidity('Breitengrad muss zwischen -90° und 90° liegen.')"
                         />
                         <div class="dotted-line coord-line"></div>
                       </div>
@@ -94,7 +99,8 @@
                       <div>
                         <input 
                           type="text" name="Long" id="lon" class="horo-inpfield coord-input"
-                          placeholder="Längen" autocomplete="off" required
+                          placeholder="Längen" autocomplete="off" pattern="^(180|1?[0-9]?[0-9])$"
+                          required oninvalid="this.setCustomValidity('Längengrad muss zwischen 0° und 180° liegen.')"
                         />
                         <div class="dotted-line coord-line"></div>
                       </div>
@@ -170,8 +176,8 @@
 
                   <hr class="horo">
 
-                  <button class="horo" id="but" type="submit"> Horoskop erstellen </button>
-                  
+                  <!-- <button class="horo" id="but" type="submit"> Horoskop erstellen </button> -->
+                  <input class="horo" id="but" type="submit" value="Horoksop erstellen"/>
                 </div>
               </form>
             </div>
@@ -191,27 +197,39 @@
 
           <div class="border">
             <div class="text-container">
-              <h3 class="horo"> Was ist ein Geburtshoroskop? </h3>
+              <h3 class="horo cntr"> Was ist ein Geburtshoroskop? </h3>
+              <p class="horo"></p>
+              <p class="horo"> Das Horoskop zeigt die Anordnung der Planeten und Himmelskörper zu einem bestimmten Zeitpunkt und an einem bestimmten Ort auf der Erde.
+              In der grafischen Darstellung werden diese Objekte in eine Ebene projiziert angezeigt, die sogenannte <i>Ekliptik</i>, sie wird vom Verlauf der Sonne aufgespannt. 
+              In dieser Ebene liegen auch die Sternzeichen/Tierkreiszeichen, so dass die Sonne jährlich alle 12 Zeichen durchwandert. </p>
               <p class="horo"> Der Name dient zur Anzeige und geht nicht in die Berechnung mit ein. </p>
               <p class="horo"> Breiten- und Längengrad können über das Suchfeld ermittelt, oder direkt eingegeben werden.</p>
               <p class="horo"> Ist die Geburtszeit unbekannt, können keine zugehörigen Häuser bestimmt werden, da die Himmelskörper nur ca. 2 Stunden in einem Haus verweilen. <br>
-                  Aktiviere in diesem Fall die Checkbox und gelange zu einer rein von den Tierkreiszeichen abhängigen Darstellung. </p>
+                  Aktiviere in diesem Fall die Checkbox und gelange zu einer von der Tageszeit unabhängigen Darstellung. </p>
               <p class="horo"> Das Häusersystem legt fest, nach welchen Kriterien die Häusergrenzen berechnet werden. </p>
-              <br>
+              <p class="horo"></p>
             </div>
           </div>
         </div>
       </div>
       
       <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          var horoButton = document.getElementById('but');
-          horoButton.addEventListener('click', fetchHtmlData);
-          document.addEventListener('keydown', function(event) {
-            if (event.key === ' ' || event.key === 'Enter') {
-              fetchHtmlData();
-            }
+        document.addEventListener('DOMContentLoaded', function() {      
+          var form = document.querySelector('form#frm');
+
+          form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            console.log("submitted")
+            fetchHtmlData(event);
           });
+
+          // Optional: Add support for Enter key submission
+          document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+              event.preventDefault();  // Prevent default Enter key behavior
+              fetchHtmlData(event);
+            }
+          });    
         });
 
         // XXX
@@ -264,40 +282,45 @@
           document.getElementById( "lat" ).value = lati;
         });
 
-        async function fetchHtmlData() {
-          event.preventDefault();
-          var aspectChecks = document.querySelectorAll(".aspect-check");
-          var aspectCheckBinary = [];
-          aspectChecks.forEach( entry => {
-            if ( entry.checked ) {
-              aspectCheckBinary.push( 1 );
-            } else {
-              aspectCheckBinary.push( 0 );
-            }
-          })
-        
-          var params = {
-            name: document.getElementById('nam').value,
-            date: document.getElementById('dat').value,
-            hour: document.getElementById('hour').value,
-            minu: document.getElementById('minu').value,
-            longi: document.getElementById('lon').value,
-            lati: document.getElementById('lat').value,
-            house: document.getElementById('House').value,
-            loca: inputCity+inputCountry,
-            zodi: document.getElementById('Trop').checked,
-            check: document.getElementById('che').checked,
-            aspectChecks: aspectCheckBinary,
-          };
-          var get_uri = <%- JSON.stringify( get_uri ) %>;
-          await axios.get(get_uri +'/get-html', { params } ) // XXX
-          .then(response => {
-            //document.getElementById('htmlContainer').innerHTML = response.data
-            document.write(response.data);
-          })
-          .catch(error => {
-            console.error('Error fetching HTML data:', error.message);
-          });
+        async function fetchHtmlData(event) {
+          var form = document.querySelector('form#frm');
+          var isValid = form.reportValidity();
+          
+          if (isValid) {
+            console.log("Form is valid, proceed with fetchHtmlData...");
+
+            var aspectChecks = document.querySelectorAll(".aspect-check");
+            var aspectCheckBinary = [];
+            aspectChecks.forEach( entry => {
+              aspectCheckBinary.push(entry.checked ? 1 : 0);
+            })
+          
+            var params = {
+              name: document.getElementById('nam').value,
+              date: document.getElementById('dat').value,
+              hour: document.getElementById('hour').value,
+              minu: document.getElementById('minu').value,
+              longi: document.getElementById('lon').value,
+              lati: document.getElementById('lat').value,
+              house: document.getElementById('House').value,
+              loca: inputCity+inputCountry,
+              zodi: document.getElementById('Trop').checked,
+              check: document.getElementById('che').checked,
+              aspectChecks: aspectCheckBinary,
+            };
+
+            var get_uri = <%- JSON.stringify( get_uri ) %>;
+            await axios.get(get_uri +'/get-html', { params } ) // XXX
+              .then(response => {
+                //document.getElementById('htmlContainer').innerHTML = response.data
+                document.write(response.data);
+              })
+              .catch(error => {
+                console.error('Error fetching HTML data:', error.message);
+              });
+          } else {
+            console.log("Form is invalid, validation messages are displayed.");
+          }
         }
         
       </script>

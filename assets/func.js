@@ -62,10 +62,16 @@ function userInput(req) { // Save User Input to Variables
 		minu = '00';
 		house_system = 'whole-sign';
 	}
-	var origiin = new Origin({ 
-		year: parseInt(year), month: parseInt(month) - 1,	//0 = January, 11 = December!
-		date: parseInt(day), hour: parseInt(hour), minute: parseInt(minu), latitude: parseFloat(lat), longitude: parseFloat(lon)
-	});
+
+	try {
+		var origiin = new Origin({ 
+			year: parseInt(year), month: parseInt(month) - 1,	//0 = January, 11 = December!
+			date: parseInt(day), hour: parseInt(hour), minute: parseInt(minu), latitude: parseFloat(lat), longitude: parseFloat(lon)
+		});
+	} catch (error) {
+		console.log(error);
+	}
+	
 	var horoscope = new Horoscope({ 
 		origin: origiin, houseSystem: house_system, zodiac: zodiac, aspectPoints: [ 'bodies', 'points', 'angles' ],
 		aspectWithPoints: [ 'bodies', 'points', 'angles' ], aspectTypes: [ "major", "minor" ], customOrbs: {}, language: 'en'
