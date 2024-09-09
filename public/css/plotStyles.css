@@ -3,7 +3,16 @@
 	to { background-color: rgba(27, 0, 53, 0.232); height: 100%; opacity: 0.96; border-radius: 33%; }
 }
 
+@media only screen and (min-width: 382px) {	
+	div.horo.form {
+		height: 114px !important;
+	}
+}
+
 @media only screen and (min-width: 606px) {	
+	div.horo.form {
+		width: 55%;
+	}
 	.flexItem4 {  	
 		width: 90%;
 	}
@@ -15,6 +24,10 @@
 	}
 }
 @media only screen and (min-width: 855px) {	
+	div.horo.form {
+		border-bottom-right-radius: 50% !important;
+		border-bottom-left-radius: 50% !important;
+	}
 	.flexItem4 {  	
 		width: 75%;
 	}
@@ -26,6 +39,9 @@
 	}
 }
 @media only screen and (min-width: 1255px) {
+	div.horo.form {
+		width: 1053px !important;
+	}
 	.flexItem4 {  	
 		width: 923px;
 	}
@@ -58,7 +74,7 @@
 		transform: scale(0.6);
 		margin: -108px 0;
 	}
-	.flexItem4, .flexItem5 {
+	.flexItem4, .flexItem5, .flexItem6 {
 		width: 96%;
 	}
 	.cartesianDiv {
@@ -96,11 +112,11 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-top: 42px;
+	padding-top: 136px;
 	font-family: Iowan Old Style, Palatino, "Palatino Linotype", "Book Antiqua", "URW Palladio L", P052, serif;
 	background-color: #fcf4ea;
 	color: black;
-	border-radius: 108px;
+	border-radius: 48px / 36px;
 }
 .flexItem1 {  	
 	display: flex;
@@ -287,6 +303,7 @@ div#infoForm {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	padding: 3px 7px 12px 7px;
 }
 .leftPos {
 	width: 50%;
@@ -303,4 +320,26 @@ div#infoForm {
 img.svgImg {
 	width: auto;
 	height: 14px;
+}
+div.horo.form {
+	background-color: #fae6c6;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 30%;
+    border-bottom-left-radius: 30%;
+	width: 85%;
+	height: 142px;
+	position: absolute;
+	top: -80px;
+	padding-top: 85px;
+}
+div.horo.header {
+	display: flex;
+	justify-content: center;
+}
+div.horo.ws {
+	position: relative;
+	top: -15px;
+	height: 18px;
+	background-color: white;
 }

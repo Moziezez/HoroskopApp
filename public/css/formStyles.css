@@ -128,9 +128,6 @@ span.sublabel.bold {
 	font-weight: bold;
 	font-size: 9px;
 }
-span.address>span.min-part {
-	color:rgba(219, 49, 49, 0.877);
-}
 .geoapify-autocomplete-input {
 	display: flex;
 	flex-direction: row;
@@ -172,7 +169,7 @@ span.address>span.min-part {
 	width: 131px;
 	border-radius: 2px;	
 	border-width: 1.5px;
-	border-color: orange;
+	border-color: rgb(252, 169, 45);
 	background-color: white;
 	margin-left: 3px;
 	text-align: center;

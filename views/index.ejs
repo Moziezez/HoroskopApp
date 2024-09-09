@@ -33,8 +33,8 @@
                       name="Name" 
                       id="nam" 
                       placeholder="Anzeigename" 
-                      pattern="^[a-zA-Z\s]+$"
-                      required oninvalid="this.setCustomValidity('Trage einen Anzeigenamen ein.')"
+                      pattern="^[a-zA-ZÄäÖöÜüß\s\d]+$"
+                      required oninvalid="this.setCustomValidity('Trage einen gültigen Anzeigenamen ein.')"
                     />
                     <div class="dotted-line"></div>
                   </div>
@@ -44,7 +44,7 @@
                     <span class="horo sublabel"> DATUM </span>
                     <input 
                       type="text" name="Datum" id="dat" class="horo-inpfield"
-                      placeholder="Geburtsdatum" autocomplete="off" pattern="^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}$"
+                      placeholder="Geburtsdatum" autocomplete="off" pattern="^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}\s?$"
                       required oninvalid="this.setCustomValidity('Datum muss im Format dd.mm.yyyy sein.')"
                     />
                     <div class="dotted-line"></div>
@@ -63,7 +63,7 @@
                       <div class="input-time">
                         <input 
                           type="text" name="Minute" id="minu" class="horo-inpfield"
-                          placeholder="00" autocomplete="off" pattern="^([1-5]?[0-9]|60)$"
+                          placeholder="00" autocomplete="off" pattern="^([0-5]?[0-9]|60)$"
                           required oninvalid="this.setCustomValidity('Minute muss zwischen 0 und 60 liegen.')"
                         />
                         <div class="dotted-line"></div>
@@ -84,10 +84,10 @@
 
                     <span class="horo sublabel marTop"> KOORDINATEN </span>
                     <div class="coords-container"> 
-                      <div>
+                      <div class="horo">
                         <input 
                           type="text" name="Lati" class="horo-inpfield coord-input"
-                          id="lat" placeholder="Breiten" autocomplete="off" pattern="^-?(90|[1-8]?\d)$" 
+                          id="lat" placeholder="Breiten" autocomplete="off" pattern="^\s?-?(90|[0-8]?\d)(\.\d\d)?$" 
                           required oninvalid="this.setCustomValidity('Breitengrad muss zwischen -90° und 90° liegen.')"
                         />
                         <div class="dotted-line coord-line"></div>
@@ -96,10 +96,10 @@
                       <div>
                         &nbsp; &nbsp; &nbsp; &nbsp;
                       </div>
-                      <div>
+                      <div class="horo">
                         <input 
                           type="text" name="Long" id="lon" class="horo-inpfield coord-input"
-                          placeholder="Längen" autocomplete="off" pattern="^(180|1?[0-9]?[0-9])$"
+                          placeholder="Längen" autocomplete="off" pattern="^(180|1[0-7]\d|0?\d?\d)(\.\d\d)?$"
                           required oninvalid="this.setCustomValidity('Längengrad muss zwischen 0° und 180° liegen.')"
                         />
                         <div class="dotted-line coord-line"></div>
@@ -176,7 +176,6 @@
 
                   <hr class="horo">
 
-                  <!-- <button class="horo" id="but" type="submit"> Horoskop erstellen </button> -->
                   <input class="horo" id="but" type="submit" value="Horoksop erstellen"/>
                 </div>
               </form>
@@ -184,7 +183,6 @@
           </div>
           
           <script>
-            // insert values
             window.onload = onPageLoad();
 
             function onPageLoad() {
@@ -214,22 +212,57 @@
       </div>
       
       <script>
+        var form = document.querySelector('form#frm');
+
+        form.addEventListener('submit', function(event) {
+          event.preventDefault();
+          var form = document.querySelector('form#frm');
+          //console.log(form.checkValidity())
+
+          const inputs = form.querySelectorAll('input.horo-inpfield[placeholder]');
+          console.log(inputs)
+          var countMismatches = 0;
+          inputs.forEach(function(input) {
+            if ( input.validity.patternMismatch ) {
+              countMismatches += 1;
+              var valMessage = `<p class="horo">${input.validationMessage}</p>`;
+              console.log(valMessage)
+              input.reportValidity();
+            } else if (input.validity.valueMissing) {
+              countMismatches += 1;
+              input.setCustomValidity(`Bitte trage einen Wert in das Feld ein.`);
+              input.reportValidity();
+            }
+          });
+          console.log(countMismatches);
+
+          if ( countMismatches == 0 ){
+            fetchHtmlData(event);
+          }
+          
+        });
+
         document.addEventListener('DOMContentLoaded', function() {      
           var form = document.querySelector('form#frm');
 
-          form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            console.log("submitted")
-            fetchHtmlData(event);
-          });
-
-          // Optional: Add support for Enter key submission
           document.addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
-              event.preventDefault();  // Prevent default Enter key behavior
+              event.preventDefault();
               fetchHtmlData(event);
             }
-          });    
+          }); 
+
+          form.addEventListener('input', function(event) {
+            console.log(event.target.value)
+            event.target.setCustomValidity("");
+            if (event.target.validity.patternMismatch) {
+                console.log("Input does not match the pattern.");
+                
+            } else {
+                console.log("Input matches the pattern.");
+            }
+            //event.target.setCustomValidity("");
+          });
         });
 
         // XXX
@@ -283,46 +316,38 @@
         });
 
         async function fetchHtmlData(event) {
-          var form = document.querySelector('form#frm');
-          var isValid = form.reportValidity();
-          
-          if (isValid) {
-            console.log("Form is valid, proceed with fetchHtmlData...");
+          var form = document.querySelector('form#frm'); 
 
-            var aspectChecks = document.querySelectorAll(".aspect-check");
-            var aspectCheckBinary = [];
-            aspectChecks.forEach( entry => {
-              aspectCheckBinary.push(entry.checked ? 1 : 0);
-            })
-          
-            var params = {
-              name: document.getElementById('nam').value,
-              date: document.getElementById('dat').value,
-              hour: document.getElementById('hour').value,
-              minu: document.getElementById('minu').value,
-              longi: document.getElementById('lon').value,
-              lati: document.getElementById('lat').value,
-              house: document.getElementById('House').value,
-              loca: inputCity+inputCountry,
-              zodi: document.getElementById('Trop').checked,
-              check: document.getElementById('che').checked,
-              aspectChecks: aspectCheckBinary,
-            };
-
-            var get_uri = <%- JSON.stringify( get_uri ) %>;
-            await axios.get(get_uri +'/get-html', { params } ) // XXX
-              .then(response => {
-                //document.getElementById('htmlContainer').innerHTML = response.data
-                document.write(response.data);
-              })
-              .catch(error => {
-                console.error('Error fetching HTML data:', error.message);
-              });
-          } else {
-            console.log("Form is invalid, validation messages are displayed.");
-          }
-        }
+          var aspectChecks = document.querySelectorAll(".aspect-check");
+          var aspectCheckBinary = [];
+          aspectChecks.forEach( entry => {
+            aspectCheckBinary.push(entry.checked ? 1 : 0);
+          })
         
+          var params = {
+            name: document.getElementById('nam').value,
+            date: document.getElementById('dat').value,
+            hour: document.getElementById('hour').value,
+            minu: document.getElementById('minu').value,
+            longi: document.getElementById('lon').value,
+            lati: document.getElementById('lat').value,
+            house: document.getElementById('House').value,
+            loca: inputCity+inputCountry,
+            zodi: document.getElementById('Trop').checked,
+            check: document.getElementById('che').checked,
+            aspectChecks: aspectCheckBinary,
+          };
+
+          var get_uri = <%- JSON.stringify( get_uri ) %>;
+          await axios.get(get_uri +'/get-html', { params } ) // XXX
+            .then(response => {
+              //document.getElementById('htmlContainer').innerHTML = response.data
+              document.write(response.data);
+            })
+            .catch(error => {
+              console.error('Error fetching HTML data:', error.message);
+            });
+        }        
       </script>
     </body>
 </html>
