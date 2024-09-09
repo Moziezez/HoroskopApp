@@ -26,8 +26,8 @@ function createDataURLFromSVG(svgPath) {
 	return dataURL;
 }
 
-function getAspectTraces( horoscope, isChecked ) {
-  var skip_planets = [  "northnode", "southnode", "chiron", "lilith", "sirius" ];
+function getAspectTraces( horoscope, isChecked, valid_aspect_keys ) {
+  var skip_planets = [ "northnode", "southnode", "chiron", "lilith", "sirius" ];
 
   var midheaven_arc = horoscope.Midheaven.ChartPosition.Ecliptic.ArcDegreesFormatted30;
   var midheaven_sign_symbol = signs_style_dict[ horoscope.Midheaven.Sign.key ].utf8;
@@ -76,7 +76,7 @@ function getAspectTraces( horoscope, isChecked ) {
   var all_aspects = horoscope.Aspects.points;
 
   var { aspect_planet_traces, planet_xy_symbols } = createSymbols( filtered_objects );
-  var aspects_traces = createAspects( all_aspects, isChecked, skip_planets );
+  var aspects_traces = createAspects( all_aspects, isChecked, skip_planets, valid_aspect_keys );
   var aspects_plot_grid = createGrid( len, isChecked );
 
   var aspects_plot_traces = aspect_planet_traces.concat( aspects_traces ).concat( aspects_plot_grid );
@@ -143,7 +143,7 @@ function createSymbols( filtered_objects ) {
   return { aspect_planet_traces, planet_xy_symbols };
 }
 
-function createAspects( aspect_planets, isChecked, invalid_keys ) {
+function createAspects( aspect_planets, isChecked, invalid_keys, valid_aspect_keys ) {
   var aspects_traces = [];
   var valid_keys = [ 
     "sun","moon","mercury", "venus", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto", "ascendant", "midheaven"
@@ -167,16 +167,15 @@ function createAspects( aspect_planets, isChecked, invalid_keys ) {
         var key1 = aspects_of_key[ j ].point1Key;
         var key2 = aspects_of_key[ j ].point2Key;
         var orbi = Math.round( aspects_of_key[ j ].orb );
+        var aspect_key = aspects_of_key[ j ].aspectKey;
   
-        if ( invalid_keys.includes( key1 ) || invalid_keys.includes( key2 ) ) {
+        if ( invalid_keys.includes( key1 ) || invalid_keys.includes( key2 ) || !valid_aspect_keys.includes( aspect_key )) {
           continue;
         }
         
         var dx = planets_style_dict[ key1 ].x;
         var dy = planets_style_dict[ key2 ].y;
-  
-        var aspect_key = aspects_of_key[ j ].aspectKey;
-        
+
         try {
           var marker = aspects_style_dict[ aspect_key ].marker;  
         } catch  ( err ) {

@@ -56,7 +56,9 @@ function userInput(req) { // Save User Input to Variables
 	}	else if ( Math.abs( parseFloat( lat ) ) > 90) {
 		return true;
 	}
-	var isChecked = req.body.Check; // undefined or 'on'
+	var isChecked = req.query.check === "true";
+
+	console.log("CHECK", isChecked)
 	if ( isChecked ) {
 		hour = '12';
 		minu = '00';
@@ -83,7 +85,7 @@ function userInput(req) { // Save User Input to Variables
 	};
 	const { traces_data, midheaven_theta, ascendant_theta, planet_symbols } = plotData( horoscope, isChecked, zodiac, valid_keys );
 
-	var { aspects_plot_traces, planet_xy_symbols } = getAspectTraces(horoscope, isChecked); 
+	var { aspects_plot_traces, planet_xy_symbols } = getAspectTraces(horoscope, isChecked, valid_keys); 
 	var offset = 180 - ascendant_theta;	// offset for plot rotation -> Ac always left
 	var MC = midheaven_theta;					
 	var IC = MC + 180; 
