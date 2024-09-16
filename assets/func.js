@@ -3,19 +3,19 @@ var { getAspectTraces } = require('./components/xyAspects.js');
 var { plotData } = require('./components/plotData.js');
 var { plotStyle, plotXyStyle } = require('./components/plotStyle.js');
 
-function userInput(req) { // Save User Input to Variables
-	var date = req.query.date.split("."),
+function userInput(query) { // Save User Input to Variables
+	var date = query.date.split("."),
 		year = date[2],
 		month = date[1],
 		day = date[0];
-	var name = req.query.name,
-		lat = req.query.lati,
-		lon = req.query.longi, 
-		loca = req.query.loca;
-	var hour = req.query.hour,
-		minu = req.query.minu,
-		house_system = req.query.house; 
-	var zodi = req.query.zodi;
+	var name = query.name,
+		lat = query.lati,
+		lon = query.longi, 
+		loca = query.loca;
+	var hour = query.hour,
+		minu = query.minu,
+		house_system = query.house; 
+	var zodi = query.zodi;
 
 	function zipArraysIntoObject(keys, values) {
 		const result = {};
@@ -32,7 +32,7 @@ function userInput(req) { // Save User Input to Variables
 		return result;
 	}
 
-	var aspectChecksBinary = req.query.aspectChecks;
+	var aspectChecksBinary = query.aspectChecks;
 	var keys = [ "opposition", "trine",	"square", "semi-square", "conjunction", "sextile", "semi-sextile", "quintile", "quincunx", "septile" ];
 	var valid_keys = [];
 	try {
@@ -56,7 +56,7 @@ function userInput(req) { // Save User Input to Variables
 	}	else if ( Math.abs( parseFloat( lat ) ) > 90) {
 		return true;
 	}
-	var isChecked = req.query.check === "true";
+	var isChecked = query.check === "true";
 
 	console.log("CHECK", isChecked)
 	if ( isChecked ) {

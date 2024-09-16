@@ -81,7 +81,7 @@ app.get("/get-html", function (req, res) {
 	var plot_style = plotStyle;
 	var geo_key = process.env.GEO_KEY;
 	try {
-		var { user, traces, aspects, symbols } = funcs.userInput(req);
+		var { user, traces, aspects, symbols } = funcs.userInput(req.query);
 		// dbEntry.createEntry( user );
 		// console.log( user );
 		var sun_utf8 = signs_style_dict[user.sunsign].utf8;

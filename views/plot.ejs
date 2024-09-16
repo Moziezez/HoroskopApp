@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de" dir="ltr">
 	<head>
-		<base href="https://vedaversum.eu-4.evennode.com">
+		<base href="<%=get_uri%>">
 		<meta
 			name="viewport"
 			content="width=device-width, initial-scale=1"
@@ -1176,7 +1176,8 @@
 		// 	};
 		// 	try {
 		// 		const response = await axios.post(
-		// 			"http://localhost:3030/svg-background",
+		//			<%=get_uri%> + 
+		// 			"/svg-background",
 		// 			params
 		// 		);
 		// 		console.log(params, "svg bckground triggered");
