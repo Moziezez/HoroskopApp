@@ -77,34 +77,16 @@ app.get("/", async (req, res) => {
 
 	var geo_key = process.env.GEO_KEY;
 	var get_uri = process.env.HOST; // XXX
-	var user_data = {
-		name: 'Random',
-		date: '25.06.1997',
-		hour: '12',
-		minu: '25',
-		longi: '33',
-		lati: '22',
-		house: 'placidus',
-		city: 'Hildesheim',
-		country: 'Deutschland',
-		zodi: 'true',
-		check: 'false',
-		aspectChecks: [
-			'1', '1', '1', '1',
-			'1', '1', '1', '1',
-			'1', '1'
-		]
-	};
 	// var user_data = {
-	// 	name: '',
-	// 	date: '',
-	// 	hour: '',
-	// 	minu: '',
-	// 	longi: '',
-	// 	lati: '',
+	// 	name: 'Random',
+	// 	date: '25.06.1997',
+	// 	hour: '12',
+	// 	minu: '25',
+	// 	longi: '33',
+	// 	lati: '22',
 	// 	house: 'placidus',
-	// 	city: '',
-	// 	country: '',
+	// 	city: 'Hildesheim',
+	// 	country: 'Deutschland',
 	// 	zodi: 'true',
 	// 	check: 'false',
 	// 	aspectChecks: [
@@ -113,6 +95,24 @@ app.get("/", async (req, res) => {
 	// 		'1', '1'
 	// 	]
 	// };
+	var user_data = {
+		name: '',
+		date: '',
+		hour: '',
+		minu: '',
+		longi: '',
+		lati: '',
+		house: 'placidus',
+		city: '',
+		country: '',
+		zodi: 'true',
+		check: 'false',
+		aspectChecks: [
+			'1', '1', '1', '1',
+			'1', '1', '1', '1',
+			'1', '1'
+		]
+	};
 	res.render("index", { geo_key, get_uri, user_data });
 });
 app.get("/api/environment", (req, res) => {
