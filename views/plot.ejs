@@ -1,1192 +1,385 @@
 <!DOCTYPE html>
 <html lang="de" dir="ltr">
-	<head>
-		<base href="<%=get_uri%>">
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1"
-			charset="UTF-8"
-		/>
-		<link
-			rel="stylesheet"
-			type="text/css"
-			href="../public/css/styles.css"
-			media="screen"
-		/>
-		<link
-			rel="stylesheet"
-			type="text/css"
-			href="../public/css/plotStyles.css"
-			media="screen"
-		/>
-		<link
-			rel="stylesheet"
-			type="text/css"
-			href="../public/css/formStyles.css"
-			media="screen"
-		/>
-		<link rel="stylesheet" href="../public/css/jquery.datetimepicker.min.css" />
-		<script src="https://unpkg.com/@geoapify/geocoder-autocomplete@^1/dist/index.min.js"></script>
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-		/>
-		<script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<script src="../../assets/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-		<title>Horoskop</title>
-	</head>
 
-	<body>
-		<script>
-			var config = <%- JSON.stringify( plotConfig ) %>;
-			var layout = <%- JSON.stringify( plotLayout ) %>;
-			var planets_data = <%- JSON.stringify( plotPlanets ) %>;
-			var user_data = <%- JSON.stringify( userData ) %>;
-			var planet_styles = <%- JSON.stringify( planets ) %>;
-			var signs_styles = <%- JSON.stringify( signs ) %>;
-			var circles = <%- JSON.stringify( plotCircles ) %>;
-			var system_name = <%- JSON.stringify( system_name ) %>;
-			var symbols = <%- JSON.stringify( symbols ) %>;
+<body>
+  <div class="plot-flex-container" id="plot-container">
 
-			var data = circles.concat( planets_data );
-			var name_string = `${user_data.name} `;
-			var date_string = `${user_data.day}.${user_data.month}.${user_data.year}`;
-			var time_string = `${user_data.hour}:${user_data.minute} Uhr`;
+    <div class="horo header">
+      <div class="horo form">
+        <h1 class="horo cntr">Dein Geburtshoroskop</h1>
+        <h5 class="horo" id="hSystem" style="text-align: center"> Häusersystem: <%=userData.house%> </h5>
+      </div>
+    </div>
 
-			var loca_string = `${user_data.loca} (${user_data.lat}°N, ${user_data.lon}°O)`;
-			var house_string = `Häusersystem: ${system_name[ user_data.house ]}.`;
-			var pUserInfoString = 'Geboren am ' + date_string + ' um ' + time_string + ' in ' + loca_string;
-		</script>
-		<div class="horo header">
-			
-			<div class="horo form">
-				<div class="horo ws"> </div>
-				<h1 class="horo cntr">Dein Geburtshoroskop</h1>
-				<h5 class="horo" id="hSystem" style="text-align: center"></h5>
-			</div>
-		</div>
-		<div class="plot-flex-container">
-			<div class="flexItem1">
-				<div class="newInput horo" id="infoForm">
-					<a class="horo" id="triggerForm" onclick="popUpForm('Form')">
-						Eingabedaten ändern →
-					</a>
-				</div>
-				<div id="popupForm" class="popup hide">
-					<div class="border">
-						<div class="text-container">
-							<h3 class="horo cntr">Trage deine Daten ein</h3>
-							<form id="frm">
-								<div class="w3-animate-top">
-									<div class="grid-item">
-										<label for="Name" class="horo"> Name: </label>
-										<input
-											class="horo-inpfield"
-											type="text"
-											name="Name"
-											id="nam"
-											placeholder="Anzeigename"
-											required
-										/>
-										<div class="dotted-line"></div>
-									</div>
+    <div class="flexItem1">
+      <div class="newInput horo" id="infoForm">
+        <a class="horo" id="triggerForm" onclick="popUpForm()">
+          Eingabedaten ändern →
+        </a>
+      </div>
+    </div>
 
-									<div class="grid-item">
-										<label for="Datum" class="horo"> Geburtstag: </label>
-										<span class="horo sublabel"> DATUM </span>
-										<input
-											type="text"
-											name="Datum"
-											id="dat"
-											class="horo-inpfield"
-											placeholder="Geburtsdatum"
-											autocomplete="off"
-											required
-										/>
-										<div class="dotted-line"></div>
+    <div class="horo">
+      <h3 class="horo cntr" id="h3Name"><%=userData.name%></h3>
+      <p class="cntr" id="pUserInfo">
+        <%=pUserInfoString%>
+      </p>
+    </div>
 
-										<span class="horo sublabel marTop"> UHRZEIT </span>
-										<div class="flex-time">
-											<div class="input-time">
-												<input
-													type="text"
-													name="Stunde"
-													id="hour"
-													class="horo-inpfield time"
-													placeholder="00"
-													autocomplete="off"
-													required
-												/>
-												<div class="dotted-line"></div>
-											</div>
-											<span> &nbsp; : &nbsp; </span>
-											<div class="input-time">
-												<input
-													type="text"
-													name="Minute"
-													id="minu"
-													class="horo-inpfield"
-													placeholder="00"
-													autocomplete="off"
-													required
-												/>
-												<div class="dotted-line"></div>
-											</div>
-											<div>
-												<span
-													class="horo sublabel bold"
-													id="checkbox"
-													for="Check"
-												>
-													ZEIT UNBEKANNT?
-												</span>
-												<span class="horo sublabel bold"> &nbsp; JA: </span>
-												<input
-													type="checkbox"
-													name="Check"
-													id="che"
-													class="horo-inpfield"
-													value="off"
-												/>
-											</div>
-										</div>
-									</div>
+    <div class="flexItem2">
+      <div class="signsBox sunSign">
+        <div class="grid1 cOrange" style="font-size: 29px">☉</div>
+        <div class="grid2 sublabel">STERNZEICHEN</div>
+        <h4 class="grid3"><%= sunSign %></h4>
+      </div>
 
-									<div class="grid-item">
-										<span class="horo"> Geburtsort: </span>
-										<div id="search_loc" class="autocomplete-container"></div>
-										<div class="dotted-line"></div>
+      <div class="signsBox sunSign">
+        <div class="grid1 cOrange">AC</div>
+        <div class="grid2 sublabel">ASZENDENT</div>
+        <h4 class="grid3"><%= ascendant %></h4>
+      </div>
 
-										<span class="horo sublabel marTop"> KOORDINATEN </span>
-										<div class="coords-container">
-											<div>
-												<input
-													type="text"
-													name="Lati"
-													class="horo-inpfield coord-input"
-													id="lat"
-													placeholder="Breite"
-													autocomplete="off"
-													required
-												/>
-												<div class="dotted-line coord-line"></div>
-											</div>
-											<label for="Lati" class="horo" style="margin-top: 5px">
-												° Nord
-											</label>
-											<div>&nbsp; &nbsp; &nbsp; &nbsp;</div>
-											<div>
-												<input
-													type="text"
-													name="Long"
-													id="lon"
-													class="horo-inpfield coord-input"
-													placeholder="Länge"
-													autocomplete="off"
-													required
-												/>
-												<div class="dotted-line coord-line"></div>
-											</div>
-											<label for="Long" class="horo" style="margin-top: 5px">
-												° Ost
-											</label>
-										</div>
-									</div>
+      <div class="signsBox sunSign">
+        <div class="grid1 cOrange" style="font-size: 25px; font-weight: bold">
+          ☽
+        </div>
+        <div class="grid2 sublabel">MONDZEICHEN</div>
+        <h4 class="grid3"><%= moonSign %></h4>
+      </div>
+    </div>
 
-									<hr class="horo" />
+    <div class="flexItem3">
+      <div id="circularPlot"></div>
+      <div>
+        <a class="horo" id="triggerLegend" onclick="popUpLegend()">
+          Legende →
+        </a>
+      </div>
+      <div id="popupLegend" class="popupLegend hide">
+        <div class="flexLegend">
 
-									<div class="grid-item">
-										<label for="House" class="horo" style="display: inline">
-											Häuser-System:
-										</label>
-										<select name="House" id="House">
-											<option value="placidus">Placidus</option>
-											<option value="koch">Koch</option>
-											<option value="campanus">Campanus</option>
-											<option value="whole-sign">Tierkreiszeichen</option>
-											<option value="equal-house">Gleiche Häuser</option>
-											<option value="regiomontanus">Regiomontanus</option>
-											<option value="topocentric">Topozentrisch</option>
-										</select>
-									</div>
+          <div class="horo itemLegend">
+            <% var count = 0 %>
+            <% Object.entries(planets).forEach(([k, v], i) => { %>
+            <% if ( ['sirius', 'ascendant', 'midheaven', 'southnode'].includes(k) ) return; %>
 
-									<div class="grid-item">
-										<label for="zodi" class="horo" style="display: inline">
-											Sternzeichen-System:
-										</label>
-										<span class="horo sublabel bold"> TROPICAL </span>
-										<input
-											type="radio"
-											name="Zodiac"
-											id="Trop"
-											class="horo"
-											checked
-										/>
-										<span class="horo sublabel bold"> SIDEREAL </span>
-										<input type="radio" name="Zodiac" id="Side" class="horo" />
-									</div>
+            <% var source = "../assets/components/svg/"+k+".svg"%>
+            <div class="flexItemLegend">
 
-									<hr class="horo" />
+              <div><%=v.text %></div>
+              <div><img src=<%=source%> alt="svg" class="svgImgLegend" /></div>
 
-									<button class="horo" id="but">Horoskop erstellen</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
+            </div>
+            <% count += 1 %>
+            <% if (count%4 == 0) { %>
 
-				<h3 class="horo cntr" id="h3Name"></h3>
-				<p class="cntr" id="pUserInfo">
-					Geboren am 1. Januar 1980 in Berlin, Deutschland
-				</p>
-			</div>
+          </div>
+          <div class="horo itemLegend">
+            <% } %>
+            <% }); %>
+            <div class="flexItemLegend">
+              <div>Aszendent</div>
+              <div>AC</div>
+            </div>
+            <div class="flexItemLegend">
+              <div>Himmelsmitte</div>
+              <div>MC</div>
+            </div>
+            <div class="flexItemLegend">
+              <div>Deszendent</div>
+              <div>DC</div>
+            </div>
+          </div>
 
-			<div class="flexItem2">
-				<div class="signsBox sunSign">
-					<div class="grid1 cOrange" style="font-size: 29px">☉</div>
-					<div class="grid2 sublabel">STERNZEICHEN</div>
-					<h4 class="grid3"><%= sunSign %></h4>
-				</div>
+        </div>
+        <div class="flexLegend">
+          <div class="horo itemLegend">
+            <% var count = 0 %>
 
-				<div class="signsBox sunSign">
-					<div class="grid1 cOrange">AC</div>
-					<div class="grid2 sublabel">ASZENDENT</div>
-					<h4 class="grid3"><%= ascendant %></h4>
-				</div>
+            <% Object.entries(signs).forEach(([k, v], i) => { %>
+            <% var source = "../assets/components/svg/"+k+".svg"%>
+            <div class="flexItemLegend">
+              <div><%=v.text %></div>
+              <div><img src=<%=source%> alt="svg" class="svgImgLegend" /></div>
+            </div>
+            <% count += 1 %>
+            <% if (count%3 == 0) { %>
+          </div>
+          <div class="horo itemLegend">
+            <% } %>
+            <% }); %>
+          </div>
+        </div>
+      </div>
+    </div>
 
-				<div class="signsBox sunSign">
-					<div class="grid1 cOrange" style="font-size: 25px; font-weight: bold">
-						☽
-					</div>
-					<div class="grid2 sublabel">MONDZEICHEN</div>
-					<h4 class="grid3"><%= moonSign %></h4>
-				</div>
-			</div>
+    <div class="flexItem4">
+      <h4 class="horo">INTERPRETATION</h4>
+      <p class="horo">Das Geburtshoroskop kann umfassende und detaillierte Einsicht in die Persönlichkeit, Talente,
+        Herausforderungen und das Lebenspotenzial eines Menschen geben, basierend auf der genauen
+        Position der Planeten zum Zeitpunkt der Geburt.</p>
+      <!-- <button class="butn" type="button" id="dlButton">DL</button> -->
 
-			<div class="flexItem3">
-				<div id="circularPlot"></div>
-				<div>
-					<a class="horo" id="triggerLegend" onclick="popUpLegend()">
-						Legende →
-					</a>
-				</div>
-				<div id="popupLegend" class="popupLegend hide">
-					<div class="flexLegend">
-						<div class="horo itemLegend">
-							<div class="flexItemLegend">
-								<div>Sonne</div>
-								<div>
-									<img
-										src="../assets/components/svg/sun.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-							<div class="flexItemLegend">
-								<div>Mond</div>
-								<div>
-									<img
-										src="../assets/components/svg/moon.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-							<div class="flexItemLegend">
-								<div>Merkur</div>
-								<div>
-									<img
-										src="../assets/components/svg/mercury.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-							<div class="flexItemLegend">
-								<div>Venus</div>
-								<div>
-									<img
-										src="../assets/components/svg/venus.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-						</div>
-						<div class="horo itemLegend">
-							<div class="flexItemLegend">
-								<div>Mars</div>
-								<div>
-									<img
-										src="../assets/components/svg/mars.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-							<div class="flexItemLegend">
-								<div>Jupiter</div>
-								<div>
-									<img
-										src="../assets/components/svg/jupiter.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-							<div class="flexItemLegend">
-								<div>Saturn</div>
-								<div>
-									<img
-										src="../assets/components/svg/saturn.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-							<div class="flexItemLegend">
-								<div>Uranus</div>
-								<div>
-									<img
-										src="../assets/components/svg/uranus.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-						</div>
-						<div class="horo itemLegend">
-							<div class="flexItemLegend">
-								<div>Neptun</div>
-								<div>
-									<img
-										src="../assets/components/svg/neptune.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-							<div class="flexItemLegend">
-								<div>Pluto</div>
-								<div>
-									<img
-										src="../assets/components/svg/pluto.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-							<div class="flexItemLegend">
-								<div>Chiron</div>
-								<div>
-									<img
-										src="../assets/components/svg/chiron.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-							<div class="flexItemLegend">
-								<div>Lilith</div>
-								<div>
-									<img
-										src="../assets/components/svg/lilith.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-						</div>
-						<div class="horo itemLegend">
-							<div class="flexItemLegend">
-								<div>Widder</div>
-								<div>
-									<img
-										src="../assets/components/svg/aries.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-							<div class="flexItemLegend">
-								<div>Stier</div>
-								<div>
-									<img
-										src="../assets/components/svg/taurus.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-							<div class="flexItemLegend">
-								<div>Zwilling</div>
-								<div>
-									<img
-										src="../assets/components/svg/gemini.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-							<div class="flexItemLegend">
-								<div>Krebs</div>
-								<div>
-									<img
-										src="../assets/components/svg/cancer.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-						</div>
-						<div class="horo itemLegend">
-							<div class="flexItemLegend">
-								<div>Löwe</div>
-								<div>
-									<img
-										src="../assets/components/svg/mercury.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-							<div class="flexItemLegend">
-								<div>Jungfrau</div>
-								<div>
-									<img
-										src="../assets/components/svg/virgo.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-							<div class="flexItemLegend">
-								<div>Waage</div>
-								<div>
-									<img
-										src="../assets/components/svg/libra.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-							<div class="flexItemLegend">
-								<div>Skorpion</div>
-								<div>
-									<img
-										src="../assets/components/svg/scorpio.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-						</div>
-						<div class="horo itemLegend">
-							<div class="flexItemLegend">
-								<div>Schütze</div>
-								<div>
-									<img
-										src="../assets/components/svg/virgo.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-							<div class="flexItemLegend">
-								<div>Steinbock</div>
-								<div>
-									<img
-										src="../assets/components/svg/capricorn.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-							<div class="flexItemLegend">
-								<div>Wassermann</div>
-								<div>
-									<img
-										src="../assets/components/svg/aquarius.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-							<div class="flexItemLegend">
-								<div>Fische</div>
-								<div>
-									<img
-										src="../assets/components/svg/pisces.svg"
-										alt="svg"
-										class="svgImg"
-									/>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<script>
-				function popUpLegend() {
-					$("#triggerLegend").text("← Zurück").attr("onclick", `closeLegend()`);
+      <script>
+        var inputCity = "",
+          inputCountry = "";
+        autocompleteInput.on("select", (location) => {
+          inputCity = location.properties.city;
+          inputCountry = ", " + location.properties.country;
+          var longi = Math.round(location.properties.lon * 100) / 100;
+          document.getElementById("lon").value = longi;
+          var lati = Math.round(location.properties.lat * 100) / 100;
+          document.getElementById("lat").value = lati;
+        });
 
-					$("#infoLegend").css("width", "40%");
-					$("#infoLegend").animate(
-						{
-							width: "100%",
-						},
-						{
-							duration: 333,
-							complete: function () {
-								$("html, body").animate(
-									{
-										scrollTop: $("#circularPlot").offset().top - 36,
-									},
-									111
-								);
-							},
-						}
-					);
-					$("#popupLegend").fadeIn(1234);
-				}
-				function closeLegend() {
-					$(".popupLegend").fadeOut(108);
-					$("#infoLegend").animate(
-						{
-							width: "50%",
-						},
-						{
-							duration: 333,
-							complete: function () {
-								$(this).removeAttr("style"); // Remove inline style after animation completes
-							},
-						}
-					);
-					$("#triggerLegend")
-						.text("Legende →")
-						.attr("onclick", `popUpLegend()`);
-				}
+        var horoButton = document.getElementById("but");
+        horoButton.addEventListener("click", fetchHtmlData);
+        document.addEventListener("DOMContentLoaded", function() {
+          document.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+              $('#but').click();
+            }
+          });
+        });
 
-				document.getElementById("hSystem").innerHTML = house_string;
-				document.getElementById("h3Name").innerHTML = name_string;
-				document.getElementById("pUserInfo").innerHTML = pUserInfoString;
-				try {
-					Plotly.newPlot("circularPlot", data, layout, config);
-				} catch (error) {
-					console.error("Error creating Plotly graph:", error);
-				}
-			</script>
-			<div class="flexItem4">
-				<h4 class="horo">INTERPRETATION</h4>
-				<p class="horo">Das Geburtshoroskop kann umfassende und detaillierte Einsicht in die Persönlichkeit, Talente,
-					Herausforderungen und das Lebenspotenzial eines Menschen geben, basierend auf der genauen
-					Position der Planeten zum Zeitpunkt der Geburt.</p>
-				<!-- <button class="butn" type="button" id="dlButton">DL</button> -->
+        $("#che").click(function(event) {
+          var isChecked = event.target.checked;
 
-				<script>
-					$.datetimepicker.setLocale("de");
-					$("#dat").datetimepicker({
-						timepicker: false,
-						format: "d.m.Y",
-						startDate: "1987/12/03",
-					});
-					$("#hour").datetimepicker({
-						datepicker: false,
-						format: "H",
-						step: 60,
-					});
-					$("#minu").datetimepicker({
-						datepicker: false,
-						format: "i",
-						step: 1,
-						minTime: "00:00",
-						maxTime: "01:00",
-					});
-					try {
-						// if (document.getElementById("search_loc").children.length === 0) {				
-							var autocompleteInput = new autocomplete.GeocoderAutocomplete(
-								document.getElementById("search_loc"),
-								`<%= geo_key %>`,
-								{ placeholder: "Ort finden", lang: "de", delay: 0.1 }
-							);
-						
-					} catch (err) {
-						console.log(err);
-					}
+          if (isChecked) {
+            savedHour = $("#hour").val();
+            savedMinu = $("#minu").val();
+            savedHouse = $("#House").val();
+            $("#hour").val("12");
+            $("#minu").val("00");
+            $("#House").val("whole-sign");
+          } else {
+            $("#hour").val(savedHour);
+            $("#minu").val(savedMinu);
+            $("#House").val(savedHouse);
+          }
+        });
 
-					var inputCity = "",
-						inputCountry = "";
-					autocompleteInput.on("select", (location) => {
-						inputCity = location.properties.city;
-						inputCountry = ", " + location.properties.country;
-						var longi = Math.round(location.properties.lon * 100) / 100;
-						document.getElementById("lon").value = longi;
-						var lati = Math.round(location.properties.lat * 100) / 100;
-						document.getElementById("lat").value = lati;
-					});
+        // async function fetchHtmlData(event) {
+        //   event.preventDefault();
+        //   var get_uri = <%- JSON.stringify( get_uri ) %>;
 
-					var horoButton = document.getElementById("but");
-					horoButton.addEventListener("click", fetchHtmlData);
-					document.addEventListener("DOMContentLoaded", function () {
-						document.addEventListener("keydown", function (event) {
-							if (event.key === " " || event.key === "Enter") {
-								fetchHtmlData();
-							}
-						});
-					});
+        //   const params = {
+        //     name: document.getElementById("nam").value,
+        //     date: document.getElementById("dat").value,
+        //     hour: document.getElementById("hour").value,
+        //     minu: document.getElementById("minu").value,
+        //     longi: document.getElementById("lon").value,
+        //     lati: document.getElementById("lat").value,
+        //     house: document.getElementById("House").value,
+        //     city: inputCity,
+        //     country: inputCountry,
+        //     zodi: document.getElementById("Trop").checked,
+        //     check: document.getElementById("che").checked,
+        //   };
+        //   await axios
+        //     .get(get_uri + "/get-html", {
+        //       params
+        //     })
+        //     .then((response) => {
+        //       document.open();
+        //       document.write(response.data);
+        //       document.close();
+        //     })
+        //     .catch((error) => {
+        //       console.error("Error fetching HTML data:", error.message);
+        //     });
+        // }
+      </script>
 
-					$("#che").click(function (event) {
-						var isChecked = event.target.checked;
+      <div class="flexText">
+        <div class="signsTextBox" id="infoSun">
+          <div class="flexText1 cOrange" style="line-height: 28px">
+            <div style="font-size: 33px">☉</div>
+          </div>
+          <h6 class="flexText2 horo">Dein Sternzeichen</h6>
+          <h3 class="flexText3 horo"><%= sunSign %></h3>
+          <hr class="horo" />
+          <p class="flexText4 horo">
+            Das Sonnenzeichen (Sternzeichen) repräsentiert den Kern der Persönlichkeit und die
+            grundlegenden Charakterzüge, die das Wesen und die Selbstwahrnehmung eines Menschen
+            prägen.
+          </p>
+          <div id="popupSun" class="popup hide">
+            <% if ( !checked ) { %>
+            <% var sign_key = userData.sunsign %>
+            <%-	include('./partials/sunsign', { key: sign_key }) %>
+            <% } %>
+          </div>
+          <div class="flexText5 horo">
+            <a class="horo" id="triggerSun" onclick="popUp('Sun')">
+              Zur Interpretation →
+            </a>
+          </div>
+        </div>
+        <div class="signsTextBox" id="infoAc">
+          <div class="flexText1 cOrange" style="line-height: 25px">
+            <div style="font-size: 16px; margin-right: 3px">AC</div>
+          </div>
+          <h6 class="flexText2 horo">Dein Aszendent</h6>
+          <h3 class="flexText3 horo"><%= ascendant %></h3>
+          <hr class="horo" />
+          <p class="flexText4 horo">
+            Der Aszendent beschreibt, wie ein Mensch nach außen hin wirkt und in der Welt auftritt, sowie die
+            Art und Weise, wie er auf seine Umgebung reagiert und von anderen wahrgenommen wird
+          </p>
+          <div id="popupAc" class="popup hide">
+            <% if ( !checked ) { %>
+            <% var asc_link = './partials/houses/ascendant_signs'; %>
+            <% var asc_key = houses[1].sign_key; %>
+            <%- include( asc_link, { key: asc_key } ); %>
+            <% } %>
+          </div>
+          <div class="flexText5 horo">
+            <a class="horo" id="triggerAc" onclick="popUp('Ac')">
+              Zur Interpretation →
+            </a>
+          </div>
+        </div>
 
-						if (isChecked) {
-							savedHour = $("#hour").val();
-							savedMinu = $("#minu").val();
-							savedHouse = $("#House").val();
-							$("#hour").val("12");
-							$("#minu").val("00");
-							$("#House").val("whole-sign");
-						} else {
-							$("#hour").val(savedHour);
-							$("#minu").val(savedMinu);
-							$("#House").val(savedHouse);
-						}
-					});
+        <div class="signsTextBox" id="infoMoon">
+          <div class="flexText1 cOrange" style="line-height: 26px">
+            <div style="font-size: 26px; margin-left: 3px">☽</div>
+          </div>
+          <h6 class="flexText2 horo">Dein Mondzeichen</h6>
+          <h3 class="flexText3 horo"><%= moonSign %></h3>
+          <hr class="horo" />
+          <p class="flexText4 horo">
+            Das Mondzeichen repräsentiert die emotionale Natur eines Menschen, seine inneren Bedürfnisse,
+            Gefühle und unbewussten Reaktionen.
+          </p>
+          <div id="popupMoon" class="popup hide">
+            <% if ( !checked ) { %>
+            <% var sign_key = userData.moonsign %>
+            <%- include('./partials/moonsign', { key: sign_key }); %>
+            <% } %>
+          </div>
+          <div class="flexText5 horo">
+            <a class="horo" id="triggerMoon" onclick="popUp('Moon')">
+              Zur Interpretation →
+            </a>
+          </div>
+        </div>
+      </div>
 
-					document.getElementById("nam").value = name_string;
-					document.getElementById("dat").value = date_string;
-					document.getElementById("hour").value = user_data.hour;
-					document.getElementById("minu").value = user_data.minute;
-					document.getElementById("lat").value = user_data.lat;
-					document.getElementById("lon").value = user_data.lon;
+      <h4 class="horo">Wechselwirkungen</h4>
+      <div class="flexText">
+        <div class="signsTextBox" id="infoSunAc">
+          <div class="flexTextWw1 cOrange">
+            <div style="font-size: 33px; display: inline; margin-top: -5px">
+              ☉
+            </div>
+            <div style="font-size: 25px; display: inline; margin-top: -2px">
+              ↔
+            </div>
+            <div style="font-size: 14pt; display: inline">AC</div>
+          </div>
+          <h6 class="flexText2 horo">Kombination Sonne & Aszendent</h6>
+          <h3 class="flexText3 horo"><%= sunSign %> & <%= ascendant %></h3>
+          <hr class="horo" />
+          <p class="flexText4 horo">
+            Die kombinierte Deutung von Sternzeichen und Aszendent zeigt, wie der innere Wesenskern eines
+            Menschen durch sein äußeres Erscheinungsbild und Verhalten zum Ausdruck kommt.
+          </p>
+          <div id="popupSunAc" class="popup hide">
+            <% if ( !checked ) { %>
+            <% var sun_key = userData.sunsign %>
+            <% var asc_key = houses[1].sign_key; %>
+            <%-	include('./partials/asc_sun_' + sun_key, { key2: asc_key }); %>
+            <% } %>
+          </div>
+          <div class="flexText5 horo">
+            <a class="horo" id="triggerSunAc" onclick="popUp('SunAc')">
+              Zur Interpretation →
+            </a>
+          </div>
+        </div>
+        <div class="signsTextBox" id="infoSunMoon">
+          <div class="flexTextWw1 cOrange">
+            <div style="font-size: 33px; display: inline; margin-top: -5px">
+              ☉
+            </div>
+            <div style="font-size: 25px; display: inline; margin-top: -2px">
+              ↔
+            </div>
+            <div style="font-size: 20pt; display: inline; margin-top: -3px">
+              ☽
+            </div>
+          </div>
+          <h6 class="flexText2 horo">Kombination Sonne & Mond</h6>
+          <h3 class="flexText3 horo"><%= sunSign %> & <%= moonSign %></h3>
+          <hr class="horo" />
+          <p class="flexText4 horo">
+            Die Kombination von Sonnenzeichen und Mondzeichen offenbart, wie der innere Wesenskern
+            eines Menschen mit seinen emotionalen Bedürfnissen und Reaktionen harmoniert und interagiert.
+          </p>
+          <div id="popupSunMoon" class="popup hide">
+            <% if ( !checked ) { %>
+            <% var sun_key = userData.sunsign %>
+            <% var moon_key = userData.moonsign; %>
+            <%- include('./partials/moon_sun_' + sun_key, { key2: moon_key }); %>
+            <% } %>
+          </div>
+          <div class="flexText5 horo">
+            <a class="horo" id="triggerSunMoon" onclick="popUp('SunMoon')">
+              Zur Interpretation →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-					function popUpForm(key) {
-						$(".flexText4, .popup").fadeOut(108);
-						$(".signsTextBox").css({
-							width: "20%",
-							height: "296px",
-						});
-						$(".flexText5").children().text("Zur Interpretation →");
+    <div class="flexItem5">
+      <h4 class="horo">ASPEKTE</h4>
+      <div class="cartesianDiv">
+        <p class="horo half">
+          Die Aspekte der Planeten untereinander zeigen die dynamischen Beziehungen und
+          Wechselwirkungen zwischen verschiedenen Bereichen des Lebens an, wobei harmonische
+          Aspekte positive Synergien und Wachstumschancen fördern, während Spannungsaspekte auf
+          Konflikte und Herausforderungen hinweisen. </br>
+          Der Orbis gibt an, um wie viel Grad der jeweilige Aspekt vom exakten Winkel abweicht.
+          Je höher dieser Wert, desto schwächer ist also die Wirkung des Aspekts.
+        </p>
+        <div class="horo half2">
+          <div id="cartesianPlot"></div>
+        </div>
+      </div>
+    </div>
 
-						// click events
-						["Sun", "Ac", "Moon", "SunAc", "SunMoon"].forEach((key) => {
-							$("#trigger" + key).attr("onclick", `popUp("${key}")`);
-						});
-						$("#trigger" + key)
-							.text("← Zurück")
-							.attr("onclick", `closePopupForm("${key}")`);
+    <div class="flexItem6">
+      <h4 class="horo">POSITIONEN</h4>
+      <p class="horo">
+        Die Planeten und Himmelskörper bewohnen die 12 astrologischen Häuser, welche verschiedene Lebensbereiche darstellen.
+        Dadurch beeinflussen sie diese Bereiche mit ihren charakteristischen Energien und zeigen vorherrschende Themen auf.
+      </p>
+      <div class="positions">
+        <div class="leftPos">
+          <% Object.entries(planets).forEach(([k, v], i) => { %>
+          <% if ( ['sirius', 'ascendant', 'midheaven'].includes(k) ) return; %>
+          <% var source = "../assets/components/svg/"+k+".svg"%>
+          <p class="horo" id=<%=k%>></p>
+          <img src=<%=source%> alt="svg" class="svgImgLegend" />
+          <b><%=v.text%></b> in
+          <span class="pos">
+            <%= planets[k].pos_name; %>
+            <%= signs[v.sign_id].text; %>
+          </span>, Haus <%=v.house_id%>
+          </p>
+          <% if ( i == 6) { %>
+        </div>
+        <div class="rightPos">
+          <% }%>
+          <% }); %>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
 
-						$("#info" + key).css("width", "40%");
-						$("#info" + key).animate(
-							{
-								width: "100%",
-							},
-							{
-								duration: 333,
-								complete: function () {
-									$("html, body").animate(
-										{
-											scrollTop: $("#info" + key).offset().top - 36,
-										},
-										111
-									);
-								},
-							}
-						);
-						$(".flexText4, #popup" + key).fadeIn(1234);
-					}
-					function closePopupForm(key) {
-						$(".flexText4, .popup").fadeOut(108);
-						$(".flexText4").fadeIn(666);
-						$(".signsTextBox").animate(
-							{
-								width: "20%",
-								height: "296px",
-							},
-							{
-								duration: 333,
-								complete: function () {
-									$("html, body").animate(
-										{
-											scrollTop: $("#info" + key).offset().top - 36,
-										},
-										111
-									);
-								},
-							}
-						);
-						$("#info" + key).animate(
-							{
-								width: "50%",
-							},
-							{
-								duration: 333,
-								complete: function () {
-									$(this).removeAttr("style"); // Remove inline style after animation completes
-								},
-							}
-						);
-						$("#trigger" + key)
-							.text("Eingabedaten ändern →")
-							.attr("onclick", `popUpForm("${key}")`);
-					}
-					async function fetchHtmlData(event) {
-						event.preventDefault();
-						var get_uri = <%- JSON.stringify( get_uri ) %>;
+<script src="../assets/plotFunc.js"></script>
 
-						const params = {
-							name: document.getElementById("nam").value,
-							date: document.getElementById("dat").value,
-							hour: document.getElementById("hour").value,
-							minu: document.getElementById("minu").value,
-							longi: document.getElementById("lon").value,
-							lati: document.getElementById("lat").value,
-							house: document.getElementById("House").value,
-							loca: inputCity + inputCountry,
-							zodi: document.getElementById("Trop").checked,
-							check: document.getElementById("che").checked,
-						};
-						await axios
-							.get( get_uri+"/get-html", { params } )
-							.then((response) => {
-								document.open();
-								document.write(response.data);
-								document.close();
-							})
-							.catch((error) => {
-								console.error("Error fetching HTML data:", error.message);
-							});
-					}
-				</script>
-
-				<div class="flexText">
-					<div class="signsTextBox" id="infoSun">
-						<div class="flexText1 cOrange" style="line-height: 28px">
-							<div style="font-size: 33px">☉</div>
-						</div>
-						<h6 class="flexText2 horo">Dein Sternzeichen</h6>
-						<h3 class="flexText3 horo"><%= sunSign %></h3>
-						<hr class="horo" />
-						<p class="flexText4 horo">
-							Das Sonnenzeichen (Sternzeichen) repräsentiert den Kern der Persönlichkeit und die
-							grundlegenden Charakterzüge, die das Wesen und die Selbstwahrnehmung eines Menschen
-							prägen.
-						</p>
-						<div id="popupSun" class="popup hide">
-							<% if ( !checked ) { %>
-								<% var sign_key = userData.sunsign %> 
-								<%-	include('./partials/sunsign', { key: sign_key }) %> 
-							<% } %>
-						</div>
-						<div class="flexText5 horo">
-							<a class="horo" id="triggerSun" onclick="popUp('Sun')">
-								Zur Interpretation →
-							</a>
-						</div>
-					</div>
-					<div class="signsTextBox" id="infoAc">
-						<div class="flexText1 cOrange" style="line-height: 25px">
-							<div style="font-size: 16px; margin-right: 3px">AC</div>
-						</div>
-						<h6 class="flexText2 horo">Dein Aszendent</h6>
-						<h3 class="flexText3 horo"><%= ascendant %></h3>
-						<hr class="horo" />
-						<p class="flexText4 horo">
-							Der Aszendent beschreibt, wie ein Mensch nach außen hin wirkt und in der Welt auftritt, sowie die
-							Art und Weise, wie er auf seine Umgebung reagiert und von anderen wahrgenommen wird
-						</p>
-						<div id="popupAc" class="popup hide">
-							<% if ( !checked ) { %>
-								<% var asc_link = './partials/houses/ascendant_signs'; %> 
-								<% var asc_key = houses[1].sign_key; %> 
-								<%- include( asc_link, { key: asc_key } ); %> 
-							<% } %>
-						</div>
-						<div class="flexText5 horo">
-							<a class="horo" id="triggerAc" onclick="popUp('Ac')">
-								Zur Interpretation →
-							</a>
-						</div>
-					</div>
-
-					<div class="signsTextBox" id="infoMoon">
-						<div class="flexText1 cOrange" style="line-height: 26px">
-							<div style="font-size: 26px; margin-left: 3px">☽</div>
-						</div>
-						<h6 class="flexText2 horo">Dein Mondzeichen</h6>
-						<h3 class="flexText3 horo"><%= moonSign %></h3>
-						<hr class="horo" />
-						<p class="flexText4 horo">
-							Das Mondzeichen repräsentiert die emotionale Natur eines Menschen, seine inneren Bedürfnisse,
-							Gefühle und unbewussten Reaktionen.
-						</p>
-						<div id="popupMoon" class="popup hide">
-							<% if ( !checked ) { %> 
-								<% var sign_key = userData.moonsign %> 
-								<%- include('./partials/moonsign', { key: sign_key }); %> 
-							<% } %>
-						</div>
-						<div class="flexText5 horo">
-							<a class="horo" id="triggerMoon" onclick="popUp('Moon')">
-								Zur Interpretation →
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<h4 class="horo">Wechselwirkungen</h4>
-				<div class="flexText">
-					<div class="signsTextBox" id="infoSunAc">
-						<div class="flexTextWw1 cOrange">
-							<div style="font-size: 33px; display: inline; margin-top: -5px">
-								☉
-							</div>
-							<div style="font-size: 25px; display: inline; margin-top: -2px">
-								↔
-							</div>
-							<div style="font-size: 14pt; display: inline">AC</div>
-						</div>
-						<h6 class="flexText2 horo">Kombination Sonne & Aszendent</h6>
-						<h3 class="flexText3 horo"><%= sunSign %> & <%= ascendant %></h3>
-						<hr class="horo" />
-						<p class="flexText4 horo">
-							Die kombinierte Deutung von Sternzeichen und Aszendent zeigt, wie der innere Wesenskern eines
-							Menschen durch sein äußeres Erscheinungsbild und Verhalten zum Ausdruck kommt.
-						</p>
-						<div id="popupSunAc" class="popup hide">
-							<% if ( !checked ) { %> 
-								<% var sun_key = userData.sunsign %> 
-								<% var asc_key = houses[1].sign_key; %> 
-								<%-	include('./partials/asc_sun_' + sun_key, { key2: asc_key }); %> 
-							<% } %>
-						</div>
-						<div class="flexText5 horo">
-							<a class="horo" id="triggerSunAc" onclick="popUp('SunAc')">
-								Zur Interpretation →
-							</a>
-						</div>
-					</div>
-					<div class="signsTextBox" id="infoSunMoon">
-						<div class="flexTextWw1 cOrange">
-							<div style="font-size: 33px; display: inline; margin-top: -5px">
-								☉
-							</div>
-							<div style="font-size: 25px; display: inline; margin-top: -2px">
-								↔
-							</div>
-							<div style="font-size: 20pt; display: inline; margin-top: -3px">
-								☽
-							</div>
-						</div>
-						<h6 class="flexText2 horo">Kombination Sonne & Mond</h6>
-						<h3 class="flexText3 horo"><%= sunSign %> & <%= moonSign %></h3>
-						<hr class="horo" />
-						<p class="flexText4 horo">
-							Die Kombination von Sonnenzeichen und Mondzeichen offenbart, wie der innere Wesenskern
-							eines Menschen mit seinen emotionalen Bedürfnissen und Reaktionen harmoniert und interagiert.
-						</p>
-						<div id="popupSunMoon" class="popup hide">
-							<% if ( !checked ) { %> 
-								<% var sun_key = userData.sunsign %> 
-								<% var moon_key = userData.moonsign; %> 
-								<%- include('./partials/moon_sun_' + sun_key, { key2: moon_key }); %>
-							<% } %>
-						</div>
-						<div class="flexText5 horo">
-							<a class="horo" id="triggerSunMoon" onclick="popUp('SunMoon')">
-								Zur Interpretation →
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<script>
-				function popUp(key) {
-					$(".flexText4, .popup").fadeOut(108);
-					$(".signsTextBox").css({
-						width: "20%",
-					});
-					$(".flexText5").children().text("Zur Interpretation →");
-					$(".newInput").children().text("Eingabedaten ändern →");
-
-					// click events
-					["Sun", "Ac", "Moon", "SunAc", "SunMoon"].forEach((idKey) => {
-						$("#trigger" + idKey).attr("onclick", `popUp("${idKey}")`);
-					});
-					$("#trigger" + key)
-						.text("← Zurück")
-						.attr("onclick", `closePopup("${key}")`);
-
-					$("#info" + key).css("width", "40%");
-					$("#info" + key).animate(
-						{
-							width: "100%",
-							height: `${0.67 * window.innerHeight}px`,
-						},
-						{
-							duration: 333,
-							complete: function () {
-								$("html, body").animate(
-									{
-										scrollTop: $("#info" + key).offset().top - 12,
-									},
-									111
-								);
-							},
-						}
-					);
-					$(".flexText4, #popup" + key).fadeIn(1234);
-				}
-				function closePopup(key) {
-					$(".flexText4, .popup").fadeOut(108);
-					$(".flexText4").fadeIn(666);
-					$(".signsTextBox").animate(
-						{
-							width: "20%",
-							height: "296px",
-						},
-						{
-							duration: 333,
-							complete: function () {
-								$("html, body").animate(
-									{
-										scrollTop: $("#info" + key).offset().top - 12,
-									},
-									111
-								);
-							},
-						}
-					);
-					$("#trigger" + key)
-						.text("Zur Interpretation →")
-						.attr("onclick", `popUp("${key}")`);
-				}
-			</script>
-			<div class="flexItem5">
-				<h4 class="horo">ASPEKTE</h4>
-				<div class="cartesianDiv">
-					<p class="horo half">
-						Die Aspekte der Planeten untereinander zeigen die dynamischen Beziehungen und
-						Wechselwirkungen zwischen verschiedenen Bereichen des Lebens an, wobei harmonische
-						Aspekte positive Synergien und Wachstumschancen fördern, während Spannungsaspekte auf
-						Konflikte und Herausforderungen hinweisen.
-					</p>
-					<div class="horo half2">
-						<div id="cartesianPlot"></div>
-					</div>
-					<script>
-						var config = <%- JSON.stringify( xyConfig ) %>;
-						var layout = <%- JSON.stringify( xyLayout ) %>;
-						var data = <%- JSON.stringify( xyAspects ) %>;
-						Plotly.newPlot( "cartesianPlot", data, layout, config );
-					</script>
-				</div>
-			</div>
-			<div class="flexItem6">
-				<h4 class="horo">POSITIONEN</h4>
-				<p class="horo">
-					Die Planeten und Himmelskörper bewohnen die 12 astrologischen Häuser, welche verschiedene Lebensbereiche darstellen.
-					Dadurch beeinflussen sie diese Bereiche mit ihren charakteristischen Energien und zeigen vorherrschende Themen auf. 
-				</p>
-				<div class="positions">
-					<div class="leftPos">
-						<p class="horo" id="sun">
-							<img
-								src="../assets/components/svg/sun.svg"
-								alt="svg"
-								class="svgImg"
-							/>
-							<b>Sonne</b> steht in <span class="pos">text</span>, Haus
-							<span class="houseId">N</span>
-						</p>
-						<p class="horo" id="moon">
-							<img
-								src="../assets/components/svg/moon.svg"
-								alt="svg"
-								class="svgImg"
-							/>
-							<b>Mond</b> steht in <span class="pos">text</span>, Haus
-							<span class="houseId">N</span>
-						</p>
-						<p class="horo" id="mercury">
-							<img
-								src="../assets/components/svg/mercury.svg"
-								alt="svg"
-								class="svgImg"
-							/>
-							<b>Merkur</b> steht in <span class="pos">text</span>, Haus
-							<span class="houseId">N</span>
-						</p>
-						<p class="horo" id="venus">
-							<img
-								src="../assets/components/svg/venus.svg"
-								alt="svg"
-								class="svgImg"
-							/>
-							<b>Venus</b> steht in <span class="pos">text</span>, Haus
-							<span class="houseId">N</span>
-						</p>
-						<p class="horo" id="mars">
-							<img
-								src="../assets/components/svg/mars.svg"
-								alt="svg"
-								class="svgImg"
-							/>
-							<b>Mars</b> steht in <span class="pos">text</span>, Haus
-							<span class="houseId">N</span>
-						</p>
-						<p class="horo" id="jupiter">
-							<img
-								src="../assets/components/svg/jupiter.svg"
-								alt="svg"
-								class="svgImg"
-							/>
-							<b>Jupiter</b> steht in <span class="pos">text</span>, Haus
-							<span class="houseId">N</span>
-						</p>
-						<p class="horo" id="saturn">
-							<img
-								src="../assets/components/svg/saturn.svg"
-								alt="svg"
-								class="svgImg"
-							/>
-							<b>Saturn</b> steht in <span class="pos">text</span>, Haus
-							<span class="houseId">N</span>
-						</p>
-					</div>
-					<div class="rightPos">
-						<p class="horo" id="uranus">
-							<img
-								src="../assets/components/svg/uranus.svg"
-								alt="svg"
-								class="svgImg"
-							/>
-							<b>Uranus</b> steht in <span class="pos">text</span>, Haus
-							<span class="houseId">N</span>
-						</p>
-						<p class="horo" id="neptune">
-							<img
-								src="../assets/components/svg/neptune.svg"
-								alt="svg"
-								class="svgImg"
-							/>
-							<b>Neptun</b> steht in <span class="pos">text</span>, Haus
-							<span class="houseId">N</span>
-						</p>
-						<p class="horo" id="pluto">
-							<img
-								src="../assets/components/svg/pluto.svg"
-								alt="svg"
-								class="svgImg"
-							/>
-							<b>Pluto</b> steht in <span class="pos">text</span>, Haus
-							<span class="houseId">N</span>
-						</p>
-						<p class="horo" id="chiron">
-							<img
-								src="../assets/components/svg/chiron.svg"
-								alt="svg"
-								class="svgImg"
-							/>
-							<b>Chiron</b> steht in <span class="pos">text</span>, Haus
-							<span class="houseId">N</span>
-						</p>
-						<p class="horo" id="northnode">
-							<img
-								src="../assets/components/svg/northnode.svg"
-								alt="svg"
-								class="svgImg"
-							/>
-							<b>Aufst. Mondknoten</b> steht in <span class="pos">text</span>,
-							Haus <span class="houseId">N</span>
-						</p>
-						<p class="horo" id="southnode">
-							<img
-								src="../assets/components/svg/southnode.svg"
-								alt="svg"
-								class="svgImg"
-							/>
-							<b>Abst. Mondknoten</b> steht in <span class="pos">text</span>,
-							Haus <span class="houseId">N</span>
-						</p>
-						<p class="horo" id="lilith">
-							<img
-								src="../assets/components/svg/lilith.svg"
-								alt="svg"
-								class="svgImg"
-							/>
-							<b>Lilith</b> steht in <span class="pos">text</span>, Haus
-							<span class="houseId">N</span>
-						</p>
-					</div>
-				</div>
-				<script>
-					planets_data.forEach((entry) => {
-						try {
-							var pos_text =
-								entry.name +
-								" " +
-								signs_styles[planet_styles[entry.key].sign_id].text;
-							document
-								.getElementById(entry.key)
-								.querySelector("span.pos").innerHTML = pos_text;
-							document
-								.getElementById(entry.key)
-								.querySelector("span.houseId").innerHTML =
-								planet_styles[entry.key].house_id;
-						} catch (error) {
-							// console.log("error during position texts", error, entry);
-						}
-					});
-				</script>
-			</div>
-		</div>
-	</body>
-	<script>
-		// async function downloadSvgGraph(event) {
-		// 	event.preventDefault();
-		// 	var svgtag1 = document.querySelectorAll(".main-svg")[0].innerHTML;
-		// 	// var svgtag2 = document.querySelectorAll('.main-svg')[1].innerHTML;
-		// 	var svgtag = svgtag1;
-		// 	svgtag = svgtag.replace(/<b>|<\/b>/g, "").replace(/<br>/g, "");
-		// 	var filename =
-		// 		user_data.name +
-		// 		"_" +
-		// 		user_data.year +
-		// 		"." +
-		// 		user_data.month +
-		// 		"." +
-		// 		user_data.day +
-		// 		"_" +
-		// 		user_data.hour +
-		// 		"_" +
-		// 		user_data.minute +
-		// 		"_" +
-		// 		user_data.lat +
-		// 		"N" +
-		// 		user_data.lon +
-		// 		"O";
-		// 	const params = {
-		// 		ident_key: "zbob3as8",
-		// 		svgtag: svgtag,
-		// 		file_name: filename,
-		// 	};
-		// 	try {
-		// 		const response = await axios.post(
-		//			<%=get_uri%> + 
-		// 			"/svg-background",
-		// 			params
-		// 		);
-		// 		console.log(params, "svg bckground triggered");
-		// 	} catch (error) {
-		// 		console.error("Error fetching SVG background download:", error);
-		// 	}
-		// }
-		// document
-		// 	.getElementById("dlButton")
-		// 	.addEventListener("click", downloadSvgGraph);
-	</script>
 </html>

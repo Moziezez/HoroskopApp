@@ -1,7 +1,7 @@
 require("dotenv").config();
 const funcs = require("./assets/func.js");
 const { plotXyStyle, circles } = require("./assets/components/plotStyle.js");
-const {	signs_style_dict, houses_style_dict, planets_style_dict, house_system_dict } = require("./assets/components/planetStyles.js");
+const { signs_style_dict, houses_style_dict, planets_style_dict, house_system_dict } = require("./assets/components/planetStyles.js");
 var { plotStyle } = require("./assets/components/plotStyle.js");
 const path = require("path");
 const express = require("express");
@@ -39,6 +39,13 @@ app.get("/authenticated", (req, res) => {
 	}
 })
 
+app.get("/get-index", async (req, res) => {
+	var geo_key = process.env.GEO_KEY;
+	var get_uri = process.env.HOST;
+	var user_data = req.query;
+	res.render("index", { geo_key, get_uri, user_data });
+})
+
 app.get("/", async (req, res) => {
 	// const db = new pg.Client({
 	// 	user: "postgres",
@@ -70,16 +77,84 @@ app.get("/", async (req, res) => {
 
 	var geo_key = process.env.GEO_KEY;
 	var get_uri = process.env.HOST; // XXX
-
-	res.render("index", { geo_key, get_uri });
+	var user_data = {
+		name: 'Random',
+		date: '25.06.1997',
+		hour: '12',
+		minu: '25',
+		longi: '33',
+		lati: '22',
+		house: 'placidus',
+		city: 'Hildesheim',
+		country: 'Deutschland',
+		zodi: 'true',
+		check: 'false',
+		aspectChecks: [
+			'1', '1', '1', '1',
+			'1', '1', '1', '1',
+			'1', '1'
+		]
+	};
+	// var user_data = {
+	// 	name: '',
+	// 	date: '',
+	// 	hour: '',
+	// 	minu: '',
+	// 	longi: '',
+	// 	lati: '',
+	// 	house: 'placidus',
+	// 	city: '',
+	// 	country: '',
+	// 	zodi: 'true',
+	// 	check: 'false',
+	// 	aspectChecks: [
+	// 		'1', '1', '1', '1',
+	// 		'1', '1', '1', '1',
+	// 		'1', '1'
+	// 	]
+	// };
+	res.render("index", { geo_key, get_uri, user_data });
 });
 app.get("/api/environment", (req, res) => {
 	const geo_key = process.env.GEO_KEY;
 	res.json({ geo_key });
 });
+
+app.get("/create-plot", function (req, res) {
+
+	var { user, traces, aspects, symbols } = funcs.userInput(req.query);
+
+	var config = plotStyle.config;
+	var layout = plotStyle.layout;
+	var planet_styles = planets_style_dict;
+	var signs_styles = signs_style_dict;
+	var system_name = house_system_dict[user.house];
+
+	var data = circles.concat(traces);
+
+
+	var loca_string = `${user.city} (${user.lat}°N, ${user.lon}°O)`;
+	var house_string = `Häusersystem: ${system_name}.`;
+	var layoutXy = plotXyStyle.layout;
+	var configXy = plotXyStyle.config;
+
+	res.json({
+		loca_string,
+		house_string,
+		user,
+		layout,
+		config,
+		data,
+		layoutXy,
+		configXy,
+		aspects,
+	});
+});
+
 app.get("/get-html", function (req, res) {
 	var plot_style = plotStyle;
 	var geo_key = process.env.GEO_KEY;
+
 	try {
 		var { user, traces, aspects, symbols } = funcs.userInput(req.query);
 		// dbEntry.createEntry( user );
@@ -95,7 +170,14 @@ app.get("/get-html", function (req, res) {
 		var asc_utf8 = signs_style_dict[user.asc.Sign.key].utf8;
 		var asc = asc_utf8 + " " + asc_name;
 		var isChecked = req.body.Check;
-		console.log(user);
+
+		var name_string = `${user.name} `;
+		var date_string = `${user.day}.${user.month}.${user.year}`;
+		var time_string = `${user.hour}:${user.minute} Uhr`;
+
+		var loca_string = `${user.city} (${user.lat}°N, ${user.lon}°O)`;
+		var pUserInfoString = 'Geboren am ' + date_string + ' um ' + time_string + ' in ' + loca_string;
+
 		res.render("plot.ejs", {
 			checked: isChecked,
 			userData: user,
@@ -106,7 +188,7 @@ app.get("/get-html", function (req, res) {
 			sunSign: sun_sign,
 			ascendant: asc,
 			moonSign: moon_sign,
-			system_name: house_system_dict,
+			system_name: house_system_dict[user.house],
 			houses: houses_style_dict,
 			planets: planets_style_dict,
 			signs: signs_style_dict,
@@ -116,6 +198,8 @@ app.get("/get-html", function (req, res) {
 			symbols: symbols,
 			geo_key: geo_key,
 			get_uri: process.env.HOST,
+			reqQuery: req.query,
+			pUserInfoString: pUserInfoString
 		});
 	} catch (err) {
 		console.error(err);
@@ -127,18 +211,33 @@ app.get("/render-pdf", async (req, res) => {
 	const pdfFilePath = "assets/converted-image.pdf";
 	convertSVGtoPDF(svgFilePath, pdfFilePath);
 });
+
 app.get("/favicon.ico", function (req, res) {
 	res.type("image/x-icon");
 	res.sendFile(path.join(__dirname, "favicon.ico"));
 });
-app.get("/assets/components/svg/*.svg", function (req, res) {
+
+app.get("/assets/components/svg/:filename", function (req, res) {
+	const filename = req.params.filename
 	res.setHeader("content-type", "image/svg+xml; charset=utf-8");
-	res.sendFile(path.join(__dirname, req.url));
+	res.sendFile(
+		path.join(__dirname, req.url)
+	);
 });
+
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
+
 app.get("/assets/datetimepicker-master/jquery.js", function (req, res) {
 	res.setHeader("content-type", "text/javascript; charset=utf-8");
 	res.sendFile(
 		path.join(__dirname, "assets", "datetimepicker-master", "jquery.js")
+	);
+});
+
+app.get("/assets/plotFunc.js", function (req, res) {
+	res.setHeader("content-type", "text/javascript; charset=utf-8");
+	res.sendFile(
+		path.join(__dirname, "assets", "plotFunc.js")
 	);
 });
 app.get(

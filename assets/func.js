@@ -4,17 +4,19 @@ var { plotData } = require('./components/plotData.js');
 var { plotStyle, plotXyStyle } = require('./components/plotStyle.js');
 
 function userInput(query) { // Save User Input to Variables
+	console.log(query)
 	var date = query.date.split("."),
 		year = date[2],
 		month = date[1],
 		day = date[0];
 	var name = query.name,
 		lat = query.lati,
-		lon = query.longi, 
-		loca = query.loca;
+		lon = query.longi,
+		city = query.city,
+		country = query.country;
 	var hour = query.hour,
 		minu = query.minu,
-		house_system = query.house; 
+		house_system = query.house;
 	var zodi = query.zodi;
 
 	function zipArraysIntoObject(keys, values) {
@@ -33,72 +35,71 @@ function userInput(query) { // Save User Input to Variables
 	}
 
 	var aspectChecksBinary = query.aspectChecks;
-	var keys = [ "opposition", "trine",	"square", "semi-square", "conjunction", "sextile", "semi-sextile", "quintile", "quincunx", "septile" ];
+	var keys = ["opposition", "trine", "square", "semi-square", "conjunction", "sextile", "semi-sextile", "quintile", "quincunx", "septile"];
 	var valid_keys = [];
 	try {
-		var aspectChecksDict = zipArraysIntoObject( keys, aspectChecksBinary );
-		Object.entries( aspectChecksDict ).forEach( ([ key, value ]) => {
-			if ( value === "1" ) {
+		var aspectChecksDict = zipArraysIntoObject(keys, aspectChecksBinary);
+		Object.entries(aspectChecksDict).forEach(([key, value]) => {
+			if (value === "1") {
 				valid_keys.push(key);
-			}		
+			}
 		});
-	} catch ( err ) {
-		console.log( err );
+	} catch (err) {
+		console.log(err);
 		valid_keys = keys;
 	}
 
 	var zodiac = "sidereal";
-	if ( zodi === "true") {
+	if (zodi === "true") {
 		zodiac = "tropical";
 	}
-	if ( Math.abs( parseFloat( lon ) ) > 180) {
+	if (Math.abs(parseFloat(lon)) > 180) {
 		return true;
-	}	else if ( Math.abs( parseFloat( lat ) ) > 90) {
+	} else if (Math.abs(parseFloat(lat)) > 90) {
 		return true;
 	}
 	var isChecked = query.check === "true";
 
-	console.log("CHECK", isChecked)
-	if ( isChecked ) {
+	if (isChecked) {
 		hour = '12';
 		minu = '00';
 		house_system = 'whole-sign';
 	}
 
 	try {
-		var origiin = new Origin({ 
+		var origiin = new Origin({
 			year: parseInt(year), month: parseInt(month) - 1,	//0 = January, 11 = December!
 			date: parseInt(day), hour: parseInt(hour), minute: parseInt(minu), latitude: parseFloat(lat), longitude: parseFloat(lon)
 		});
 	} catch (error) {
 		console.log(error);
 	}
-	
-	var horoscope = new Horoscope({ 
-		origin: origiin, houseSystem: house_system, zodiac: zodiac, aspectPoints: [ 'bodies', 'points', 'angles' ],
-		aspectWithPoints: [ 'bodies', 'points', 'angles' ], aspectTypes: [ "major", "minor" ], customOrbs: {}, language: 'en'
+
+	var horoscope = new Horoscope({
+		origin: origiin, houseSystem: house_system, zodiac: zodiac, aspectPoints: ['bodies', 'points', 'angles'],
+		aspectWithPoints: ['bodies', 'points', 'angles'], aspectTypes: ["major", "minor"], customOrbs: {}, language: 'en'
 	});
-	var user_data = {	
+	var user_data = {
 		"name": name, "day": day, "month": month, "year": year, "minute": minu, "hour": hour,
 		"lon": lon, "lat": lat, "house": house_system, "sunsign": horoscope.SunSign.key, "moonsign": horoscope.CelestialBodies.moon.Sign.key,
-		"asc": horoscope.Ascendant, "loca": loca
+		"asc": horoscope.Ascendant, "city": city, "country": country
 	};
-	const { traces_data, midheaven_theta, ascendant_theta, planet_symbols } = plotData( horoscope, isChecked, zodiac, valid_keys );
+	const { traces_data, midheaven_theta, ascendant_theta, planet_symbols } = plotData(horoscope, isChecked, zodiac, valid_keys);
 
-	var { aspects_plot_traces, planet_xy_symbols } = getAspectTraces(horoscope, isChecked, valid_keys); 
+	var { aspects_plot_traces, planet_xy_symbols } = getAspectTraces(horoscope, isChecked, valid_keys);
 	var offset = 180 - ascendant_theta;	// offset for plot rotation -> Ac always left
-	var MC = midheaven_theta;					
-	var IC = MC + 180; 
+	var MC = midheaven_theta;
+	var IC = MC + 180;
 	if (MC > 180) {			// bugfix for horoscope module
-		IC = MC - 180;	
+		IC = MC - 180;
 	}
-	var AC = ascendant_theta;					
-	var DC = AC + 180;						   
+	var AC = ascendant_theta;
+	var DC = AC + 180;
 	if (AC > 180) {
 		DC = AC - 180;
 	}
-	if ( isChecked ) {
-		MC = 444; AC = 444;  DC = 444; IC = 444;
+	if (isChecked) {
+		MC = 444; AC = 444; DC = 444; IC = 444;
 	}
 	plotStyle.layout.polar.angularaxis.tickvals = [AC, MC, DC, IC];
 	plotStyle.layout.polar.angularaxis.rotation = offset;
