@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8"> 
+    <script src="https://unpkg.com/@geoapify/geocoder-autocomplete@^1/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <title> Horoskop </title>
+  </head>
+	<script>
+		var inputCity = "", inputCountry = "";
+		async function fetchEnvironmentVariables() {
+	      try {
+	        const response = await axios.get('https://vedaversum.eu-4.evennode.com/api/environment')
+	        const data = response.data;
+	        const geo_key = data.geo_key;
+        	const autocompleteInput = new autocomplete.GeocoderAutocomplete(
+          		document.getElementById( "search_loc" ),
+          		geo_key,
+          		{ placeholder: "Ort finden", lang: "de"}
+        	);
+
+        	autocompleteInput.on('select', ( location ) => {  
+          		inputCity = location.properties.city;
+          		inputCountry = ", "+location.properties.country;            
+          		var longi = Math.round( location.properties.lon * 100 ) / 100;
+          		document.getElementById( "lon" ).value = longi;
+          		var lati = Math.round( location.properties.lat * 100 ) / 100;
+          		document.getElementById( "lat" ).value = lati;
+        	});
+              } catch (error) {
+                 console.error('Error fetching environment vars:', error.message);
+              }
+	   }
+
+	  fetchEnvironmentVariables();
+        </script>
+
+    <body class="horo">
+      <div class="input-container">
+        <h1 class="horo cntr"> Erstelle dein individuelles Geburtshoroskop </h1>
+        <div class="flex">
+          <div class="border">
+            <div class="text-container">  
+              <h3 class="horo cntr"> Trage deine Daten ein </h3>
+              <form action="#" id="frm" novalidate>
+                <div class="w3-animate-top">      
+                  <div class="grid-item">
+                    <label for="Name" class="horo"> Name: </label>
+                    <input 
+                      class="horo-inpfield"
+                      type="text" 
+                      name="Name" 
+                      id="nam" 
+                      placeholder="Anzeigename"
+					            pattern="^[a-zA-ZÄäÖöÜüß\s\d]+$"
+                      required oninvalid="this.setCustomValidity('Trage einen gültigen Anzeigenamen ein.')"
+                    />
+                    <div class="dotted-line"></div>
+                  </div>
+
+                  <div class="grid-item">
+                    <label for="Datum" class="horo"> Geburtstag: </label>
+                    <span class="horo sublabel"> DATUM </span>
+                    <input 
+                      type="text" name="Datum" id="dat" class="horo-inpfield"
+                      placeholder="Geburtsdatum" autocomplete="off" pattern="^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.\d{4}\s?$"
+                      required oninvalid="this.setCustomValidity('Datum muss im Format dd.mm.yyyy sein.')"
+                    />
+                    <div class="dotted-line"></div>
+          
+                    <span class="horo sublabel marTop"> UHRZEIT </span>
+                    <div class="flex-time">
+                      <div class="input-time">
+                        <input 
+                          type="text" name="Stunde" id="hour" class="horo-inpfield time"
+                          placeholder="00" autocomplete="off" pattern="^(2[0-4]|1[0-9]|0[0-9])$"
+                          required oninvalid="this.setCustomValidity('Stunde muss im 24h-Format sein.')"
+                        />
+                        <div class="dotted-line"></div>
+                      </div>
+                      <span> &nbsp; : &nbsp; </span> 
+                      <div class="input-time">
+                        <input 
+                          type="text" name="Minute" id="minu" class="horo-inpfield"
+                          placeholder="00" autocomplete="off" pattern="^([0-5]?[0-9]|60)$"
+                          required oninvalid="this.setCustomValidity('Minute muss zwischen 0 und 60 liegen.')"
+                        />
+                        <div class="dotted-line"></div>
+                      </div>
+                      <div>
+                        <span class="horo sublabel bold" id="checkbox" for="Check">
+							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+							ZEIT UNBEKANNT? </span>
+                        <span class="horo sublabel bold"> &nbsp; JA: </span>
+                        <input 
+                          type="checkbox" name="Check" id="che" class="horo-inpfield"> 
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="grid-item">
+                    <span class="horo"> Geburtsort: </span>
+                    <div id="search_loc" class="autocomplete-container"></div>
+                    <div class="dotted-line"></div>
+
+                    <span class="horo sublabel marTop"> KOORDINATEN </span>
+                    <div class="coords-container"> 
+                      <div class="horo">
+                        <input 
+                          type="text" name="Lati" class="horo-inpfield coord-input"
+                          id="lat" placeholder="Breiten" autocomplete="off" pattern="^\s?-?(90|[0-8]?\d(\.\d\d?)?)$"
+                          required oninvalid="this.setCustomValidity('Breitengrad muss zwischen -90° und 90° liegen.')"
+                        />
+                        <div class="dotted-line coord-line"></div>
+                      </div>
+                      <label for="Lati" class="horo" style="margin-top: 5px;"> ° Nord </label>
+                      <div>
+                        &nbsp; &nbsp; &nbsp; &nbsp;
+                      </div>
+                      <div class="horo">
+                        <input 
+                          type="text" name="Long" id="lon" class="horo-inpfield coord-input"
+                          placeholder="Längen" autocomplete="off" pattern="^\s?-?(180(\.00?)?|(1[0-7]\d|0?\d?\d)(\.\d\d?)?)$"
+                          required oninvalid="this.setCustomValidity('Längengrad muss zwischen 0° und 180° liegen.')"
+                        />
+                        <div class="dotted-line coord-line"></div>
+                      </div>
+                      <label for="Long" class="horo" style="margin-top: 5px;"> ° Ost </label>
+                    </div>
+                  </div>
+
+                  <hr class="horo">
+
+                  <div class="grid-item">
+                    <label for="House" class="horo" style="display: inline;"> Häuser-System: </label>
+                    <select name="House" id="House">
+                      <option value="placidus"> Placidus </option>
+                      <option value="koch"> Koch </option>
+                      <option value="campanus"> Campanus </option>
+                      <option value="whole-sign"> Tierkreiszeichen </option>
+                      <option value="equal-house"> Gleiche Häuser </option>
+                      <option value="regiomontanus"> Regiomontanus </option>
+                      <option value="topocentric"> Topozentrisch </option>
+                    </select>
+                  </div>
+                  <div class="grid-item" id="signsSystem">
+                    <label for="zodi" class="horo" style="display: inline;"> Sternzeichen-System: </label>
+                    <div class="flex-radio">
+                      <div>
+                        <span class="horo sublabel bold"> TROPICAL </span>
+                        <input 
+                        type="radio" name="Zodiac" id="Trop" class="horo" checked> 
+                      </div>
+                      <div>
+                        <span class="horo sublabel bold"> SIDEREAL </span>
+                        <input 
+                              type="radio" name="Zodiac" id="Side" class="horo"> 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="grid-item">
+                    <label for="Aspects" class="horo" style="display: inline;"> Aktive Aspekte: </label>
+                    <div>
+                      <span class="horo sublabel bold" id="opposition"> Opposition </span>
+                      <input 
+                        type="checkbox" name="cheOpposition" class="horo-inpfield aspect-check"> 
+                      <span class="horo sublabel bold" id="trine"> Trigon </span>
+                      <input 
+                        type="checkbox" id="cheTrine" class="horo-inpfield aspect-check"> 
+                      <span class="horo sublabel bold" id="square"> Quadrat </span>
+                      <input 
+                        type="checkbox" id="cheSquare" class="horo-inpfield aspect-check"> 
+                      <span class="horo sublabel bold" id="semi-square"> Semi-Quadrat </span>
+                      <input 
+                        type="checkbox" id="cheSemiSquare" class="horo-inpfield aspect-check"> 
+                      <span class="horo sublabel bold" id="conjunction"> Konjunktion </span>
+                      <input 
+                        type="checkbox" id="cheConjunction" class="horo-inpfield aspect-check"> 
+                      <span class="horo sublabel bold" id="sextile"> Sextil </span>
+                      <input 
+                        type="checkbox" id="cheSextile" class="horo-inpfield aspect-check"> 
+                      <span class="horo sublabel bold" id="semi-sextile"> Semi-Sextil </span>
+                      <input 
+                        type="checkbox" id="cheSemiSextile" class="horo-inpfield aspect-check"> 
+                      <span class="horo sublabel bold" id="quintile"> Quintil </span>
+                      <input 
+                        type="checkbox" id="cheQuintile" class="horo-inpfield aspect-check">
+                      <span class="horo sublabel bold" id="quincunx"> Quinkunx </span>
+                      <input 
+                        type="checkbox" id="cheQuincunx" class="horo-inpfield aspect-check" checked="true">  
+                      <span class="horo sublabel bold" id="septile"> Septil </span>
+                      <input 
+                        type="checkbox" id="cheSeptile" class="horo-inpfield aspect-check" checked="true"> 
+                    </div>
+                  
+                  </div>
+
+                  <hr class="horo">
+
+                  <input class="horo" id="but" type="submit" value="Horoksop erstellen"/>
+                </div>
+              </form>
+            </div>
+          </div>
+          
+          <script>
+            window.onload = onPageLoad();
+
+            function onPageLoad() {
+              var aspectChecks = document.querySelectorAll(".aspect-check");
+              aspectChecks.forEach(element => {
+                element.checked = true;
+              });
+            }
+          </script>
+        </div>
+      </div>
+      
+      <script>
+        var form = document.querySelector('form#frm');
+
+        form.addEventListener('submit', function(event) {
+          event.preventDefault();
+          var form = document.querySelector('form#frm');
+          //console.log(form.checkValidity())
+
+          const inputs = form.querySelectorAll('input.horo-inpfield[placeholder]');
+          console.log(inputs)
+          var countMismatches = 0;
+		  inputs.forEach(function(input) {
+			if (input.validity.valueMissing) {
+			  countMismatches += 1;
+			  input.setCustomValidity(`Bitte trage einen Wert in das Feld ein.`);
+			  input.reportValidity();
+			  console.log(input.validationMessage, "missing val")
+			}
+			if (input.validity.patternMismatch) {
+			  countMismatches += 1;
+			  var valMessage = `<p class="horo">${input.validationMessage}</p>`;
+			  console.log(valMessage)
+			  input.reportValidity();
+			}
+		  });
+          console.log(countMismatches);
+
+          if ( countMismatches == 0 ){
+            fetchHtmlData(event);
+          }
+          
+        });
+		
+		form.addEventListener('input', function(event) {
+			const inputElement = event.target;
+
+			if (inputElement.validity.patternMismatch) {
+			  console.log("Input does not match the pattern.");
+
+			  inputElement.setCustomValidity("Bitte gib einen gültigen Wert ein.");
+			} else {
+			  console.log("Input matches the pattern.");
+			  inputElement.setCustomValidity("");
+			}
+			inputElement.reportValidity();
+		});
+		
+		var $ = jQuery;
+
+        document.addEventListener('DOMContentLoaded', function() {      
+          var form = document.querySelector('form#frm');
+
+          document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+				$('#but').click()
+            }
+          }); 
+        });
+
+        $('#che').click( function(event) {
+          var isChecked = event.target.checked;
+
+          if ( isChecked ) {
+            savedHour = $('#hour').val();
+            savedMinu = $('#minu').val();
+            savedHouse = $('#House').val();
+            $('#hour').val('12');
+            $('#minu').val('00');
+            $('#House').val('whole-sign');
+          } else { 
+            $('#hour').val(savedHour);
+            $('#minu').val(savedMinu);
+            $('#House').val(savedHouse);
+          }
+        });
+
+        $.datetimepicker.setLocale('de');
+        $('#dat').datetimepicker({
+          timepicker: false, format: 'd.m.Y', startDate: '1987/12/03'
+        });
+        $('#hour').datetimepicker({ 
+          datepicker: false, format: 'H', step: 60
+        }); 
+        $('#minu').datetimepicker({ 
+          datepicker: false, format: 'i', step: 1, minTime: '00:00', maxTime: '01:00'
+        }); 
+        
+        async function fetchHtmlData(event) {
+          event.preventDefault();
+
+          var aspectChecks = document.querySelectorAll(".aspect-check");
+          var aspectCheckBinary = [];
+          aspectChecks.forEach( entry => {
+            aspectCheckBinary.push(entry.checked ? 1 : 0);
+          })
+        
+          var params = {
+            name: document.getElementById('nam').value,
+            date: document.getElementById('dat').value,
+            hour: document.getElementById('hour').value,
+            minu: document.getElementById('minu').value,
+            longi: document.getElementById('lon').value,
+            lati: document.getElementById('lat').value,
+            house: document.getElementById('House').value,
+            loca: inputCity+inputCountry,
+            zodi: document.getElementById('Trop').checked,
+            check: document.getElementById('che').checked,
+            aspectChecks: aspectCheckBinary,
+          };
+
+          await axios.get('https://vedaversum.eu-4.evennode.com/get-html', { params } )
+            .then(response => {
+              //document.getElementById('htmlContainer').innerHTML = response.data
+              document.write(response.data);
+            })
+            .catch(error => {
+              console.error('Error fetching HTML data:', error.message);
+            });
+        }        
+      </script>
+    </body>
+</html>

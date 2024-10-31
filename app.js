@@ -46,6 +46,43 @@ app.get("/get-index", async (req, res) => {
 	res.render("index", { geo_key, get_uri, user_data });
 })
 
+app.get("/plugin", (req, res) => {
+	res.setHeader("content-type", "text/html; charset=utf-8");
+	res.sendFile(
+		path.join(__dirname, 'wp-horoskop-plugin', 'plugin_index.html')
+	);
+})
+
+app.get("/assets/plotFunc", (req, res) => {
+	res.setHeader("content-type", "text/javascript; charset=utf-8");
+	res.sendFile(
+		path.join(__dirname, 'assets', 'plotFunc.js')
+	);
+})
+
+app.get("/form", (req, res) => {
+	res.setHeader('Content-Type', 'text/html');
+	var user_data = {
+		name: '',
+		date: '',
+		hour: '',
+		minu: '',
+		longi: '',
+		lati: '',
+		house: 'placidus',
+		city: '',
+		country: '',
+		zodi: 'true',
+		check: 'false',
+		aspectChecks: [
+			'1', '1', '1', '1',
+			'1', '1', '1', '1',
+			'1', '1'
+		]
+	};
+	res.render("form", { userData: user_data });
+})
+
 app.get("/", async (req, res) => {
 	// const db = new pg.Client({
 	// 	user: "postgres",
@@ -77,34 +114,16 @@ app.get("/", async (req, res) => {
 
 	var geo_key = process.env.GEO_KEY;
 	var get_uri = process.env.HOST; // XXX
-	// var user_data = {
-	// 	name: 'Random',
-	// 	date: '25.06.1997',
-	// 	hour: '12',
-	// 	minu: '25',
-	// 	longi: '33',
-	// 	lati: '22',
-	// 	house: 'placidus',
-	// 	city: 'Hildesheim',
-	// 	country: 'Deutschland',
-	// 	zodi: 'true',
-	// 	check: 'false',
-	// 	aspectChecks: [
-	// 		'1', '1', '1', '1',
-	// 		'1', '1', '1', '1',
-	// 		'1', '1'
-	// 	]
-	// };
 	var user_data = {
-		name: '',
-		date: '',
-		hour: '',
-		minu: '',
-		longi: '',
-		lati: '',
+		name: 'Random',
+		date: '25.06.1997',
+		hour: '12',
+		minu: '25',
+		longi: '33',
+		lati: '22',
 		house: 'placidus',
-		city: '',
-		country: '',
+		city: 'Hildesheim',
+		country: 'Deutschland',
 		zodi: 'true',
 		check: 'false',
 		aspectChecks: [
@@ -113,6 +132,24 @@ app.get("/", async (req, res) => {
 			'1', '1'
 		]
 	};
+	// var user_data = {
+	// 	name: '',
+	// 	date: '',
+	// 	hour: '',
+	// 	minu: '',
+	// 	longi: '',
+	// 	lati: '',
+	// 	house: 'placidus',
+	// 	city: '',
+	// 	country: '',
+	// 	zodi: 'true',
+	// 	check: 'false',
+	// 	aspectChecks: [
+	// 		'1', '1', '1', '1',
+	// 		'1', '1', '1', '1',
+	// 		'1', '1'
+	// 	]
+	// };
 	res.render("index", { geo_key, get_uri, user_data });
 });
 app.get("/api/environment", (req, res) => {

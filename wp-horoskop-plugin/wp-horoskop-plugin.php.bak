@@ -1,0 +1,47 @@
+﻿<?php
+/*
+ * Plugin Name: Horoskop Plugin
+ * Plugin URI:  www.google.com
+ * Description: WordPress plugin Geburtshoroskop.
+ * Version:     2.0.2
+ * Author:      Maurice Schollmeyer
+ * Author URI:  https://your-website.com
+ */
+
+
+function enqueue_related_pages_scripts_and_styles() {
+    wp_enqueue_style('related-form-styles', plugins_url('css/formStyles.css?v=1', __FILE__), array(), '2.0.5');
+    wp_enqueue_style('related-plot-styles', plugins_url('css/plotStyles.css?v=2', __FILE__), array(), '3.1.2');
+	wp_enqueue_style('related-styles', plugins_url('css/styles.css?v=1', __FILE__), array(), '2.0.2');	
+	wp_enqueue_style('related-datetime-styles', plugins_url('/css/jquery.datetimepicker.min.css', __FILE__));
+	
+	wp_enqueue_script('jquery');
+
+	wp_enqueue_script('dt-js', 
+					   plugins_url('/assets/datetimepicker-master/build/jquery.datetimepicker.full.min.js', __FILE__), 
+					   array('jquery'), 
+					   '', 
+					   false
+					  ); 
+
+	wp_enqueue_script('geoapify-js', 
+					   'https://unpkg.com/@geoapify/geocoder-autocomplete@^1/dist/index.min.js', 
+					   array(), 
+					   '1.0', 
+					   false
+					  ); 
+}
+
+add_action('wp_enqueue_styles','enqueue_related_pages_scripts_and_styles');
+add_action('wp_enqueue_scripts','enqueue_related_pages_scripts_and_styles');
+
+// Add a shortcode to display the index.html file
+function display_html_file() {
+    $file_path = plugin_dir_path(__FILE__) . 'index.html';
+    ob_start();
+    include $file_path;
+    return ob_get_clean();
+}
+
+add_shortcode('horo_input', 'display_html_file', 9999999);
+

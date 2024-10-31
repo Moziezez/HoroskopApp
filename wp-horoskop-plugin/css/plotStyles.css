@@ -1,0 +1,303 @@
+@keyframes pop-in5 {
+  from { background-color: rgba(174, 134, 69, 0.703); height: 50%; opacity: 0.5; border-radius: 55%; }
+  to { background-color: rgba(27, 0, 53, 0.232); height: 100%; opacity: 0.96; border-radius: 33%; }
+}
+
+@media only screen and (min-width: 606px) {	
+	.flexItem4 {  	
+		width: 90%;
+	}
+	.flexItem5 {
+		width: 90%;
+	}
+	.flexItem6 {
+		width: 90%;
+	}
+}
+@media only screen and (min-width: 855px) {	
+	.flexItem4 {  	
+		width: 75%;
+	}
+	.flexItem5 {
+		width: 75%;
+	}
+	.flexItem6 {
+		width: 75%;
+	}
+}
+@media only screen and (min-width: 1255px) {
+	.flexItem4 {  	
+		width: 923px;
+	}
+	.flexItem5 {
+		width: 923px;
+	}
+	.flexItem6 {
+		width: 923px;
+	}
+}
+@media only screen and (max-width: 605px) {
+	#triggerLegend {
+		margin-left: 48px;
+	}
+	.flexLegend {
+		justify-content: center !important;
+		gap: 5px !important;
+	}
+	hr.horo {
+		display: none;
+	}
+	.signsTextBox{
+		height: auto !important;
+		width: auto !important;
+	}
+	.flexText {
+		flex-direction: column;
+	}
+	.flexItem3 {
+		transform: scale(0.6);
+		margin: -108px 0;
+	}
+	.flexItem4, .flexItem5 {
+		width: 96%;
+	}
+	.cartesianDiv {
+		height: 567px !important;
+	}
+	.half, .half2, .leftPos, .rightPos {
+		width: 100% !important;
+	}
+	.half2 {
+		height: 69%;
+	}
+	#cartesianPlot {
+		width: 100% !important;
+		height: 100%;
+	}
+}
+.flexLegend {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	gap: 24px;
+}
+.itemLegend {
+	margin: 3px;
+}
+.flexItemLegend {
+	display: flex;
+	justify-content: space-between;
+	gap: 6px;
+}
+.cOrange{
+	color: orange;
+}
+.plot-flex-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 42px;
+}
+.flexItem1 {  	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 9px auto;
+}
+.flexItem2 {  	
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 9px;
+}
+.flexItem4 {  	
+	margin-top: 32px;
+}
+.flexItem5 {
+	margin-top: 32px;
+}
+.flexItem6 {
+	margin-top: 32px;
+}
+.flexText {  	
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 9px;
+	margin-bottom: 36px;
+	flex-wrap: wrap;
+}
+.flexText1{
+	font-weight: bold;
+	background-color: #fae6c6;
+	border-radius: 14px;
+	width: 31px;
+	height: 29px;
+	margin: -7px auto 0 auto;
+}
+.flexText4 {  	
+	text-align: left;
+}
+.flexText5 {  	
+	position: absolute;
+	bottom: 12px;
+	text-align: left;
+	color: orange;
+}
+.signsTextBox{
+	position: relative;
+	width: 20%; 
+	height: 258px;
+	margin-top: 12px;
+	border-radius: 2px;
+	background-color: #fae6c6;
+	text-align: center;
+	padding: 0 14px 42px 14px;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+.popup {
+	text-align: left;
+	padding: 7px;
+	overflow: auto;
+}
+.hide {
+	display: none;
+}
+div#infoForm {
+	margin-bottom: 14px;
+}
+.signsBox{
+	width: 185px;
+	height: 63px;
+	background-color: #fae6c6;
+	display: grid;
+	border-radius: 5px;
+	grid-template-columns: [first-col] 25% [second-col] 75%;
+	grid-template-rows: [first-row] 50% [second-row] 50%;
+}
+.flexTextWw1{
+	font-weight: bold;
+	background-color: #fae6c6;
+	border-radius: 14px;
+	width: 101px;
+	height: 29px;
+	margin: -7px auto 0 auto;  
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 3px;
+}
+.sublabel {
+	font-family: system-ui,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+	color: black;
+}
+.grid1 {  
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 1;
+	grid-row-end: 3;
+	margin: auto auto;
+	font-size: 18px;
+	font-weight: bold;
+}
+.grid2 { 
+	margin-top: 12px; 
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 2;
+	margin: auto auto auto 0;
+	font-size: 12px;
+	padding-left: 3px;
+}
+.grid3 {  
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 3;
+	margin: -2px auto 0 0;
+	font-size: 16px;
+}
+#circularPlot {
+	width: 666px;
+	opacity: 1;
+	border-width: 0;
+	padding: 2.5px;
+}
+.cartesianDiv {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	height: auto;
+}
+.half2 {
+	width: 50%;
+}
+
+.plot-text-container {
+	-webkit-hyphens: auto;
+	hyphens: auto; 
+	text-align: justify;
+	margin-top: 22px;
+	margin-bottom: 9px;  
+	box-sizing: border-box;
+	border-style: outset;
+	border-color: rgba(202, 187, 161, 0.747);
+	border-radius: 3px;
+	border-width: 0.1px;
+  	padding: 0 19px; 
+	background-color: rgb(255, 255, 255); /* rgb(13, 0, 26); */
+	opacity: 0.9;
+	height: 90vh;
+	overflow-y: scroll;
+}
+.butn {	
+	font-weight: bold;
+	color: white;
+	font-size: 16px;
+	background-color: rgb(171, 124, 253);
+	width: auto;
+	height: 26px;
+	border-radius: 7px;
+ 	cursor: pointer;
+}
+.butn:hover {
+	background-color: rgb(4, 2, 60);
+  }
+
+.buttons-holder {
+  	display: flex;
+	width: auto;
+	flex-direction: column;
+	justify-content: center;
+	margin: 0 auto;
+	position: fixed;
+	bottom: 16px;
+	left: auto;
+	z-index: 999;
+}
+.positions {
+	display: flex;
+	flex-direction: row;
+    flex-wrap: wrap;
+}
+.leftPos {
+	width: 50%;
+}
+.rightPos {
+	width: 50%;
+}
+.name {
+	fill: black !important;
+}
+.hovertext rect {
+	border: 1px solid black !important;
+}
+img.svgImg {
+	width: auto;
+	height: 14px;
+}
