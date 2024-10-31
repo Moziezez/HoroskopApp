@@ -248,7 +248,7 @@ async function fetchHtmlData(get_uri) {
     .catch(error => {
       console.error('Error fetching HTML data:', error.message);
     });
-  await axios.get("/create-plot", {
+  await axios.get(get_uri + "/create-plot", {
     params
   }).then(resp => {
     var response_data = resp.data;

@@ -132,24 +132,24 @@ app.get("/", async (req, res) => {
 			'1', '1'
 		]
 	};
-	// var user_data = {
-	// 	name: '',
-	// 	date: '',
-	// 	hour: '',
-	// 	minu: '',
-	// 	longi: '',
-	// 	lati: '',
-	// 	house: 'placidus',
-	// 	city: '',
-	// 	country: '',
-	// 	zodi: 'true',
-	// 	check: 'false',
-	// 	aspectChecks: [
-	// 		'1', '1', '1', '1',
-	// 		'1', '1', '1', '1',
-	// 		'1', '1'
-	// 	]
-	// };
+	var user_data = {
+		name: '',
+		date: '',
+		hour: '',
+		minu: '',
+		longi: '',
+		lati: '',
+		house: 'placidus',
+		city: '',
+		country: '',
+		zodi: 'true',
+		check: 'false',
+		aspectChecks: [
+			'1', '1', '1', '1',
+			'1', '1', '1', '1',
+			'1', '1'
+		]
+	};
 	res.render("index", { geo_key, get_uri, user_data });
 });
 app.get("/api/environment", (req, res) => {

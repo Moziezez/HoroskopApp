@@ -6,36 +6,40 @@
   <script src="https://unpkg.com/@geoapify/geocoder-autocomplete@^1/dist/index.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+  <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
   <!-- THIS IS FOR TESTING: -->
-  <link rel="stylesheet" href="../css/plotStyles.css">
+  <script src="/assets/datetimepicker-master/jquery.js"></script>
+  <script src="/assets/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
+  <script src="../assets/plotFunc.js"></script>
+  <!-- <link rel="stylesheet" href="../css/plotStyles.css">
   <link rel="stylesheet" href="../css/formStyles.css">
   <link rel="stylesheet" href="../css/styles.css">
 
   <link rel="stylesheet" href="/css/jquery.datetimepicker.min.css" />
-  <script src="/assets/datetimepicker-master/jquery.js"></script>
-  <script src="/assets/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
+ -->
 
 </head>
 
 <body class="horo">
   <div class="horo" id="formEjs"></div>
   <script>
+    // const get_uri = 'https://vedaversum.eu-4.evennode.com';
+    const get_uri = 'http://localhost:3030';
+
     async function fetchForm() {
-      await axios.get('https://vedaversum.eu-4.evennode.com/form')
-        .then(response => {
-          document.querySelector('#formEjs').outerHTML = response.data;
-        })
-        .catch(error => {
-          console.error('Error fetching HTML data:', error.message);
-        });
+      try {
+        const response = await axios.get(get_uri + '/form');
+        document.querySelector('#formEjs').outerHTML = response.data;
+      } catch (error) {
+        console.error('Error fetching HTML data:', error.message);
+      }
     }
 
-    fetchForm();
     var inputCity = "",
       inputCountry = "";
     async function fetchEnvironmentVariables() {
       try {
-        const response = await axios.get('https://vedaversum.eu-4.evennode.com/api/environment')
+        const response = await axios.get(get_uri + '/api/environment')
         const data = response.data;
         const geo_key = data.geo_key;
         const autocompleteInput = new autocomplete.GeocoderAutocomplete(
@@ -59,54 +63,29 @@
       }
     }
 
-    fetchEnvironmentVariables();
-  </script>
-  <script>
-    axios.get('/assets/plotFunc.js')
-      .then(response => {
-        eval(response.data);
-        testFunc();
-        setDatetimepicker();
-      })
-      .catch(error => {
-        console.error("Error loading functions:", error);
-      });
+    document.addEventListener("DOMContentLoaded", () => {
+      const $ = jQuery;
+      fetchForm();
+
+      axios.get(get_uri + '/assets/plotFunc.js')
+        .then(response => {
+          const $ = jQuery;
+          eval(response.data);
+          testFunc();
+          fetchEnvironmentVariables();
+
+          setDatetimepicker();
+          addEventlistener();
+        })
+        .catch(error => {
+          console.error("Error loading functions:", error);
+        });
+
+    });
   </script>
   </div>
 
   <script>
-    // var form = document.querySelector('form#frm');
-
-    // form.addEventListener('submit', function(event) {
-    //   event.preventDefault();
-    //   var form = document.querySelector('form#frm');
-    //   //console.log(form.checkValidity())
-
-    //   const inputs = form.querySelectorAll('input.horo-inpfield[placeholder]');
-    //   console.log(inputs)
-    //   var countMismatches = 0;
-    //   inputs.forEach(function(input) {
-    //     if (input.validity.valueMissing) {
-    //       countMismatches += 1;
-    //       input.setCustomValidity(`Bitte trage einen Wert in das Feld ein.`);
-    //       input.reportValidity();
-    //       console.log(input.validationMessage, "missing val")
-    //     }
-    //     if (input.validity.patternMismatch) {
-    //       countMismatches += 1;
-    //       var valMessage = `<p class="horo">${input.validationMessage}</p>`;
-    //       console.log(valMessage)
-    //       input.reportValidity();
-    //     }
-    //   });
-    //   console.log(countMismatches);
-
-    //   if (countMismatches == 0) {
-    //     fetchHtmlData(event);
-    //   }
-
-    // });
-
     // form.addEventListener('input', function(event) {
     //   const inputElement = event.target;
 
@@ -121,91 +100,51 @@
     //   inputElement.reportValidity();
     // });
 
-    // var $ = jQuery;
+    document.addEventListener('DOMContentLoaded', function() {
+      var form = document.querySelector('form#frm');
 
-    // document.addEventListener('DOMContentLoaded', function() {
-    //   var form = document.querySelector('form#frm');
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+          $('#but').click()
+        }
+      });
+    });
 
-    //   document.addEventListener('keydown', function(event) {
-    //     if (event.key === 'Enter') {
-    //       $('#but').click()
-    //     }
-    //   });
-    // });
+    $('#che').click(function(event) {
+      var isChecked = event.target.checked;
 
-    // $('#che').click(function(event) {
-    //   var isChecked = event.target.checked;
+      if (isChecked) {
+        savedHour = $('#hour').val();
+        savedMinu = $('#minu').val();
+        savedHouse = $('#House').val();
+        $('#hour').val('12');
+        $('#minu').val('00');
+        $('#House').val('whole-sign');
+      } else {
+        $('#hour').val(savedHour);
+        $('#minu').val(savedMinu);
+        $('#House').val(savedHouse);
+      }
+    });
 
-    //   if (isChecked) {
-    //     savedHour = $('#hour').val();
-    //     savedMinu = $('#minu').val();
-    //     savedHouse = $('#House').val();
-    //     $('#hour').val('12');
-    //     $('#minu').val('00');
-    //     $('#House').val('whole-sign');
-    //   } else {
-    //     $('#hour').val(savedHour);
-    //     $('#minu').val(savedMinu);
-    //     $('#House').val(savedHouse);
-    //   }
-    // });
-
-    // $.datetimepicker.setLocale('de');
-    // $('#dat').datetimepicker({
-    //   timepicker: false,
-    //   format: 'd.m.Y',
-    //   startDate: '1987/12/03'
-    // });
-    // $('#hour').datetimepicker({
-    //   datepicker: false,
-    //   format: 'H',
-    //   step: 60
-    // });
-    // $('#minu').datetimepicker({
-    //   datepicker: false,
-    //   format: 'i',
-    //   step: 1,
-    //   minTime: '00:00',
-    //   maxTime: '01:00'
-    // });
-
-    // async function fetchHtmlData(event) {
-    //   event.preventDefault();
-
-    //   var aspectChecks = document.querySelectorAll(".aspect-check");
-    //   var aspectCheckBinary = [];
-    //   aspectChecks.forEach(entry => {
-    //     aspectCheckBinary.push(entry.checked ? 1 : 0);
-    //   })
-
-    //   var params = {
-    //     name: document.getElementById('nam').value,
-    //     date: document.getElementById('dat').value,
-    //     hour: document.getElementById('hour').value,
-    //     minu: document.getElementById('minu').value,
-    //     longi: document.getElementById('lon').value,
-    //     lati: document.getElementById('lat').value,
-    //     house: document.getElementById('House').value,
-    //     loca: inputCity + inputCountry,
-    //     zodi: document.getElementById('Trop').checked,
-    //     check: document.getElementById('che').checked,
-    //     aspectChecks: aspectCheckBinary,
-    //   };
-
-    //   const newWindow = window.open('/', '_blank');
-
-    //   await axios.get('https://vedaversum.eu-4.evennode.com/get-html', {
-    //       params
-    //     })
-    //     .then(response => {
-    //       newWindow.document.open();
-    //       newWindow.document.write(response.data);
-    //       newWindow.document.close();
-    //     })
-    //     .catch(error => {
-    //       console.error('Error fetching HTML data:', error.message);
-    //     });
-    // }
+    $.datetimepicker.setLocale('de');
+    $('#dat').datetimepicker({
+      timepicker: false,
+      format: 'd.m.Y',
+      startDate: '1987/12/03'
+    });
+    $('#hour').datetimepicker({
+      datepicker: false,
+      format: 'H',
+      step: 60
+    });
+    $('#minu').datetimepicker({
+      datepicker: false,
+      format: 'i',
+      step: 1,
+      minTime: '00:00',
+      maxTime: '01:00'
+    });
   </script>
 </body>
 

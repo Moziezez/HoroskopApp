@@ -36,7 +36,7 @@ add_action('wp_enqueue_scripts','enqueue_related_pages_scripts_and_styles');
 
 // Add a shortcode to display the index.html file
 function display_html_file() {
-    $file_path = plugin_dir_path(__FILE__) . 'index.html';
+    $file_path = plugin_dir_path(__FILE__) . 'plugin_index.html';
     ob_start();
     include $file_path;
     return ob_get_clean();
