@@ -198,30 +198,6 @@ function setGeoapify(geo_key) {
   }
 }
 
-async function fetchIndex(get_uri) {
-  const aspectChecks = document.querySelectorAll(".aspect-check");
-  const aspectCheckBinary = [];
-  aspectChecks.forEach(entry => {
-    aspectCheckBinary.push(entry.checked ? 1 : 0);
-  })
-  const params = {
-    name: "mö",
-    date: "23.04.1994",
-  };
-  await axios.get(get_uri + '/get-index', {
-    params
-  })
-    .then(response => {
-      requestAnimationFrame(() => {
-        setDatetimepicker();
-        setGeoapify(geoKey);
-      });
-    })
-    .catch(error => {
-      console.error('Error fetching HTML data:', error.message);
-    });
-}
-
 async function fetchHtmlData(get_uri) {
   $(".fadeOutDiv").fadeOut(108);
 

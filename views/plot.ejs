@@ -366,14 +366,17 @@
           <b><%=v.text%></b> in
           <span class="pos">
             <%= planets[k].pos_name; %>
-            <% console.log(v.sign_id, "SIGN ID"); %>
+            <% try { %>
             <%= signs[v.sign_id].text; %>
-          </span>, Haus <%=v.house_id%>
+            <% } catch (error) { %>
+            <% console.log(v, "Has error with sign ID:", error); %>
+            <% } %>
+          </span>, Haus <%= v.house_id %>
           </p>
           <% if ( i == 6) { %>
         </div>
         <div class="rightPos">
-          <% }%>
+          <% } %>
           <% }); %>
         </div>
       </div>

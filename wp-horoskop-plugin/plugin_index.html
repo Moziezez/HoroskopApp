@@ -72,9 +72,7 @@
         .then(response => {
           const $ = jQuery;
           eval(response.data);
-          testFunc();
           fetchEnvironmentVariables();
-
           setDatetimepicker();
           addEventlistener(get_uri);
         })

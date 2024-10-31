@@ -39,13 +39,6 @@ app.get("/authenticated", (req, res) => {
 	}
 })
 
-app.get("/get-index", async (req, res) => {
-	var geo_key = process.env.GEO_KEY;
-	var get_uri = process.env.HOST;
-	var user_data = req.query;
-	res.render("index", { geo_key, get_uri, user_data });
-})
-
 app.get("/plugin", (req, res) => {
 	res.setHeader("content-type", "text/html; charset=utf-8");
 	res.sendFile(
