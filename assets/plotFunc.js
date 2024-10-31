@@ -348,10 +348,6 @@ function addEventlistener(getUri) {
 // 	.getElementById("dlButton")
 // 	.addEventListener("click", downloadSvgGraph);
 
-function testFunc() {
-  console.log("TEST");
-}
-
 async function fetchForm() {
   try {
     const response = await axios.get(get_uri + '/form');
@@ -387,27 +383,17 @@ async function fetchEnvironmentVariables() {
   }
 }
 
-function mainFunc() {
+async function mainFunc() {
   // XXXX
   var inputCity = "",
     inputCountry = "";
 
-  document.addEventListener("DOMContentLoaded", async () => {
-    const $ = jQuery;
-    await fetchForm();
+  const $ = jQuery;
+  await fetchForm();
 
-    try {
-      const response = await axios.get(get_uri + '/assets/plotFunc.js');
-      eval(response.data); // Evaluate and load `plotFunc.js`
-      fetchEnvironmentVariables(); // Initialize environment variables
-      setDatetimepicker(); // Initialize datetime picker
-
-      // 3. Now that everything is loaded, run `addEventlistener`
-      addEventlistener(get_uri);
-    } catch (error) {
-      console.error("Error loading functions:", error);
-    }
-  });
+  fetchEnvironmentVariables();
+  setDatetimepicker();
+  addEventlistener(get_uri);
 }
 
 // wp index func:
