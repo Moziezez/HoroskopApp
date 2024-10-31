@@ -24,8 +24,18 @@
 <body class="horo">
   <div class="horo" id="formEjs"></div>
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      mainFunc();
+    const get_uri = 'https://vedaversum.eu-4.evennode.com';
+    const $ = jQuery;
+    document.addEventListener("DOMContentLoaded", async () => {
+      try {
+        const inputField = document.querySelector('.geoapify-autocomplete-input');
+        const response = await axios.get(get_uri + '/assets/plotFunc.js');
+        eval(response.data); // Evaluate and load `plotFunc.js`
+      } catch (error) {
+        console.error("Error loading functions:", error);
+      } finally {
+        mainFunc();
+      }
     });
   </script>
   </div>
