@@ -41,36 +41,12 @@
 <script>
   const geoKey = "<%= geo_key %>";
   setGeoapify(geoKey);
+
   const inputCity = "<%=user_data.city%>";
   const inputCountry = "<%=user_data.country%>";
   const getUri = "<%= get_uri %>";
   addEventlistener(getUri);
-
-  document.addEventListener('DOMContentLoaded', function() {
-
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Enter') {
-        $('#but').click();
-      }
-    });
-  });
-
-  $('#che').click(function(event) {
-    var isChecked = event.target.checked;
-
-    if (isChecked) {
-      savedHour = $('#hour').val();
-      savedMinu = $('#minu').val();
-      savedHouse = $('#House').val();
-      $('#hour').val('12');
-      $('#minu').val('00');
-      $('#House').val('whole-sign');
-    } else {
-      $('#hour').val(savedHour);
-      $('#minu').val(savedMinu);
-      $('#House').val(savedHouse);
-    }
-  });
+  setDatetimepicker();
 </script>
 
 </html>

@@ -8,23 +8,24 @@
 
   <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
   <!-- THIS IS FOR TESTING: -->
-  <script src="/assets/datetimepicker-master/jquery.js"></script>
-  <script src="/assets/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
-  <script src="../assets/plotFunc.js"></script>
-  <!-- <link rel="stylesheet" href="../css/plotStyles.css">
+
+  <!-- 
+  <link rel="stylesheet" href="../css/plotStyles.css">
   <link rel="stylesheet" href="../css/formStyles.css">
   <link rel="stylesheet" href="../css/styles.css">
-
+  <script src="../assets/plotFunc.js"></script>
   <link rel="stylesheet" href="/css/jquery.datetimepicker.min.css" />
- -->
+  <script src="/assets/datetimepicker-master/jquery.js"></script>
+  <script src="/assets/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
+  -->
 
 </head>
 
 <body class="horo">
   <div class="horo" id="formEjs"></div>
   <script>
-    // const get_uri = 'https://vedaversum.eu-4.evennode.com';
-    const get_uri = 'http://localhost:3030';
+    const get_uri = 'https://vedaversum.eu-4.evennode.com';
+    // const get_uri = 'http://localhost:3030';
 
     async function fetchForm() {
       try {
@@ -75,7 +76,7 @@
           fetchEnvironmentVariables();
 
           setDatetimepicker();
-          addEventlistener();
+          addEventlistener(get_uri);
         })
         .catch(error => {
           console.error("Error loading functions:", error);
@@ -84,68 +85,6 @@
     });
   </script>
   </div>
-
-  <script>
-    // form.addEventListener('input', function(event) {
-    //   const inputElement = event.target;
-
-    //   if (inputElement.validity.patternMismatch) {
-    //     console.log("Input does not match the pattern.");
-
-    //     inputElement.setCustomValidity("Bitte gib einen gültigen Wert ein.");
-    //   } else {
-    //     console.log("Input matches the pattern.");
-    //     inputElement.setCustomValidity("");
-    //   }
-    //   inputElement.reportValidity();
-    // });
-
-    document.addEventListener('DOMContentLoaded', function() {
-      var form = document.querySelector('form#frm');
-
-      document.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-          $('#but').click()
-        }
-      });
-    });
-
-    $('#che').click(function(event) {
-      var isChecked = event.target.checked;
-
-      if (isChecked) {
-        savedHour = $('#hour').val();
-        savedMinu = $('#minu').val();
-        savedHouse = $('#House').val();
-        $('#hour').val('12');
-        $('#minu').val('00');
-        $('#House').val('whole-sign');
-      } else {
-        $('#hour').val(savedHour);
-        $('#minu').val(savedMinu);
-        $('#House').val(savedHouse);
-      }
-    });
-
-    $.datetimepicker.setLocale('de');
-    $('#dat').datetimepicker({
-      timepicker: false,
-      format: 'd.m.Y',
-      startDate: '1987/12/03'
-    });
-    $('#hour').datetimepicker({
-      datepicker: false,
-      format: 'H',
-      step: 60
-    });
-    $('#minu').datetimepicker({
-      datepicker: false,
-      format: 'i',
-      step: 1,
-      minTime: '00:00',
-      maxTime: '01:00'
-    });
-  </script>
 </body>
 
 </html>

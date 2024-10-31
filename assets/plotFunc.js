@@ -156,7 +156,22 @@ function setDatetimepicker() {
     maxTime: "01:00",
   });
 
+  $('#che').click(function (event) {
+    var isChecked = event.target.checked;
 
+    if (isChecked) {
+      savedHour = $('#hour').val();
+      savedMinu = $('#minu').val();
+      savedHouse = $('#House').val();
+      $('#hour').val('12');
+      $('#minu').val('00');
+      $('#House').val('whole-sign');
+    } else {
+      $('#hour').val(savedHour);
+      $('#minu').val(savedMinu);
+      $('#House').val(savedHouse);
+    }
+  });
 };
 
 function setGeoapify(geo_key) {
@@ -290,6 +305,25 @@ function addEventlistener(getUri) {
       fetchHtmlData(getUri);
     }
   });
+
+  let isInputFocused = false;
+  const inputField = document.querySelector('.geoapify-autocomplete-input');
+
+  inputField.addEventListener('focus', () => {
+    isInputFocused = true;
+    console.log('Input is in focus:', isInputFocused);
+  });
+
+  inputField.addEventListener('blur', () => {
+    isInputFocused = false;
+    console.log('Input is in focus:', isInputFocused);
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter' && !isInputFocused) {
+      $('#but').click();
+    }
+  });
 }
 
 // async function downloadSvgGraph(event) {
@@ -338,3 +372,21 @@ function addEventlistener(getUri) {
 function testFunc() {
   console.log("TEST");
 }
+
+
+
+// wp index func:
+
+// form.addEventListener('input', function(event) {
+//   const inputElement = event.target;
+
+//   if (inputElement.validity.patternMismatch) {
+//     console.log("Input does not match the pattern.");
+
+//     inputElement.setCustomValidity("Bitte gib einen gültigen Wert ein.");
+//   } else {
+//     console.log("Input matches the pattern.");
+//     inputElement.setCustomValidity("");
+//   }
+//   inputElement.reportValidity();
+// });

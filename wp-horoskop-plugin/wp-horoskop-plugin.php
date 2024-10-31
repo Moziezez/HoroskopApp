@@ -13,7 +13,7 @@ function enqueue_related_pages_scripts_and_styles() {
     wp_enqueue_style('related-plot-styles', plugins_url('css/plotStyles.css?v=2', __FILE__), array(), '3.1.2');
 	wp_enqueue_style('related-styles', plugins_url('css/styles.css?v=1', __FILE__), array(), '2.0.2');	
 	wp_enqueue_style('related-datetime-styles', plugins_url('/css/jquery.datetimepicker.min.css', __FILE__));
-	
+
 	wp_enqueue_script('jquery');
 
 	wp_enqueue_script('dt-js', 
