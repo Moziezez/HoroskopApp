@@ -1,4 +1,7 @@
 
+const get_uri = 'https://vedaversum.eu-4.evennode.com';
+// const get_uri = 'http://localhost:3030';
+
 function popUpForm() {
   $("#popupForm").fadeOut(108);
 
@@ -349,7 +352,63 @@ function testFunc() {
   console.log("TEST");
 }
 
+async function fetchForm() {
+  try {
+    const response = await axios.get(get_uri + '/form');
+    document.querySelector('#formEjs').outerHTML = response.data;
+  } catch (error) {
+    console.error('Error fetching HTML data:', error.message);
+  }
+}
 
+async function fetchEnvironmentVariables() {
+  try {
+    const response = await axios.get(get_uri + '/api/environment')
+    const data = response.data;
+    const geo_key = data.geo_key;
+    const autocompleteInput = new autocomplete.GeocoderAutocomplete(
+      document.getElementById("search_loc"),
+      geo_key, {
+      placeholder: "Ort finden",
+      lang: "de"
+    }
+    );
+
+    autocompleteInput.on('select', (location) => {
+      inputCity = location.properties.city;
+      inputCountry = ", " + location.properties.country;
+      var longi = Math.round(location.properties.lon * 100) / 100;
+      document.getElementById("lon").value = longi;
+      var lati = Math.round(location.properties.lat * 100) / 100;
+      document.getElementById("lat").value = lati;
+    });
+  } catch (error) {
+    console.error('Error fetching environment vars:', error.message);
+  }
+}
+
+function mainFunc() {
+  // XXXX
+  var inputCity = "",
+    inputCountry = "";
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    const $ = jQuery;
+    await fetchForm();
+
+    try {
+      const response = await axios.get(get_uri + '/assets/plotFunc.js');
+      eval(response.data); // Evaluate and load `plotFunc.js`
+      fetchEnvironmentVariables(); // Initialize environment variables
+      setDatetimepicker(); // Initialize datetime picker
+
+      // 3. Now that everything is loaded, run `addEventlistener`
+      addEventlistener(get_uri);
+    } catch (error) {
+      console.error("Error loading functions:", error);
+    }
+  });
+}
 
 // wp index func:
 
