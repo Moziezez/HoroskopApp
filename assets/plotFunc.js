@@ -177,27 +177,35 @@ function setDatetimepicker() {
   });
 };
 
-function setGeoapify(geo_key) {
+
+async function fetchEnvironmentVariables() {
   if (document.getElementById("search_loc").children.length === 0) {
-    var autocompleteInput = new autocomplete.GeocoderAutocomplete(
-      document.getElementById("search_loc"),
-      geo_key, {
-      placeholder: "Ort finden",
-      lang: "de"
+    try {
+      const response = await axios.get(get_uri + '/api/environment')
+      const data = response.data;
+      const geo_key = data.geo_key;
+      const autocompleteInput = new autocomplete.GeocoderAutocomplete(
+        document.getElementById("search_loc"),
+        geo_key, {
+        placeholder: "Ort finden",
+        lang: "de"
+      }
+      );
+
+      var inputCity = "";
+      var inputCountry = "";
+
+      autocompleteInput.on('select', (location) => {
+        inputCity = location.properties.city;
+        inputCountry = location.properties.country;
+        var longi = Math.round(location.properties.lon * 100) / 100;
+        document.getElementById("lon").value = longi;
+        var lati = Math.round(location.properties.lat * 100) / 100;
+        document.getElementById("lat").value = lati;
+      });
+    } catch (error) {
+      console.error('Error fetching environment vars:', error.message);
     }
-    );
-
-    var inputCity = "";
-    var inputCountry = "";
-
-    autocompleteInput.on('select', (location) => {
-      inputCity = location.properties.city;
-      inputCountry = ", " + location.properties.country;
-      var longi = Math.round(location.properties.lon * 100) / 100;
-      document.getElementById("lon").value = longi;
-      var lati = Math.round(location.properties.lat * 100) / 100;
-      document.getElementById("lat").value = lati;
-    });
   }
 }
 
@@ -254,37 +262,6 @@ async function fetchHtmlData(get_uri) {
       console.error("Error creating Plotly graph:", error);
     }
   });
-}
-
-async function fetchEnvironmentVariables() {
-  if (document.getElementById("search_loc").children.length === 0) {
-    try {
-      const response = await axios.get(get_uri + '/api/environment')
-      const data = response.data;
-      const geo_key = data.geo_key;
-      const autocompleteInput = new autocomplete.GeocoderAutocomplete(
-        document.getElementById("search_loc"),
-        geo_key, {
-        placeholder: "Ort finden",
-        lang: "de"
-      }
-      );
-
-      var inputCity = "";
-      var inputCountry = "";
-
-      autocompleteInput.on('select', (location) => {
-        inputCity = location.properties.city;
-        inputCountry = location.properties.country;
-        var longi = Math.round(location.properties.lon * 100) / 100;
-        document.getElementById("lon").value = longi;
-        var lati = Math.round(location.properties.lat * 100) / 100;
-        document.getElementById("lat").value = lati;
-      });
-    } catch (error) {
-      console.error('Error fetching environment vars:', error.message);
-    }
-  }
 }
 
 function addEventlistener(getUri) {
