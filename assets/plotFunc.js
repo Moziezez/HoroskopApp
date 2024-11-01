@@ -232,7 +232,7 @@ async function fetchHtmlData(get_uri) {
       document.querySelector('#plot-container').outerHTML = response.data;
       requestAnimationFrame(() => {
         setDatetimepicker();
-        setGeoapify(geoKey);
+        setGeoapify(geo_key);
       });
       // newWindow.document.open();
       // newWindow.document.write(response.data);

@@ -1,14 +1,16 @@
 
 h1.horo {
-	margin: 0 auto 14px auto;
+	margin: 22px auto 0 auto;
 }
 h2.horo {
 	margin: 12px auto 0 auto;
 	font-size: 22px;
 }
 h3.horo {
-	margin: 0 auto;
-	font-size: 14pt;
+	margin: 0 auto 5px auto;
+	font-size: 14pt !important;
+	color: black !important;
+	font-family: Iowan Old Style, Palatino, "Palatino Linotype", "Book Antiqua", "URW Palladio L", P052, serif !important;
 }
 h4.horo {
 	margin: 0 auto 0 auto;
@@ -31,6 +33,7 @@ h6.horo {
 p.horo {	
 	font-size: 12pt;
 	text-align: justify !important;
+	color: black !important;
 }
 a.horo {
 	font-family: system-ui,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;

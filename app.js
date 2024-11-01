@@ -183,7 +183,6 @@ app.get("/create-plot", function (req, res) {
 
 app.get("/get-html", function (req, res) {
 	var plot_style = plotStyle;
-	var geo_key = process.env.GEO_KEY;
 
 	try {
 		var { user, traces, aspects, symbols } = funcs.userInput(req.query);
@@ -201,7 +200,6 @@ app.get("/get-html", function (req, res) {
 		var asc = asc_utf8 + " " + asc_name;
 		var isChecked = req.body.Check;
 
-		var name_string = `${user.name} `;
 		var date_string = `${user.day}.${user.month}.${user.year}`;
 		var time_string = `${user.hour}:${user.minute} Uhr`;
 
@@ -226,7 +224,6 @@ app.get("/get-html", function (req, res) {
 			xyLayout: plotXyStyle.layout,
 			xyAspects: aspects,
 			symbols: symbols,
-			geo_key: geo_key,
 			get_uri: process.env.HOST,
 			reqQuery: req.query,
 			pUserInfoString: pUserInfoString

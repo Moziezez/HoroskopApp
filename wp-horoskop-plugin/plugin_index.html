@@ -22,7 +22,10 @@
 </head>
 
 <body class="horo">
-  <div class="horo" id="formEjs"></div>
+  <div class="horo fadeOutDiv">
+    <div class="horo" id="formEjs"></div>
+  </div>
+  <div class="horo" id="plot-container"></div>
   <script>
     const get_uri = 'https://vedaversum.eu-4.evennode.com';
     const $ = jQuery;
@@ -30,7 +33,7 @@
       try {
         const inputField = document.querySelector('.geoapify-autocomplete-input');
         const response = await axios.get(get_uri + '/assets/plotFunc.js');
-        eval(response.data); // Evaluate and load `plotFunc.js`
+        eval(response.data);
       } catch (error) {
         console.error("Error loading functions:", error);
       } finally {
