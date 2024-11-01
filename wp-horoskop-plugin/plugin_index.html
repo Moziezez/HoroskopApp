@@ -34,10 +34,9 @@
         const inputField = document.querySelector('.geoapify-autocomplete-input');
         const response = await axios.get(get_uri + '/assets/plotFunc.js');
         eval(response.data);
+        mainFunc();
       } catch (error) {
         console.error("Error loading functions:", error);
-      } finally {
-        mainFunc();
       }
     });
   </script>

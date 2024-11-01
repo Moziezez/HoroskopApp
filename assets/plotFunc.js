@@ -224,7 +224,7 @@ async function fetchHtmlData(get_uri) {
     aspectChecks: aspectCheckBinary,
   };
   // const newWindow = window.open('', '_blank');
-
+  console.log(params);
   await axios.get(get_uri + '/get-html', {
     params
   })
@@ -270,9 +270,12 @@ async function fetchEnvironmentVariables() {
       }
       );
 
+      var inputCity = "";
+      var inputCountry = "";
+
       autocompleteInput.on('select', (location) => {
         inputCity = location.properties.city;
-        inputCountry = ", " + location.properties.country;
+        inputCountry = location.properties.country;
         var longi = Math.round(location.properties.lon * 100) / 100;
         document.getElementById("lon").value = longi;
         var lati = Math.round(location.properties.lat * 100) / 100;
@@ -387,10 +390,6 @@ async function fetchForm() {
 
 
 async function mainFunc() {
-  // XXXX
-  var inputCity = "",
-    inputCountry = "";
-
   const $ = jQuery;
   await fetchForm();
 
