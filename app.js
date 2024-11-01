@@ -73,24 +73,24 @@ app.get("/form", (req, res) => {
 			'1', '1'
 		]
 	};
-	var user_data = {
-		name: 'Random',
-		date: '25.06.1997',
-		hour: '12',
-		minu: '25',
-		longi: '33',
-		lati: '22',
-		house: 'placidus',
-		city: 'Hildesheim',
-		country: 'Deutschland',
-		zodi: 'true',
-		check: 'false',
-		aspectChecks: [
-			'1', '1', '1', '1',
-			'1', '1', '1', '1',
-			'1', '1'
-		]
-	};
+	// var user_data = {
+	// 	name: 'Random',
+	// 	date: '25.06.1997',
+	// 	hour: '12',
+	// 	minu: '25',
+	// 	longi: '33',
+	// 	lati: '22',
+	// 	house: 'placidus',
+	// 	city: 'Hildesheim',
+	// 	country: 'Deutschland',
+	// 	zodi: 'true',
+	// 	check: 'false',
+	// 	aspectChecks: [
+	// 		'1', '1', '1', '1',
+	// 		'1', '1', '1', '1',
+	// 		'1', '1'
+	// 	]
+	// };
 	res.render("form", { userData: user_data });
 })
 
