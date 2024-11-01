@@ -369,6 +369,9 @@ async function mainFunc() {
   await fetchEnvironmentVariables();
   setDatetimepicker();
   addEventlistener(get_uri);
+  $("#triggerForm").click(function () {
+    popUpForm();
+  });
 }
 
 // wp index func:
