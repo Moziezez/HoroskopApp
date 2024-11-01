@@ -1,8 +1,8 @@
 
 const get_uri = 'https://vedaversum.eu-4.evennode.com';
 // const get_uri = 'http://localhost:3030';
-let inputCity;
-let inputCountry;
+var inputCity;
+var inputCountry;
 
 function popUpForm() {
   $("#popupForm").fadeOut(108);
@@ -141,6 +141,16 @@ function closePopup(key) {
     .attr("onclick", `popUp("${key}")`);
 }
 
+function addClickEvents() {
+  $("#triggerForm").attr("onclick", `popUpForm()`);
+  $("#triggerLegend").attr("onclick", `popUpLegend()`);
+  $("#triggerSun").attr("onclick", `popUp('Sun')`);
+  $("#triggerAc").attr("onclick", `popUp('Ac')`);
+  $("#triggerMoon").attr("onclick", `popUp('Moon')`);
+  $("#triggerSunAc").attr("onclick", `popUp('SunAc')`);
+  $("#triggerSunMoon").attr("onclick", `popUp('SunMoon')`);
+}
+
 function setDatetimepicker() {
   $.datetimepicker.setLocale("de");
   $("#dat").datetimepicker({
@@ -205,6 +215,25 @@ async function fetchEnvironmentVariables() {
     } catch (error) {
       console.error('Error fetching environment vars:', error.message);
     }
+
+    let isInputFocused = false;
+    const inputField = document.querySelector('.geoapify-autocomplete-input');
+
+    inputField.addEventListener('focus', () => {
+      isInputFocused = true;
+      console.log('Input is in focus:', isInputFocused);
+    });
+
+    inputField.addEventListener('blur', () => {
+      isInputFocused = false;
+      console.log('Input is in focus:', isInputFocused);
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' && !isInputFocused) {
+        $('#but').click();
+      }
+    });
   }
 }
 
@@ -239,7 +268,9 @@ async function fetchHtmlData(get_uri) {
       document.querySelector('#plot-container').outerHTML = response.data;
       requestAnimationFrame(() => {
         setDatetimepicker();
-        fetchEnvironmentVariables(geo_key);
+        fetchEnvironmentVariables();
+        addClickEvents();
+
       });
       // newWindow.document.open();
       // newWindow.document.write(response.data);
@@ -286,25 +317,6 @@ function addEventlistener(getUri) {
 
     if (countMismatches == 0) {
       fetchHtmlData(getUri);
-    }
-  });
-
-  let isInputFocused = false;
-  const inputField = document.querySelector('.geoapify-autocomplete-input');
-
-  inputField.addEventListener('focus', () => {
-    isInputFocused = true;
-    console.log('Input is in focus:', isInputFocused);
-  });
-
-  inputField.addEventListener('blur', () => {
-    isInputFocused = false;
-    console.log('Input is in focus:', isInputFocused);
-  });
-
-  document.addEventListener('keydown', function (event) {
-    if (event.key === 'Enter' && !isInputFocused) {
-      $('#but').click();
     }
   });
 }
@@ -361,7 +373,6 @@ async function fetchForm() {
   }
 }
 
-
 async function mainFunc() {
   const $ = jQuery;
   await fetchForm();
@@ -369,9 +380,8 @@ async function mainFunc() {
   await fetchEnvironmentVariables();
   setDatetimepicker();
   addEventlistener(get_uri);
-  $("#triggerForm").click(function () {
-    popUpForm();
-  });
+
+  console.log("test")
 }
 
 // wp index func:

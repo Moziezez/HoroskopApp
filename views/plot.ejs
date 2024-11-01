@@ -13,7 +13,7 @@
 
     <div class="flexItem1">
       <div class="newInput horo" id="infoForm">
-        <a class="horo" id="triggerForm" onclick="popUpForm()">
+        <a class="horo" id="triggerForm">
           Eingabedaten ändern →
         </a>
       </div>
@@ -51,7 +51,7 @@
     <div class="flexItem3">
       <div id="circularPlot"></div>
       <div>
-        <a class="horo" id="triggerLegend" onclick="popUpLegend()">
+        <a class="horo" id="triggerLegend">
           Legende →
         </a>
       </div>
@@ -120,46 +120,6 @@
         Position der Planeten zum Zeitpunkt der Geburt.</p>
       <!-- <button class="butn" type="button" id="dlButton">DL</button> -->
 
-      <script>
-        var inputCity = "",
-          inputCountry = "";
-        autocompleteInput.on("select", (location) => {
-          inputCity = location.properties.city;
-          inputCountry = ", " + location.properties.country;
-          var longi = Math.round(location.properties.lon * 100) / 100;
-          document.getElementById("lon").value = longi;
-          var lati = Math.round(location.properties.lat * 100) / 100;
-          document.getElementById("lat").value = lati;
-        });
-
-        var horoButton = document.getElementById("but");
-        horoButton.addEventListener("click", fetchHtmlData);
-        document.addEventListener("DOMContentLoaded", function() {
-          document.addEventListener("keydown", function(event) {
-            if (event.key === "Enter") {
-              $('#but').click();
-            }
-          });
-        });
-
-        $("#che").click(function(event) {
-          var isChecked = event.target.checked;
-
-          if (isChecked) {
-            savedHour = $("#hour").val();
-            savedMinu = $("#minu").val();
-            savedHouse = $("#House").val();
-            $("#hour").val("12");
-            $("#minu").val("00");
-            $("#House").val("whole-sign");
-          } else {
-            $("#hour").val(savedHour);
-            $("#minu").val(savedMinu);
-            $("#House").val(savedHouse);
-          }
-        });
-      </script>
-
       <div class="flexText">
         <div class="signsTextBox" id="infoSun">
           <div class="flexText1 cOrange" style="line-height: 28px">
@@ -180,7 +140,7 @@
             <% } %>
           </div>
           <div class="flexText5 horo">
-            <a class="horo" id="triggerSun" onclick="popUp('Sun')">
+            <a class="horo" id="triggerSun">
               Zur Interpretation →
             </a>
           </div>
@@ -204,7 +164,7 @@
             <% } %>
           </div>
           <div class="flexText5 horo">
-            <a class="horo" id="triggerAc" onclick="popUp('Ac')">
+            <a class="horo" id="triggerAc">
               Zur Interpretation →
             </a>
           </div>
@@ -228,7 +188,7 @@
             <% } %>
           </div>
           <div class="flexText5 horo">
-            <a class="horo" id="triggerMoon" onclick="popUp('Moon')">
+            <a class="horo" id="triggerMoon">
               Zur Interpretation →
             </a>
           </div>
@@ -262,7 +222,7 @@
             <% } %>
           </div>
           <div class="flexText5 horo">
-            <a class="horo" id="triggerSunAc" onclick="popUp('SunAc')">
+            <a class="horo" id="triggerSunAc">
               Zur Interpretation →
             </a>
           </div>
@@ -294,7 +254,7 @@
             <% } %>
           </div>
           <div class="flexText5 horo">
-            <a class="horo" id="triggerSunMoon" onclick="popUp('SunMoon')">
+            <a class="horo" id="triggerSunMoon">
               Zur Interpretation →
             </a>
           </div>

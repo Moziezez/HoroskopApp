@@ -26,9 +26,13 @@
 
   <h1 class="horo cntr fadeOutDiv"> Erstelle dein individuelles Geburtshoroskop </h1>
 
-  <div class="input-container fadeOutDiv" id="popupForm">
-    <%-include('form.ejs', {userData: user_data}) %>
+  <div class="horo fadeOutDiv" id="popupForm">
+    <div class="horo" id="formEjs"></div>
   </div>
+
+  <!-- <div class="input-container fadeOutDiv" id="popupForm">
+    <-include('form.ejs', {userData: user_data})>
+  </div> -->
 
   <div class="horo" id="plot-container"></div>
 
@@ -39,14 +43,7 @@
 
 <script src="../assets/plotFunc.js"></script>
 <script>
-  const geoKey = "<%= geo_key %>";
-  setGeoapify(geoKey);
-
-  const inputCity = "<%=user_data.city%>";
-  const inputCountry = "<%=user_data.country%>";
-  const getUri = "<%= get_uri %>";
-  addEventlistener(getUri);
-  setDatetimepicker();
+  mainFunc();
 </script>
 
 </html>

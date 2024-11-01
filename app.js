@@ -73,6 +73,24 @@ app.get("/form", (req, res) => {
 			'1', '1'
 		]
 	};
+	var user_data = {
+		name: 'Random',
+		date: '25.06.1997',
+		hour: '12',
+		minu: '25',
+		longi: '33',
+		lati: '22',
+		house: 'placidus',
+		city: 'Hildesheim',
+		country: 'Deutschland',
+		zodi: 'true',
+		check: 'false',
+		aspectChecks: [
+			'1', '1', '1', '1',
+			'1', '1', '1', '1',
+			'1', '1'
+		]
+	};
 	res.render("form", { userData: user_data });
 })
 
@@ -107,43 +125,8 @@ app.get("/", async (req, res) => {
 
 	var geo_key = process.env.GEO_KEY;
 	var get_uri = process.env.HOST; // XXX
-	var user_data = {
-		name: 'Random',
-		date: '25.06.1997',
-		hour: '12',
-		minu: '25',
-		longi: '33',
-		lati: '22',
-		house: 'placidus',
-		city: 'Hildesheim',
-		country: 'Deutschland',
-		zodi: 'true',
-		check: 'false',
-		aspectChecks: [
-			'1', '1', '1', '1',
-			'1', '1', '1', '1',
-			'1', '1'
-		]
-	};
-	var user_data = {
-		name: '',
-		date: '',
-		hour: '',
-		minu: '',
-		longi: '',
-		lati: '',
-		house: 'placidus',
-		city: '',
-		country: '',
-		zodi: 'true',
-		check: 'false',
-		aspectChecks: [
-			'1', '1', '1', '1',
-			'1', '1', '1', '1',
-			'1', '1'
-		]
-	};
-	res.render("index", { geo_key, get_uri, user_data });
+
+	res.render("index", { geo_key, get_uri });
 });
 app.get("/api/environment", (req, res) => {
 	const geo_key = process.env.GEO_KEY;
@@ -156,12 +139,9 @@ app.get("/create-plot", function (req, res) {
 
 	var config = plotStyle.config;
 	var layout = plotStyle.layout;
-	var planet_styles = planets_style_dict;
-	var signs_styles = signs_style_dict;
 	var system_name = house_system_dict[user.house];
 
 	var data = circles.concat(traces);
-
 
 	var loca_string = `${user.city} (${user.lat}°N, ${user.lon}°O)`;
 	var house_string = `Häusersystem: ${system_name}.`;
