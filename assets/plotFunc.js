@@ -1,6 +1,8 @@
 
 const get_uri = 'https://vedaversum.eu-4.evennode.com';
 // const get_uri = 'http://localhost:3030';
+let inputCity;
+let inputCountry;
 
 function popUpForm() {
   $("#popupForm").fadeOut(108);
@@ -192,9 +194,6 @@ async function fetchEnvironmentVariables() {
       }
       );
 
-      var inputCity = "";
-      var inputCountry = "";
-
       autocompleteInput.on('select', (location) => {
         inputCity = location.properties.city;
         inputCountry = location.properties.country;
@@ -278,12 +277,9 @@ function addEventlistener(getUri) {
         countMismatches += 1;
         input.setCustomValidity(`Bitte trage einen Wert in das Feld ein.`);
         input.reportValidity();
-        console.log(input.validationMessage, "missing val") // ??? xxx 
       }
       if (input.validity.patternMismatch) {
         countMismatches += 1;
-        var valMessage = `<p class="horo">${input.validationMessage}</p>`;
-        console.log(valMessage)
         input.reportValidity();
       }
     });
