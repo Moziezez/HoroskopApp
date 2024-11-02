@@ -1,6 +1,6 @@
 
-const get_uri = 'https://vedaversum.eu-4.evennode.com';
-// const get_uri = 'http://localhost:3030';
+// const get_uri = 'https://vedaversum.eu-4.evennode.com';
+const get_uri = 'http://localhost:3030';
 var inputCity;
 var inputCountry;
 
