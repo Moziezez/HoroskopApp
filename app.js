@@ -52,43 +52,34 @@ app.get("/assets/plotFunc", (req, res) => {
 
 app.get("/form", (req, res) => {
 	res.setHeader('Content-Type', 'text/html');
-	var user_data = {
-		name: '',
-		date: '',
-		hour: '',
-		minu: '',
-		longi: '',
-		lati: '',
-		house: 'placidus',
-		city: '',
-		country: '',
-		zodi: 'true',
-		check: 'false',
-		aspectChecks: [
-			'1', '1', '1', '1',
-			'1', '1', '1', '1',
-			'1', '1'
-		]
-	};
-	// var user_data = {
-	// 	name: 'Random',
-	// 	date: '25.06.1997',
-	// 	hour: '12',
-	// 	minu: '25',
-	// 	longi: '33',
-	// 	lati: '22',
-	// 	house: 'placidus',
-	// 	city: 'Hildesheim',
-	// 	country: 'Deutschland',
-	// 	zodi: 'true',
-	// 	check: 'false',
-	// 	aspectChecks: [
-	// 		'1', '1', '1', '1',
-	// 		'1', '1', '1', '1',
-	// 		'1', '1'
-	// 	]
-	// };
-	res.render("form", { userData: user_data });
+	console.log(process.env.HOST)
+	if (process.env.HOST == "http://localhost:3030") {
+		var user_data = require("./userData.js");
+		res.render("form", { userData: user_data });
+	} else {
+		res.render("form", {
+			userData: {
+				name: '',
+				date: '',
+				hour: '',
+				minu: '',
+				longi: '',
+				lati: '',
+				house: 'placidus',
+				city: '',
+				country: '',
+				zodi: 'true',
+				check: 'false',
+				aspectChecks: [
+					'1', '1', '1', '1',
+					'1', '1', '1', '1',
+					'1', '1'
+				]
+			}
+		});
+
+	}
+
 })
 
 app.get("/", async (req, res) => {
