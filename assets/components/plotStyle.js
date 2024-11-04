@@ -1,6 +1,6 @@
 const textfont = "Times New Roman";
 
-const colors = require("./colorCodes.js");
+const { colors } = require("./colorCodes.js");
 
 const plotStyle = {
 	layout: {
@@ -31,7 +31,7 @@ const plotStyle = {
 					color: "black"
 				},
 				rotation: 90,
-				linecolor: colors.tick, //colors.bg,
+				linecolor: colors.bg,
 				linewidth: 2,
 				tickangle: "auto",
 				direction: "counterclockwise"
@@ -140,12 +140,12 @@ const plotXyStyle = {
 		xaxis: {
 			visible: false,
 			range: [0, 12.5],
-			tickcolor: '#000',
+			// tickcolor: '#000',
 		},
 		yaxis: {
 			visible: false,
 			range: [0, 12.5],
-			tickcolor: '#000',
+			// tickcolor: '#000',
 			scaleanchor: "x",
 			scaleratio: 1
 		},
@@ -159,38 +159,10 @@ const plotXyStyle = {
 };
 //Create Circles
 var theta360 = Array.from({ length: 361 }, (e, i) => i);
-var radius1 = Array.from({ length: 361 }, () => -148);
-var radius2 = Array.from({ length: 361 }, () => -133);
 var radius3 = Array.from({ length: 361 }, () => 67);
 var radius4 = Array.from({ length: 361 }, () => 128);
 var radius5 = Array.from({ length: 361 }, () => 180);
 
-var circ1 = {
-	r: radius1,
-	theta: theta360,
-	name: 'Erde',
-	mode: 'lines',
-	fill: 'toself',
-	fillcolor: colors.bg,
-	line: {
-		color: 'black',
-		width: 0
-	},
-	type: 'scatterpolar',
-};
-var circ2 = {
-	r: radius2,
-	theta: theta360,
-	hoverinfo: 'none',
-	mode: 'lines',
-	fill: 'toself',
-	fillcolor: colors.bgSecondary,
-	line: {
-		width: 1,
-		color: colors.bgTertiary
-	},
-	type: 'scatterpolar'
-};
 var circ3 = {
 	r: radius3,
 	theta: theta360,
@@ -199,8 +171,8 @@ var circ3 = {
 	fill: 'toself',
 	fillcolor: colors.bg,
 	line: {
-		color: colors.bgTertiary,
-		width: 1
+		color: colors.tick,
+		width: 1.5
 	},
 	type: 'scatterpolar',
 	hovertext: 'Winkel',
@@ -244,10 +216,11 @@ for (var n = 0; n < theta360.length - 1; n++) {	//Append Scaling Degrees 360°
 			mode: 'lines',
 			line: {
 				color: colors.tick,
-				width: 3
+				width: 2
 			},
 			type: 'scatterpolar',
 			hovertext: 'Winkel',
+			hoverlabel: { bgcolor: colors.bgSecondary, font: { color: 'black' } },
 			hoverinfo: 'theta'
 		});
 	} else if (n % 5 == 0) {					//Append 5er ticks
@@ -261,6 +234,7 @@ for (var n = 0; n < theta360.length - 1; n++) {	//Append Scaling Degrees 360°
 			},
 			type: 'scatterpolar',
 			hovertext: 'Winkel',
+			hoverlabel: { bgcolor: colors.bgSecondary, font: { color: 'black' } },
 			hoverinfo: 'theta'
 		});
 	} else { // Append 1er ticks
@@ -270,10 +244,11 @@ for (var n = 0; n < theta360.length - 1; n++) {	//Append Scaling Degrees 360°
 			mode: 'lines',
 			line: {
 				color: colors.tick,
-				width: 2
+				width: 1.5
 			},
 			type: 'scatterpolar',
 			hovertext: 'Winkel',
+			hoverlabel: { bgcolor: colors.bgSecondary, font: { color: 'black' } },
 			hoverinfo: 'theta'
 		});
 	}

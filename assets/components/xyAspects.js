@@ -1,5 +1,5 @@
 var { planets_style_dict, signs_style_dict, aspects_style_dict } = require("./planetStyles");
-const colors = require("./colorCodes.js");
+const { colors } = require("./colorCodes.js");
 const fs = require("fs");
 const path = require("path");
 
@@ -37,7 +37,7 @@ function getAspectTraces(horoscope, isChecked, valid_aspect_keys) {
     key: 'ascendant',
     x: [len + 1.3],
     y: [2],
-    text: 'AC',
+    text: '<b>AC</b>',
     mode: 'text',
     textfont: { family: 'Times', size: 14, color: 'black' },
     hovertext: "Aszendent " + ascendant_sign_symbol + " " + ascendant_arc,
@@ -49,7 +49,7 @@ function getAspectTraces(horoscope, isChecked, valid_aspect_keys) {
     key: 'midheaven',
     x: [len + 1.3],
     y: [1],
-    text: 'MC',
+    text: '<b>MC</b>',
     mode: 'text',
     textfont: { family: 'Times', size: 14, color: 'black' },
     hovertext: "Medium Coeli " + midheaven_sign_symbol + " " + midheaven_arc,

@@ -1,3 +1,5 @@
+const { aspectColors } = require("./colorCodes.js");
+
 var planets_style_dict = {	// Markers, Colors, Descriptions and Aspects for Planets
 	sun: {
 		utf8: '\u2609',
@@ -14,7 +16,7 @@ var planets_style_dict = {	// Markers, Colors, Descriptions and Aspects for Plan
 	venus: {
 		utf8: '\u2640',
 		text: 'Venus'
-	}, 
+	},
 	mars: {
 		utf8: '\u2642',
 		text: 'Mars'
@@ -50,7 +52,7 @@ var planets_style_dict = {	// Markers, Colors, Descriptions and Aspects for Plan
 	northnode: {
 		utf8: '\u260A',
 		text: 'Aufst. Mondknoten (R)'
-	}, 
+	},
 	southnode: {
 		utf8: '\u260B',
 		text: 'Abst. Mondknoten (R)'
@@ -76,7 +78,7 @@ var signs_style_dict = {
 		ele: 'Feuer'
 	},
 	taurus: {
-		utf8: '\u2649', 
+		utf8: '\u2649',
 		text: 'Stier',
 		ele: 'Erde'
 	},
@@ -134,70 +136,70 @@ var signs_style_dict = {
 
 var aspects_style_dict = {
 	trine: {
-		color: 'rgb(73, 127, 2)',
+		color: aspectColors.trine,
 		marker: '\u1401',
 		size: 18,
 		name: 'Trigon',
-		deg: '120°' 
+		deg: '120°'
 	},
-	square:{
-		color: 'rgb(255,182,193)',
-		marker: '\u2750', // 2750  25A1
+	square: {
+		color: aspectColors.square,
+		marker: '\u2750',
 		size: 20,
 		name: 'Quadrat',
 		deg: "90°"
 	},
-	'semi-square':{
-		color: 'rgb(206,71,4)',
+	'semi-square': {
+		color: aspectColors.semisquare,
 		marker: '\u2220',
 		size: 20,
 		name: 'Semi-Quadrat',
 		deg: "45°"
 	},
 	conjunction: {
-		color: 'rgb(1, 236, 125)',
+		color: aspectColors.conjunction,
 		marker: '\u260C',
 		size: 22,
 		name: 'Konjunktion',
 		deg: "0°"
 	},
 	opposition: {
-		color: 'rgb(157, 56, 56)',
+		color: aspectColors.opposition,
 		marker: '\u260D',
 		size: 22,
 		name: 'Opposition',
 		deg: '180°'
 	},
 	septile: {
-		color: 'rgb(222, 236, 101)',
+		color: aspectColors.septile,
 		marker: 'S',
 		size: 24,
 		name: 'Septil',
 		deg: '51.5°'
 	},
 	sextile: {
-		color: 'rgb(201, 236, 125)',
+		color: aspectColors.sextile,
 		marker: '\u26B9',
 		size: 24,
 		name: 'Sextil',
 		deg: '60°'
 	},
 	quintile: {
-		color: 'rgb(167, 238, 167)',
+		color: aspectColors.quintile,
 		marker: 'Q',
 		size: 20,
 		name: 'Quintil',
 		deg: '72°'
 	},
 	'semi-sextile': {
-		color: 'rgb(130, 253, 85)',
+		color: aspectColors.semisextile,
 		marker: '\u26BA',
 		size: 20,
 		name: 'Semi-Sextil',
 		deg: '30°'
 	},
 	quincunx: {
-		color: 'rgb( 111, 87, 228)', // 'rgb(4, 125, 206)',
+		color: aspectColors.quincunx,
 		marker: '\u26BB',
 		size: 20,
 		name: 'Quinkunx',
@@ -205,7 +207,7 @@ var aspects_style_dict = {
 	},
 }
 
-var houses_style_dict = {	//Aspects for Houses
+var houses_style_dict = {	// Aspects for Houses
 	1: { name: 'Haus 1', planet: [], planet_text: [] },
 	2: { name: 'Haus 2', planet: [], planet_text: [] },
 	3: { name: 'Haus 3', planet: [], planet_text: [] },

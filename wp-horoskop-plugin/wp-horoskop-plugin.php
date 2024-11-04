@@ -1,8 +1,8 @@
 ﻿<?php
 /*
- * Plugin Name: Horoskop Plugin
+ * Plugin Name: Vedaversum Horoskopgenerator
  * Plugin URI:  https://vedaversum.eu-4.evennode.com/
- * Description: WordPress plugin Horoskopgenerator.
+ * Description: WordPress plugin Horoskopgenerator use [horo_input].
  * Version:     2.0.3
  * Author:      Maurice Schollmeyer
  */

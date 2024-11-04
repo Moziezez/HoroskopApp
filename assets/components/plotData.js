@@ -1,9 +1,12 @@
 //recieve horoscope and return plot_data
-const { planets_style_dict, signs_style_dict, aspects_style_dict, houses_style_dict } = require("./planetStyles.js");
-const colors = require("./colorCodes.js");
 const textfont = 'Arial';
 const path = require("path");
 const fs = require('fs');
+
+const { planets_style_dict, signs_style_dict, aspects_style_dict, houses_style_dict } = require("./planetStyles.js");
+const { colors } = require("./colorCodes.js");
+const connection_traces_tickwidth = 1.5;
+const r1 = 58; const r2 = 74;
 
 function createDataURLFromSVG(svgPath) {
 	// Read the SVG file content
@@ -31,12 +34,12 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 	var planet_obj = horoscope.CelestialBodies.all;
 
 	var connection_traces = [{
-		r: [58, 67],
+		r: [r1, r2],
 		theta: [ascendant_theta, ascendant_theta],
 		mode: 'lines',
 		line: {
-			color: 'orange',
-			width: 2
+			color: colors.tick,
+			width: connection_traces_tickwidth
 		},
 		name: signs_style_dict[horoscope.Angles.ascendant.Sign.key].utf8 + " " + horoscope.Angles.ascendant.ChartPosition.Ecliptic.ArcDegreesFormatted30,
 		type: 'scatterpolar',
@@ -44,11 +47,11 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 		hoverlabel: { bgcolor: colors.bgSecondary, font: { color: 'black' } },
 		hoverinfo: 'text+name'
 	}, {
-		r: [58, 67],
+		r: [r1, r2],
 		theta: [midheaven_theta, midheaven_theta],
 		mode: 'lines',
 		line: {
-			color: 'orange',
+			color: colors.tick,
 			width: 1.5
 		},
 		name: signs_style_dict[horoscope.Angles.midheaven.Sign.key].utf8 + " " + horoscope.Angles.midheaven.ChartPosition.Ecliptic.ArcDegreesFormatted30,
@@ -80,12 +83,12 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 		var current_zodi_utf8 = signs_style_dict[current_zodi].utf8;
 
 		connection_traces.push({ 						// Connection Traces Loop
-			r: [58, 67],
+			r: [r1, r2],
 			theta: [plnt_pos, planets_pos[i].theta],
 			mode: 'lines',
 			line: {
-				color: 'orange',
-				width: 1
+				color: colors.tick,
+				width: connection_traces_tickwidth
 			},
 			name: current_zodi_utf8 + " " + planet.ChartPosition.Ecliptic.ArcDegreesFormatted30,
 			type: 'scatterpolar',
@@ -177,20 +180,20 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 
 		}
 
-		connection_traces.push({ 						// Connection Traces Loop
-			r: [58, 67],
-			theta: [clst_pos, clst_pos],
-			mode: 'lines',
-			line: {
-				color: 'orange',
-				width: 1
-			},
-			name: current_zodi_utf8 + " " + planet.ChartPosition.Ecliptic.ArcDegreesFormatted30,
-			type: 'scatterpolar',
-			hovertext: planet_marker,
-			hoverlabel: { bgcolor: colors.bgSecondary, font: { color: 'black' } },
-			hoverinfo: 'text+name'
-		});
+		// connection_traces.push({ 						// Connection Traces Loop
+		// 	r: [r1, r2],
+		// 	theta: [clst_pos, clst_pos],
+		// 	mode: 'lines',
+		// 	line: {
+		// 		color: colors.tick,
+		// 		width: 0 //connection_traces_tickwidth
+		// 	},
+		// 	name: current_zodi_utf8 + " " + planet.ChartPosition.Ecliptic.ArcDegreesFormatted30,
+		// 	type: 'scatterpolar',
+		// 	hovertext: planet_marker,
+		// 	hoverlabel: { bgcolor: colors.bgSecondary, font: { color: 'black' } },
+		// 	hoverinfo: 'text+name'
+		// });
 
 		planet_traces.forEach((trace, j) => {
 			var theta_diff = Math.round(trace.theta[0] - clst_pos);
@@ -275,8 +278,8 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 	let { houses_nums, housesep_traces } = houseTraces(horoscope, -155, isChecked);
 	var traces_data = signsep_traces.concat(housesep_traces).concat(signs_traces).concat(connection_traces);
 
-	let r2 = 54;
-	var aspect_traces = []; var aspect_traces_radius = [r2, r2];
+	let aspect_radius = 54;
+	var aspect_traces = []; var aspect_traces_radius = [aspect_radius, aspect_radius];
 	var all_aspect_types = horoscope.Aspects.types;
 	var exclude_keys = [];
 	var filtered_keys = valid_keys.filter(key => !exclude_keys.includes(key));
@@ -381,7 +384,6 @@ function signTraces(horoscope, offset, zodiacSys) {
 	// SIGNS TRACES LOOP
 	for (let i = 0; i < 12; i++) {
 		var zodi_theta = horoscope.ZodiacCusps[i].ChartPosition.Ecliptic.DecimalDegrees;
-		// zodi_thetas.push( zodi_theta );
 		var sign_key = horoscope.ZodiacCusps[i].Sign.key;
 		signs_traces.push({
 			key: sign_key,
@@ -409,8 +411,8 @@ function signTraces(horoscope, offset, zodiacSys) {
 		});
 	}
 	signs_traces.forEach(trace => {					// Signs Symbols Traces Loop
-		var svgFile = trace.key + '.svg';
 		var sign_key = trace.key;
+		var svgFile = sign_key + '.svg';
 		var svgDataURL = createDataURLFromSVG(svgFile);
 		var symbol_radius = 22.2;
 		var symbol_pos_x = symbol_radius * Math.cos(((trace.theta[0] + offset) / 360) * 2 * Math.PI);
@@ -444,7 +446,7 @@ function houseTraces(horoscope, radius, isChecked) {
 		var house_sign_key = horoscope.Houses[i].Sign.key;
 		var house_sign = signs_style_dict[house_sign_key].text;
 
-		// WIP housenums even spaces
+		// housenums even spaces
 		var house_start = horoscope.Houses[i].ChartPosition.StartPosition.Ecliptic.DecimalDegrees;
 		var house_end = horoscope.Houses[i].ChartPosition.EndPosition.Ecliptic.DecimalDegrees;
 
