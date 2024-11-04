@@ -1,17 +1,3 @@
-
-var titleColor = "#211e1b";
-var textColor = "#3e3a34";
-var textFadedColor = "#69635a";
-var tickColor = '#fcdec2';
-var bgColor = "#faf5ec";
-var bgSecondaryColor = "#fae6c6";
-var bgTertiaryColor = "#f8efdf";
-var bgAltColor = "#f6ead7";
-var bgAltSecondaryColor = "#eedcbe";
-var bgAltTertiaryColor = "#f2e4cd";
-var borderColor = "#e7caa0";
-var borderLightColor = "#dfd4c4";
-
 const colors = {
     title: "#211e1b",
     text: "#3e3a34",
