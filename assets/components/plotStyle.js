@@ -1,12 +1,12 @@
-const textfont = "Times New Roman"; // "Times", "Montserrat,  sans-serif"
-const bgColor = '#fcf4ea';
-const bgColorDark = '#fcca94';
+const textfont = "Times New Roman";
+
+const colors = require("./colorCodes.js");
 
 const plotStyle = {
 	layout: {
 		autosize: false,
-		paper_bgcolor: bgColor,
-		plot_bgcolor: bgColor,
+		paper_bgcolor: colors.bg,
+		plot_bgcolor: colors.bg,
 		width: 655,
 		height: 600,
 		margin: { l: 0, r: 0, b: 0, t: 39 },
@@ -27,15 +27,16 @@ const plotStyle = {
 				ticktext: ["<b>AC</b>", "MC", "DC", "IC"],
 				tickfont: {
 					family: textfont,
-					size: 12,
+					size: 14,
 					color: "black"
 				},
 				rotation: 90,
-				linecolor: bgColor,
+				linecolor: colors.tick, //colors.bg,
+				linewidth: 2,
 				tickangle: "auto",
 				direction: "counterclockwise"
 			},
-		},		
+		},
 		xaxis: {
 			domain: [0.1, 0.9],
 			range: [-25, 25],
@@ -47,7 +48,7 @@ const plotStyle = {
 			visible: false,
 		},
 	},
-	config: {        
+	config: {
 		toImageButtonOptions: {
 			format: 'svg', // one of png, svg, jpeg, webp
 			filename: 'custom_horoscope_chart',
@@ -62,7 +63,7 @@ const plotStyle = {
 	}
 };
 const shapesList = [];
-for (let index = 0; index < 11; index+=2) {
+for (let index = 0; index < 11; index += 2) {
 	shapesList.push({		// second row in aspect plot lightgrey
 		type: 'rect',
 		xref: 'x',
@@ -108,31 +109,30 @@ shapesList.push({
 		width: 0
 	}
 },
-{
-	type: 'rect',
-	xref: 'x',
-	yref: 'x',
-	x0: 10.5,
-	y0: 1.52,
-	x1: 12,
-	y1: 2.5,
-	fillcolor: 'orange',
-	opacity: 0.1,
-	line: {
-		width: 0
+	{
+		type: 'rect',
+		xref: 'x',
+		yref: 'x',
+		x0: 10.5,
+		y0: 1.52,
+		x1: 12,
+		y1: 2.5,
+		fillcolor: 'orange',
+		opacity: 0.1,
+		line: {
+			width: 0
+		}
 	}
-}
 )
 const plotXyStyle = {
-	layout: {  
+	layout: {
 		shapes: shapesList,
 		autosize: true,
-		// width: 420,
 		dragmode: false,
 		showlegend: false,
-		margin: {l: 0, r: 0, b: 0, t: 9},
-		paper_bgcolor: bgColor,
-		plot_bgcolor: bgColor,
+		margin: { l: 0, r: 0, b: 0, t: 9 },
+		paper_bgcolor: colors.bg,
+		plot_bgcolor: colors.bg,
 		domain: {
 			x: [0, 1],
 			y: [0, 1]
@@ -158,61 +158,61 @@ const plotXyStyle = {
 	}
 };
 //Create Circles
-var theta360 = Array.from({length: 361}, (e, i)=> i);
-var radius1 = Array.from({length: 361}, ()=> -148);
-var radius2 = Array.from({length: 361}, ()=> -133);
-var radius3 = Array.from({length: 361}, ()=> 67);
-var radius4 = Array.from({length: 361}, ()=> 128);
-var radius5 = Array.from({length: 361}, ()=> 180);
+var theta360 = Array.from({ length: 361 }, (e, i) => i);
+var radius1 = Array.from({ length: 361 }, () => -148);
+var radius2 = Array.from({ length: 361 }, () => -133);
+var radius3 = Array.from({ length: 361 }, () => 67);
+var radius4 = Array.from({ length: 361 }, () => 128);
+var radius5 = Array.from({ length: 361 }, () => 180);
 
-var circ1 = {        
+var circ1 = {
 	r: radius1,
 	theta: theta360,
 	name: 'Erde',
 	mode: 'lines',
 	fill: 'toself',
-	fillcolor: bgColor,
+	fillcolor: colors.bg,
 	line: {
 		color: 'black',
 		width: 0
 	},
 	type: 'scatterpolar',
 };
-var circ2 = {        
+var circ2 = {
 	r: radius2,
 	theta: theta360,
 	hoverinfo: 'none',
 	mode: 'lines',
 	fill: 'toself',
-	fillcolor: bgColorDark,
+	fillcolor: colors.bgSecondary,
 	line: {
 		width: 1,
-		color: bgColorDark
+		color: colors.bgTertiary
 	},
 	type: 'scatterpolar'
 };
-var circ3 = {        
+var circ3 = {
 	r: radius3,
 	theta: theta360,
 	name: 'Oben',
 	mode: 'lines',
 	fill: 'toself',
-	fillcolor: bgColor,
+	fillcolor: colors.bg,
 	line: {
-		color: bgColorDark,
+		color: colors.bgTertiary,
 		width: 1
 	},
 	type: 'scatterpolar',
 	hovertext: 'Winkel',
 	hoverinfo: 'theta'
 };
-var circ4 = {        
+var circ4 = {
 	r: radius4,
 	theta: theta360,
 	name: 'Oben',
 	mode: 'lines',
 	fill: 'toself',
-	fillcolor: '#f8efdf',
+	fillcolor: colors.bgTertiary,
 	line: {
 		width: 0
 	},
@@ -220,20 +220,19 @@ var circ4 = {
 	hovertext: 'Winkel',
 	hoverinfo: 'theta'
 };
-var circ5 = {        
+var circ5 = {
 	r: radius5,
 	theta: theta360,
 	mode: 'lines',
 	fill: 'toself',
-	fillcolor: '#fae6c6',
+	fillcolor: colors.bgSecondary,
 	line: {
 		width: 0
 	},
 	hoverinfo: 'none',
 	type: 'scatterpolar'
 };
-var circ_data = [ circ5, circ4, circ3, circ2, circ1 ];
-var tick_color = '#fcdec2';
+var circ_data = [circ5, circ4, circ3];
 var rad = radius4;
 var abstand = 3.5;
 
@@ -244,7 +243,7 @@ for (var n = 0; n < theta360.length - 1; n++) {	//Append Scaling Degrees 360°
 			theta: [theta360[n], theta360[n]],
 			mode: 'lines',
 			line: {
-				color: tick_color,
+				color: colors.tick,
 				width: 3
 			},
 			type: 'scatterpolar',
@@ -257,7 +256,7 @@ for (var n = 0; n < theta360.length - 1; n++) {	//Append Scaling Degrees 360°
 			theta: [theta360[n], theta360[n]],
 			mode: 'lines',
 			line: {
-				color: tick_color,
+				color: colors.tick,
 				width: 2
 			},
 			type: 'scatterpolar',
@@ -270,7 +269,7 @@ for (var n = 0; n < theta360.length - 1; n++) {	//Append Scaling Degrees 360°
 			theta: [theta360[n], theta360[n]],
 			mode: 'lines',
 			line: {
-				color: tick_color,
+				color: colors.tick,
 				width: 2
 			},
 			type: 'scatterpolar',

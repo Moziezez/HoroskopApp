@@ -1,20 +1,7 @@
 //recieve horoscope and return plot_data
 const { planets_style_dict, signs_style_dict, aspects_style_dict, houses_style_dict } = require("./planetStyles.js");
-const {
-	titleColor,
-	textColor,
-	textFadedColor,
-	bgColor,
-	bgSecondaryColor,
-	bgTertiaryColor,
-	bgAltColor,
-	bgAltSecondaryColor,
-	bgAltTertiaryColor,
-	borderColor,
-	borderLightColor
-} = require("./colorCodes.js");
+const colors = require("./colorCodes.js");
 const textfont = 'Arial';
-const bgColorDark = bgSecondaryColor;
 const path = require("path");
 const fs = require('fs');
 
@@ -54,7 +41,7 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 		name: signs_style_dict[horoscope.Angles.ascendant.Sign.key].utf8 + " " + horoscope.Angles.ascendant.ChartPosition.Ecliptic.ArcDegreesFormatted30,
 		type: 'scatterpolar',
 		hovertext: "AC",
-		hoverlabel: { bgcolor: bgColorDark, font: { color: 'black' } },
+		hoverlabel: { bgcolor: colors.bgSecondary, font: { color: 'black' } },
 		hoverinfo: 'text+name'
 	}, {
 		r: [58, 67],
@@ -67,7 +54,7 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 		name: signs_style_dict[horoscope.Angles.midheaven.Sign.key].utf8 + " " + horoscope.Angles.midheaven.ChartPosition.Ecliptic.ArcDegreesFormatted30,
 		type: 'scatterpolar',
 		hovertext: "MC",
-		hoverlabel: { bgcolor: bgColorDark, font: { color: 'black' } },
+		hoverlabel: { bgcolor: colors.bgSecondary, font: { color: 'black' } },
 		hoverinfo: 'text+name'
 	}];
 
@@ -103,7 +90,7 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 			name: current_zodi_utf8 + " " + planet.ChartPosition.Ecliptic.ArcDegreesFormatted30,
 			type: 'scatterpolar',
 			hovertext: planet_marker,
-			hoverlabel: { bgcolor: bgColorDark, font: { color: 'black' } },
+			hoverlabel: { bgcolor: colors.bgSecondary, font: { color: 'black' } },
 			hoverinfo: 'text+name'
 		});
 		planets_style_dict[planet_key].x = [i + 1];
@@ -146,7 +133,7 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 			},
 			type: 'scatterpolar',
 			hovertext: planet_name + retro_text,
-			hoverlabel: { bgcolor: bgColorDark, font: { color: 'black' } },
+			hoverlabel: { bgcolor: colors.bgSecondary, font: { color: 'black' } },
 			hoverinfo: "text+name"
 		}); // pos of ["sun","moon","planets","chiron", "sirius"]
 
@@ -201,7 +188,7 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 			name: current_zodi_utf8 + " " + planet.ChartPosition.Ecliptic.ArcDegreesFormatted30,
 			type: 'scatterpolar',
 			hovertext: planet_marker,
-			hoverlabel: { bgcolor: bgColorDark, font: { color: 'black' } },
+			hoverlabel: { bgcolor: colors.bgSecondary, font: { color: 'black' } },
 			hoverinfo: 'text+name'
 		});
 
@@ -236,7 +223,7 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 			},
 			type: 'scatterpolar',
 			hovertext: planets_style_dict[celestial_key].text,
-			hoverlabel: { bgcolor: bgColorDark, font: { color: 'black' } },
+			hoverlabel: { bgcolor: colors.bgSecondary, font: { color: 'black' } },
 			hoverinfo: "text+name"
 		});
 	} // pos of ["northnode", "southnode", "lilith"]
@@ -244,8 +231,8 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 	console.log("planets added to house 12: ", missing_ids); 	// planets without listed houses.
 
 	planet_traces.forEach(trace => {					// Symbols Traces Loop
-		var svgFile = trace.key + '.svg';
 		var planet_key = trace.key;
+		var svgFile = planet_key + '.svg';
 		var svgDataURL = createDataURLFromSVG(svgFile);
 		var symbol_radius = 18.3;
 		var symbol_pos_x = symbol_radius * Math.cos(((trace.theta[0] + offset) / 360) * 2 * Math.PI);
@@ -269,6 +256,18 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 			yref: "y"
 		});
 	});
+	planet_symbols.push({
+		x: 0,
+		y: 0,
+		sizex: 3.9,
+		sizey: 3.9,
+		source: createDataURLFromSVG("vedara_symbol.svg"),
+		xanchor: "center",
+		xref: "x",
+		yanchor: "middle",
+		yref: "y"
+	});
+
 
 
 	let { signs_traces, signsep_traces, signs_symbols } = signTraces(horoscope, offset, zodiacSys);
@@ -349,7 +348,7 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 		name: 'Erde',
 		mode: 'lines',
 		fill: 'toself',
-		fillcolor: bgColor,
+		fillcolor: colors.bgTertiary,
 		line: {
 			color: 'black',
 			width: 0
@@ -362,10 +361,10 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 		hoverinfo: 'none',
 		mode: 'lines',
 		fill: 'toself',
-		fillcolor: bgColorDark,
+		fillcolor: colors.bgSecondary,
 		line: {
 			width: 1,
-			color: bgColorDark
+			color: colors.bgSecondary
 		},
 		type: 'scatterpolar'
 	};
@@ -397,7 +396,7 @@ function signTraces(horoscope, offset, zodiacSys) {
 			},
 			type: 'scatterpolar',
 			hovertext: signs_style_dict[sign_key].text,
-			hoverlabel: { bgcolor: bgColorDark, font: { color: 'black' } },
+			hoverlabel: { bgcolor: colors.bgSecondary, font: { color: 'black' } },
 			hoverinfo: "name+text"
 		});
 		signsep_traces.push({

@@ -19,6 +19,7 @@
   <script src="/assets/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
   -->
 
+  <base href="https://vedaversum.eu-4.evennode.com/">
 </head>
 
 <body class="horo">
@@ -27,12 +28,12 @@
   </div>
   <div class="horo" id="plot-container"></div>
   <script>
-    const get_uri = 'https://vedaversum.eu-4.evennode.com';
+    // const get_uri = 'https://vedaversum.eu-4.evennode.com';
     const $ = jQuery;
     document.addEventListener("DOMContentLoaded", async () => {
       try {
         const inputField = document.querySelector('.geoapify-autocomplete-input');
-        const response = await axios.get(get_uri + '/assets/plotFunc.js');
+        const response = await axios.get('/assets/plotFunc.js');
         eval(response.data);
         mainFunc();
       } catch (error) {

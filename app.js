@@ -23,10 +23,7 @@ env.config();
 // }
 
 // const dbEntry = require( "./assets/dbEntry.js" );
-// const corsOptions = {
-// 	origin: [process.env.HOST, process.env.CLI1],
-// 	optionsSuccessStatus: 200,
-// };
+
 const app = express();
 app.set("view engine", "ejs");
 app.use(require('./app-use'));
@@ -124,7 +121,7 @@ app.get("/", async (req, res) => {
 	// db.end();
 
 	var geo_key = process.env.GEO_KEY;
-	var get_uri = process.env.HOST; // XXX
+	var get_uri = process.env.HOST;
 
 	res.render("index", { geo_key, get_uri });
 });
@@ -185,7 +182,7 @@ app.get("/get-html", function (req, res) {
 
 		var loca_string = `${user.city} (${user.lat}°N, ${user.lon}°O)`;
 		var pUserInfoString = 'Geboren am ' + date_string + ' um ' + time_string + ' in ' + loca_string;
-
+		console.log(user.asc, "USER", user.asc.ChartPosition.Ecliptic)
 		res.render("plot.ejs", {
 			checked: isChecked,
 			userData: user,
@@ -225,14 +222,18 @@ app.get("/favicon.ico", function (req, res) {
 });
 
 app.get("/assets/components/svg/:filename", function (req, res) {
-	const filename = req.params.filename
+	const filename = req.params.filename;
+	const filePath = path.join(__dirname, "assets", "components", "svg", filename);
 	res.setHeader("content-type", "image/svg+xml; charset=utf-8");
-	res.sendFile(
-		path.join(__dirname, req.url)
-	);
+	res.sendFile(filePath, function (err) {
+		if (err) {
+			console.error("File not found:", err);
+			res.status(404).send("SVG file not found");
+		}
+	});
 });
 
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
+// app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.get("/assets/datetimepicker-master/jquery.js", function (req, res) {
 	res.setHeader("content-type", "text/javascript; charset=utf-8");
@@ -385,6 +386,6 @@ app.post("/svg-background", (req, res) => {
 });
 
 const port = 3030;
-app.listen(process.env.PORT || port, "0.0.0.0", function () {
+app.listen(process.env.PORT || port, function () {
 	console.log(`Server is running on port ${port}.`);
 });

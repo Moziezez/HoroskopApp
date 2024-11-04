@@ -2,7 +2,6 @@
 <html lang="de" dir="ltr">
 
 <body>
-  <base href="https://vedaversum.eu-4.evennode.com/">
   <div class="plot-flex-container" id="plot-container">
 
     <div class="horo header">
@@ -289,31 +288,32 @@
       <div class="positions">
         <div class="leftPos">
           <% Object.entries(planets).forEach(([k, v], i) => { %>
-          <% if ( ['sirius', 'ascendant', 'midheaven'].includes(k) ) return; %>
-          <% var source = "../assets/components/svg/"+k+".svg"%>
-          <p class="horo" id=<%=k%>></p>
-          <img src=<%=source%> alt="svg" class="svgImgLegend" />
-          <b><%=v.text%></b> in
-          <span class="pos">
-            <%= planets[k].pos_name; %>
+          <% if ( ['sirius', 'ascendant', 'midheaven', 'southnode'].includes(k) ) return; %>
+          <% var source = `assets/components/svg/${k}.svg`%>
+          <p class="horo" id="<%=k%>">
             <% try { %>
-            <%= signs[v.sign_id].text; %>
+            <img src=<%=source%> alt="svg" class="svgImgLegend" onerror="console.error('SVG not found:', '<%= source %>');" />
+            <b><%=v.text%></b> in
+            <span class="pos">
+              <%= planets[k].pos_name; %>
+              <%= signs[v.sign_id].text; %>
+            </span>- Haus <%= v.house_id %>
             <% } catch (error) { %>
             <% console.log(v, "Has error with sign ID:", error); %>
             <% } %>
-          </span>, Haus <%= v.house_id %>
           </p>
           <% if ( i == 6) { %>
         </div>
         <div class="rightPos">
           <% } %>
           <% }); %>
+          <p class="horo" id="AC">
+            AC <b>Aszendent</b> in <%= userData.asc.ChartPosition.Ecliptic.ArcDegreesFormatted30 %> <%= ascendant %> - Haus 1
+          </p>
         </div>
       </div>
     </div>
   </div>
 </body>
-<!-- 
-<script src="../assets/plotFunc.js"></script> -->
 
 </html>

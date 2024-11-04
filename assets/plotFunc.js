@@ -1,6 +1,3 @@
-
-// const get_uri = 'https://vedaversum.eu-4.evennode.com';
-const get_uri = 'http://localhost:3030';
 var inputCity;
 var inputCountry;
 
@@ -193,7 +190,7 @@ function setDatetimepicker() {
 async function fetchEnvironmentVariables() {
   if (document.getElementById("search_loc").children.length === 0) {
     try {
-      const response = await axios.get(get_uri + '/api/environment')
+      const response = await axios.get('/api/environment')
       const data = response.data;
       const geo_key = data.geo_key;
       const autocompleteInput = new autocomplete.GeocoderAutocomplete(
@@ -221,12 +218,10 @@ async function fetchEnvironmentVariables() {
 
     inputField.addEventListener('focus', () => {
       isInputFocused = true;
-      console.log('Input is in focus:', isInputFocused);
     });
 
     inputField.addEventListener('blur', () => {
       isInputFocused = false;
-      console.log('Input is in focus:', isInputFocused);
     });
 
     document.addEventListener('keydown', function (event) {
@@ -237,7 +232,7 @@ async function fetchEnvironmentVariables() {
   }
 }
 
-async function fetchHtmlData(get_uri) {
+async function fetchHtmlData() {
   $(".fadeOutDiv").fadeOut(108);
 
   const aspectChecks = document.querySelectorAll(".aspect-check");
@@ -260,8 +255,8 @@ async function fetchHtmlData(get_uri) {
     aspectChecks: aspectCheckBinary,
   };
   // const newWindow = window.open('', '_blank');
-  console.log(params);
-  await axios.get(get_uri + '/get-html', {
+
+  await axios.get('/get-html', {
     params
   })
     .then(response => {
@@ -280,7 +275,7 @@ async function fetchHtmlData(get_uri) {
     .catch(error => {
       console.error('Error fetching HTML data:', error.message);
     });
-  await axios.get(get_uri + "/create-plot", {
+  await axios.get("/create-plot", {
     params
   }).then(resp => {
     var response_data = resp.data;
@@ -366,7 +361,7 @@ function addEventlistener(getUri) {
 
 async function fetchForm() {
   try {
-    const response = await axios.get(get_uri + '/form');
+    const response = await axios.get('/form');
     document.querySelector('#formEjs').outerHTML = response.data;
   } catch (error) {
     console.error('Error fetching HTML data:', error.message);
@@ -379,9 +374,7 @@ async function mainFunc() {
 
   await fetchEnvironmentVariables();
   setDatetimepicker();
-  addEventlistener(get_uri);
-
-  console.log("test")
+  addEventlistener();
 }
 
 // wp index func:

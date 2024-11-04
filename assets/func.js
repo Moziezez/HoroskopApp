@@ -3,8 +3,7 @@ var { getAspectTraces } = require('./components/xyAspects.js');
 var { plotData } = require('./components/plotData.js');
 var { plotStyle, plotXyStyle } = require('./components/plotStyle.js');
 
-function userInput(query) { // Save User Input to Variables
-	console.log(query)
+function userInput(query) { // XXX random order mit svg loads
 	var date = query.date.split("."),
 		year = date[2],
 		month = date[1],
