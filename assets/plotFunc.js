@@ -268,6 +268,10 @@ async function fetchHtmlData() {
         addClickEvents();
         if (dmSelectors == ".dark") {
           document.getElementById("circularPlot").setAttribute("style", "filter: invert(1);");
+          document.getElementById("cartesianPlot").setAttribute("style", "filter: invert(1);");
+        } else {
+          document.getElementById("circularPlot").setAttribute("style", "filter: invert(0);");
+          document.getElementById("cartesianPlot").setAttribute("style", "filter: invert(1);");
         }
       });
       // newWindow.document.open();
