@@ -3,14 +3,14 @@
  * Plugin Name: Vedaversum Horoskopgenerator
  * Plugin URI:  https://vedaversum.eu-4.evennode.com/
  * Description: WordPress plugin Horoskopgenerator use [horo_input].
- * Version:     2.0.3
+ * Version:     2.2.0
  * Author:      Maurice Schollmeyer
  */
 
 
 function enqueue_related_pages_scripts_and_styles() {
-    wp_enqueue_style('related-form-styles', plugins_url('css/formStyles.css?v=1', __FILE__), array(), '2.0.5');
-    wp_enqueue_style('related-plot-styles', plugins_url('css/plotStyles.css?v=2', __FILE__), array(), '3.1.2');
+    wp_enqueue_style('related-form-styles', plugins_url('css/formStyles.css?v=2', __FILE__), array(), '2.0.5');
+    wp_enqueue_style('related-plot-styles', plugins_url('css/plotStyles.css?v=3', __FILE__), array(), '3.1.2');
 	wp_enqueue_style('related-styles', plugins_url('css/styles.css?v=1', __FILE__), array(), '2.0.2');	
 	wp_enqueue_style('related-datetime-styles', plugins_url('/css/jquery.datetimepicker.min.css', __FILE__));
 

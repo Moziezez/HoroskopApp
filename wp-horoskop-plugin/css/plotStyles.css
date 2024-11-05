@@ -157,8 +157,8 @@
 	align-items: center;
 	padding-top: 136px;
 	font-family: Iowan Old Style, Palatino, "Palatino Linotype", "Book Antiqua", "URW Palladio L", P052, serif;
-	background-color: #fcf4ea;
-	color: black;
+	/* background-color: #fcf4ea;
+	color: black; */
 	border-radius: 48px / 36px;
 	position: relative;
 	overflow: hidden;

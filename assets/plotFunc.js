@@ -260,8 +260,12 @@ async function fetchHtmlData() {
     params
   })
     .then(response => {
-      document.querySelector('#plot-container').outerHTML = response.data;
+      var plotSelector = document.querySelector('#plot-container');
+      plotSelector.outerHTML = response.data;
       requestAnimationFrame(() => {
+        if (dmSelectors == ".dark") {
+          document.getElementById("circularPlot").setAttribute("filter", "invert(1)")
+        }
         setDatetimepicker();
         fetchEnvironmentVariables();
         addClickEvents();
