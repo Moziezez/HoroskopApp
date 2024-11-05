@@ -263,13 +263,12 @@ async function fetchHtmlData() {
       var plotSelector = document.querySelector('#plot-container');
       plotSelector.outerHTML = response.data;
       requestAnimationFrame(() => {
-        if (dmSelectors == ".dark") {
-          document.getElementById("circularPlot").setAttribute("filter", "invert(1)")
-        }
         setDatetimepicker();
         fetchEnvironmentVariables();
         addClickEvents();
-
+        if (dmSelectors == ".dark") {
+          document.getElementById("circularPlot").setAttribute("style", "filter: invert(1);");
+        }
       });
       // newWindow.document.open();
       // newWindow.document.write(response.data);
