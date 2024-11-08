@@ -266,12 +266,14 @@ async function fetchHtmlData() {
         setDatetimepicker();
         fetchEnvironmentVariables();
         addClickEvents();
-        if (dmSelectors == ".dark") {
-          document.getElementById("circularPlot").setAttribute("style", "filter: invert(1);");
-          document.getElementById("cartesianPlot").setAttribute("style", "filter: invert(1);");
-        } else {
-          document.getElementById("circularPlot").setAttribute("style", "filter: invert(0);");
-          document.getElementById("cartesianPlot").setAttribute("style", "filter: invert(1);");
+
+        document.getElementById("circularPlot").setAttribute("style", "filter: invert(0);");
+        document.getElementById("cartesianPlot").setAttribute("style", "filter: invert(0);");
+        if (typeof dmSelectors !== 'undefined') {
+          if (dmSelectors == ".dark") {
+            document.getElementById("circularPlot").setAttribute("style", "filter: invert(1);");
+            document.getElementById("cartesianPlot").setAttribute("style", "filter: invert(1);");
+          }
         }
       });
       // newWindow.document.open();
@@ -376,7 +378,7 @@ async function fetchForm() {
 }
 
 async function mainFunc() {
-  const $ = jQuery;
+  // const $ = jQuery;
   await fetchForm();
 
   await fetchEnvironmentVariables();

@@ -1,51 +1,60 @@
-
 h1.horo {
 	margin: 0 auto 14px auto;
 }
+
 h2.horo {
 	margin: 12px auto 0 auto;
 	font-size: 22px;
 }
+
 h3.horo {
 	margin: 0 auto;
 	font-size: 14pt;
 }
+
 h4.horo {
 	margin: 0 auto 0 auto;
 }
+
 h5.horo {
 	margin: 7px auto 7px auto;
 	color: rgb(145, 145, 145);
 	font-size: 12pt;
 }
+
 h6.horo {
 	margin: 7px auto 7px auto;
 	font-size: 12pt;
 }
+
 .cntr {
 	text-align: center;
 }
-.half{
+
+.half {
 	width: 50%;
 }
-p.horo {	
+
+p.horo {
 	font-size: 12pt;
 	text-align: justify !important;
 }
+
 a.horo {
-	font-family: system-ui,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-family: system-ui, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: bold;
-	color: orange;
+	color: var(--cc-color-32);
 	font-size: 15px;
 	cursor: pointer;
 }
+
 hr.hrheader {
 	width: 222px;
 	margin: 1px auto;
 }
 
 hr.horo {
-	border: 1px solid #fcd9a9;
+	border: 1px solid var(--cc-color-18);
 	margin: 14px 0;
 }
 

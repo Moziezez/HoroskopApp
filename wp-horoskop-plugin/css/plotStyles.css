@@ -63,15 +63,15 @@
 	}
 
 	.flexItem4 {
-		width: 923px;
+		width: 1108px;
 	}
 
 	.flexItem5 {
-		width: 923px;
+		width: 1108px;
 	}
 
 	.flexItem6 {
-		width: 923px;
+		width: 1108px;
 	}
 }
 
@@ -202,7 +202,8 @@
 
 .flexText1 {
 	font-weight: bold;
-	background-color: #fae6c6;
+	background-color: var(--cc-color-4);
+	color: var(--cc-color-16);
 	border-radius: 14px;
 	width: 31px;
 	height: 29px;
@@ -225,7 +226,7 @@
 	width: 20%;
 	margin-top: 12px;
 	border-radius: 2px;
-	background-color: #fae6c6;
+	background-color: var(--cc-color-4);
 	text-align: center;
 	padding: 0 14px 42px 14px;
 	flex-grow: 1;
@@ -250,7 +251,7 @@ div#infoForm {
 .signsBox {
 	width: 185px;
 	height: 63px;
-	background-color: #fae6c6;
+	background-color: var(--cc-color-4);
 	display: grid;
 	border-radius: 5px;
 	grid-template-columns: [first-col] 25% [second-col] 75%;
@@ -259,7 +260,8 @@ div#infoForm {
 
 .flexTextWw1 {
 	font-weight: bold;
-	background-color: #fae6c6;
+	background-color: var(--cc-color-4);
+	color: var(--cc-color-16);
 	border-radius: 14px;
 	width: 101px;
 	height: 29px;
@@ -398,7 +400,7 @@ img.svgImgLegend {
 }
 
 div.horo.form {
-	background-color: #fae6c6;
+	/* background-color: #fae6c6; */
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 30%;

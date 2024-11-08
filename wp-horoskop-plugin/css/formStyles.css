@@ -34,12 +34,12 @@ body.horo {
 
 .text-container {
 	height: auto;
-	background-color: white;
+	background-color: var(--cc-color-4);
 	margin: 5px 5.5px;
 	text-align: justify;
 	box-sizing: border-box;
 	border-style: outset;
-	border-color: lightgray;
+	border-color: var(--cc-color-15);
 	border-radius: 3px;
 	border-width: 0;
 	padding: 19px;
@@ -50,7 +50,7 @@ body.horo {
 }
 
 .border {
-	border: 1.5px solid #fcd9a9;
+	border: 1.5px solid var(--cc-color-18);
 	border-radius: 5px;
 	width: 401px;
 	height: auto;
@@ -80,7 +80,7 @@ body.horo {
 	position: relative;
 	width: 100%;
 	height: 1px;
-	background-image: linear-gradient(to right, #fcd9a9 50%, transparent 50%);
+	background-image: linear-gradient(to right, var(--cc-color-17) 50%, transparent 50%);
 	background-size: 2px 2px;
 	/* space between dots */
 	background-repeat: repeat-x;
@@ -93,7 +93,9 @@ input.geoapify-autocomplete-input {
 	height: 29px;
 	width: 100%;
 	margin-bottom: -5px;
-	background-color: white;
+	color: var(--cc-color-1);
+	accent-color: var(--cc-color-26);
+	/* #9d3039; */
 }
 
 ::placeholder {
@@ -146,7 +148,7 @@ span.marTop {
 span.sublabel {
 	font-family: "Arial";
 	font-size: 9px;
-	color: black;
+	color: var(--cc-color-2);
 }
 
 span.sublabel.bold {
@@ -187,8 +189,11 @@ span.sublabel.bold {
 }
 
 #but {
-	color: rgb(255, 255, 255);
-	background-color: rgb(252, 169, 45);
+	color: var(--cc-color-16);
+	/* rgb(255, 255, 255); */
+	background-color: var(--cc-color-19);
+	border-color: var(--cc-color-15);
+	/* rgb(252, 169, 45); */
 	width: 100%;
 	height: 31px;
 	border-radius: 5px;
@@ -201,8 +206,8 @@ span.sublabel.bold {
 	width: 131px;
 	border-radius: 2px;
 	border-width: 1.5px;
-	border-color: rgb(252, 169, 45);
-	background-color: white;
+	color: var(--cc-color-1);
+	border-color: var(--cc-color-18);
 	margin-left: 3px;
 	text-align: center;
 }
@@ -232,6 +237,10 @@ option {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 14px;
+}
+
+input[type="radio"] {
+	accent-color: var(--cc-color-26);
 }
 
 #signsSystem {

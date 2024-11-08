@@ -351,7 +351,7 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 		name: 'Erde',
 		mode: 'lines',
 		fill: 'toself',
-		fillcolor: colors.bgTertiary,
+		fillcolor: colors.bg,
 		line: {
 			color: 'black',
 			width: 0
