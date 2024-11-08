@@ -275,7 +275,7 @@ div#infoForm {
 
 .sublabel {
 	font-family: system-ui, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	color: black;
+	color: var(--cc-color-2);
 }
 
 .grid1 {
@@ -326,52 +326,6 @@ div#infoForm {
 	width: 50%;
 }
 
-.plot-text-container {
-	-webkit-hyphens: auto;
-	hyphens: auto;
-	text-align: justify;
-	margin-top: 22px;
-	margin-bottom: 9px;
-	box-sizing: border-box;
-	border-style: outset;
-	border-color: rgba(202, 187, 161, 0.747);
-	border-radius: 3px;
-	border-width: 0.1px;
-	padding: 0 19px;
-	background-color: rgb(255, 255, 255);
-	/* rgb(13, 0, 26); */
-	opacity: 0.9;
-	height: 90vh;
-	overflow-y: scroll;
-}
-
-.butn {
-	font-weight: bold;
-	color: white;
-	font-size: 16px;
-	background-color: rgb(171, 124, 253);
-	width: auto;
-	height: 26px;
-	border-radius: 7px;
-	cursor: pointer;
-}
-
-.butn:hover {
-	background-color: rgb(4, 2, 60);
-}
-
-.buttons-holder {
-	display: flex;
-	width: auto;
-	flex-direction: column;
-	justify-content: center;
-	margin: 0 auto;
-	position: fixed;
-	bottom: 16px;
-	left: auto;
-	z-index: 999;
-}
-
 .positions {
 	display: flex;
 	flex-direction: row;
@@ -386,13 +340,14 @@ div#infoForm {
 	width: 50%;
 }
 
+/* 
 .name {
 	fill: black !important;
 }
 
 .hovertext rect {
 	border: 1px solid black !important;
-}
+} */
 
 img.svgImgLegend {
 	width: auto;

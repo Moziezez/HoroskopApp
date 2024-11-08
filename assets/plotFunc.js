@@ -149,16 +149,22 @@ function addClickEvents() {
 }
 
 function setDatetimepicker() {
+  var colorTheme = "default";
+  if (typeof dmSelectors !== 'undefined' && dmSelectors === ".dark") {
+    colorTheme = "dark";
+  }
   $.datetimepicker.setLocale("de");
   $("#dat").datetimepicker({
     timepicker: false,
     format: "d.m.Y",
     startDate: "1987/12/03",
+    theme: colorTheme
   });
   $("#hour").datetimepicker({
     datepicker: false,
     format: "H",
     step: 60,
+    theme: colorTheme
   });
   $("#minu").datetimepicker({
     datepicker: false,
@@ -166,6 +172,7 @@ function setDatetimepicker() {
     step: 1,
     minTime: "00:00",
     maxTime: "01:00",
+    theme: colorTheme
   });
 
   $('#che').click(function (event) {
@@ -266,14 +273,12 @@ async function fetchHtmlData() {
         setDatetimepicker();
         fetchEnvironmentVariables();
         addClickEvents();
-
-        document.getElementById("circularPlot").setAttribute("style", "filter: invert(0);");
-        document.getElementById("cartesianPlot").setAttribute("style", "filter: invert(0);");
-        if (typeof dmSelectors !== 'undefined') {
-          if (dmSelectors == ".dark") {
-            document.getElementById("circularPlot").setAttribute("style", "filter: invert(1);");
-            document.getElementById("cartesianPlot").setAttribute("style", "filter: invert(1);");
-          }
+        if (typeof dmSelectors !== 'undefined' && dmSelectors === ".dark") {
+          document.getElementById("circularPlot").setAttribute("style", "filter: invert(1);");
+          document.getElementById("cartesianPlot").setAttribute("style", "filter: invert(1);");
+        } else {
+          document.getElementById("circularPlot").setAttribute("style", "filter: invert(0);");
+          document.getElementById("cartesianPlot").setAttribute("style", "filter: invert(0);");
         }
       });
       // newWindow.document.open();

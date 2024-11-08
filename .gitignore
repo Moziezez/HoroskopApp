@@ -2,6 +2,7 @@
 .vs
 Material
 userData.js
+createZip.js
 
 # Logs
 logs

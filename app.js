@@ -52,7 +52,6 @@ app.get("/assets/plotFunc", (req, res) => {
 
 app.get("/form", (req, res) => {
 	res.setHeader('Content-Type', 'text/html');
-	console.log(process.env.HOST)
 	if (process.env.HOST == "http://localhost:3030") {
 		var user_data = require("./userData.js");
 		res.render("form", { userData: user_data });
@@ -155,7 +154,7 @@ app.get("/get-html", function (req, res) {
 	try {
 		var { user, traces, aspects, symbols } = funcs.userInput(req.query);
 		// dbEntry.createEntry( user );
-		// console.log( user );
+		console.log(user);
 		var sun_utf8 = signs_style_dict[user.sunsign].utf8;
 		var sun_name = signs_style_dict[user.sunsign].text;
 		var sun_sign = sun_utf8 + " " + sun_name;
@@ -173,7 +172,7 @@ app.get("/get-html", function (req, res) {
 
 		var loca_string = `${user.city} (${user.lat}°N, ${user.lon}°O)`;
 		var pUserInfoString = 'Geboren am ' + date_string + ' um ' + time_string + ' in ' + loca_string;
-		console.log(user.asc, "USER", user.asc.ChartPosition.Ecliptic)
+
 		res.render("plot.ejs", {
 			checked: isChecked,
 			userData: user,

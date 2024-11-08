@@ -1,19 +1,23 @@
 h1.horo {
 	margin: 0 auto 14px auto;
+	color: var(--cc-color-2);
 }
 
 h2.horo {
 	margin: 12px auto 0 auto;
 	font-size: 22px;
+	color: var(--cc-color-2);
 }
 
 h3.horo {
 	margin: 0 auto;
 	font-size: 14pt;
+	color: var(--cc-color-2);
 }
 
 h4.horo {
 	margin: 0 auto 0 auto;
+	color: var(--cc-color-2);
 }
 
 h5.horo {
@@ -25,6 +29,7 @@ h5.horo {
 h6.horo {
 	margin: 7px auto 7px auto;
 	font-size: 12pt;
+	color: var(--cc-color-2);
 }
 
 .cntr {
