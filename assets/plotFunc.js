@@ -150,7 +150,7 @@ function addClickEvents() {
 
 function setDatetimepicker() {
   var colorTheme = "default";
-  if (typeof dmSelectors !== 'undefined' && dmSelectors === ".dark") {
+  if ($("body").css("background-color") == "rgb(11, 10, 9)") {
     colorTheme = "dark";
   }
   $.datetimepicker.setLocale("de");
@@ -273,7 +273,7 @@ async function fetchHtmlData() {
         setDatetimepicker();
         fetchEnvironmentVariables();
         addClickEvents();
-        if (typeof dmSelectors !== 'undefined' && dmSelectors === ".dark") {
+        if ($("body").css("background-color") == "rgb(11, 10, 9)") {
           document.getElementById("circularPlot").setAttribute("style", "filter: invert(1);");
           document.getElementById("cartesianPlot").setAttribute("style", "filter: invert(1);");
         } else {
