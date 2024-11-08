@@ -5,7 +5,7 @@
 	}
 
 	to {
-		background-color: var(--cc-color-4);
+		background-color: var(--bg-dark-blue);
 	}
 }
 
@@ -34,7 +34,7 @@ body.horo {
 
 .text-container {
 	height: auto;
-	background-color: var(--cc-color-4);
+	background-color: var(--bg-dark-blue);
 	margin: 5px 5.5px;
 	text-align: justify;
 	box-sizing: border-box;

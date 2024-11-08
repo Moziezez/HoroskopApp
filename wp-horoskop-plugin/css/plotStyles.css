@@ -202,7 +202,7 @@
 
 .flexText1 {
 	font-weight: bold;
-	background-color: var(--cc-color-4);
+	background-color: var(--cc-dark-blue);
 	color: var(--cc-color-16);
 	border-radius: 14px;
 	width: 31px;
@@ -226,7 +226,7 @@
 	width: 20%;
 	margin-top: 12px;
 	border-radius: 2px;
-	background-color: var(--cc-color-4);
+	background-color: var(--cc-dark-blue);
 	text-align: center;
 	padding: 0 14px 42px 14px;
 	flex-grow: 1;
@@ -251,7 +251,7 @@ div#infoForm {
 .signsBox {
 	width: 185px;
 	height: 63px;
-	background-color: var(--cc-color-4);
+	background-color: var(--cc-light-blue);
 	display: grid;
 	border-radius: 5px;
 	grid-template-columns: [first-col] 25% [second-col] 75%;
@@ -260,7 +260,7 @@ div#infoForm {
 
 .flexTextWw1 {
 	font-weight: bold;
-	background-color: var(--cc-color-4);
+	background-color: var(--cc-dark-blue);
 	color: var(--cc-color-16);
 	border-radius: 14px;
 	width: 101px;
@@ -286,6 +286,7 @@ div#infoForm {
 	margin: auto auto;
 	font-size: 18px;
 	font-weight: bold;
+	color: var(--cc-color-16);
 }
 
 .grid2 {
