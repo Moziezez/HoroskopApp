@@ -22,7 +22,7 @@ h4.horo {
 
 h5.horo {
 	margin: 7px auto 7px auto;
-	color: rgb(145, 145, 145);
+	color: var(--cc-color-2);
 	font-size: 12pt;
 }
 

@@ -34,7 +34,7 @@ body.horo {
 
 .text-container {
 	height: auto;
-	background-color: var(--cc-color-4);
+	background-color: var(--cc-bg-blue);
 	margin: 5px 5.5px;
 	text-align: justify;
 	box-sizing: border-box;
@@ -94,7 +94,7 @@ input.geoapify-autocomplete-input {
 	padding: 0;
 	width: 100%;
 	margin-bottom: -5px;
-	background-color: var(--cc-color-4);
+	background-color: var(--cc-bg-blue);
 	color: var(--cc-color-1);
 	accent-color: var(--cc-color-26);
 	opacity: 1;

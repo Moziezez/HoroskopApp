@@ -130,7 +130,11 @@
 	}
 }
 
-.flexLegend {
+#pUserInfo {
+	margin: 14px 0;
+}
+
+.flexLeg end {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
@@ -162,6 +166,7 @@
 	border-radius: 48px / 36px;
 	position: relative;
 	overflow: hidden;
+	background-color: var(--cc-bg-blue);
 }
 
 .flexItem1 {
@@ -290,12 +295,11 @@ div#infoForm {
 }
 
 .grid2 {
-	margin-top: 12px;
+	margin-top: 7px;
 	grid-column-start: 2;
 	grid-column-end: 3;
 	grid-row-start: 1;
 	grid-row-end: 2;
-	margin: auto auto auto 0;
 	font-size: 12px;
 	padding-left: 3px;
 }
@@ -307,6 +311,7 @@ div#infoForm {
 	grid-row-end: 3;
 	margin: -2px auto 0 0;
 	font-size: 16px;
+	color: va(--cc-color-2);
 }
 
 #circularPlot {
