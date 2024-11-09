@@ -23,24 +23,28 @@
 </head>
 
 <body class="horo">
-  <div class="horo fadeOutDiv">
+
+  <h1 class="horo cntr fadeOutDiv"> Erstelle dein individuelles Geburtshoroskop </h1>
+
+  <div class="horo fadeOutDiv" id="popupForm">
     <div class="horo" id="formEjs"></div>
   </div>
+
   <div class="horo" id="plot-container"></div>
+
   <script>
     const $ = jQuery;
     document.addEventListener("DOMContentLoaded", async () => {
       try {
         const inputField = document.querySelector('.geoapify-autocomplete-input');
         const response = await axios.get('/assets/plotFunc.js');
-        eval(response.data);
+        // eval(response.data);
         mainFunc();
       } catch (error) {
         console.error("Error loading functions:", error);
       }
     });
   </script>
-  </div>
 </body>
 
 </html>

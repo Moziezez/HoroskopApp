@@ -15,6 +15,7 @@ function popUpForm() {
   $("#infoForm").css("width", "40%");
   $("#infoForm").animate({
     width: "100%",
+    display: "block",
   }, {
     duration: 333,
     complete: function () {
@@ -85,6 +86,7 @@ function closeLegend() {
 }
 
 function popUp(key) {
+
   $(".flexText4, .popup").fadeOut(108);
   $(".signsTextBox").css({
     width: "20%",
@@ -118,16 +120,20 @@ function popUp(key) {
 }
 
 function closePopup(key) {
+  let $signsTextBox = $(".signsTextBox");
+  $signsTextBox.css("height", "auto");
+  let autoHeight = $signsTextBox.height(); // Get the "auto" height
+
   $(".flexText4, .popup").fadeOut(108);
   $(".flexText4").fadeIn(666);
   $(".signsTextBox").animate({
     width: "20%",
-    height: "296px",
+    height: autoHeight,
   }, {
     duration: 333,
     complete: function () {
       $("html, body").animate({
-        scrollTop: $("#info" + key).offset().top - 12,
+        scrollTop: $(".flexItem4").offset().top - 12,
       },
         111
       );

@@ -5,7 +5,7 @@
 	}
 
 	to {
-		background-color: var(--bg-dark-blue);
+		background-color: var(--cc-color-background);
 	}
 }
 
@@ -28,13 +28,13 @@ body.horo {
 }
 
 .coord-input {
-	width: 43px !important;
+	width: 55px !important;
 	text-align: end;
 }
 
 .text-container {
 	height: auto;
-	background-color: var(--bg-dark-blue);
+	background-color: var(--cc-color-4);
 	margin: 5px 5.5px;
 	text-align: justify;
 	box-sizing: border-box;
@@ -69,6 +69,7 @@ body.horo {
 #che {
 	width: 14px;
 	height: 14px;
+	opacity: 0.78;
 }
 
 .grid-item {
@@ -90,14 +91,15 @@ input.horo-inpfield,
 input.geoapify-autocomplete-input {
 	border: none;
 	outline: none;
-	height: 29px;
+	padding: 0;
 	width: 100%;
 	margin-bottom: -5px;
+	background-color: var(--cc-color-4);
 	color: var(--cc-color-1);
 	accent-color: var(--cc-color-26);
 	opacity: 1;
 	animation-name: pop-in;
-	animation-duration: 2s;
+	animation-duration: 1s;
 	animation-timing-function: ease-out;
 	/* #9d3039; */
 }
@@ -114,19 +116,14 @@ input.geoapify-autocomplete-input {
 
 .geoapify-autocomplete-items {
 	position: absolute;
-	border: 1px solid rgba(0, 0, 0, 0.3);
+	border: 1.5px solid var(--cc-color-18);
 	border-top-width: 1px;
-	border-top-style: solid;
-	border-top-color: rgba(0, 0, 0, 0.3);
-	border-top: none;
-	border-radius: 5px;
-	background-color: #fff;
+	border-radius: 2px;
+	background-color: var(--cc-color-20);
 	z-index: 99;
-	top: 100%;
-	left: 0;
-	right: 0;
-	width: 100%;
+	width: 108%;
 	cursor: pointer;
+	margin-left: -14px;
 }
 
 .geoapify-autocomplete-item {
@@ -142,6 +139,7 @@ span.address>span.secondary-part {
 label {
 	display: block;
 	margin-bottom: 4px;
+	font-size: 14pt;
 }
 
 span.marTop {
@@ -158,13 +156,6 @@ span.sublabel {
 span.sublabel.bold {
 	font-weight: bold;
 	font-size: 9px;
-}
-
-.geoapify-autocomplete-input {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	height: 31.5px !important;
 }
 
 .geoapify-close-button.visible {
