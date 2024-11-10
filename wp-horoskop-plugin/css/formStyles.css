@@ -224,7 +224,7 @@ option {
 	margin-left: 5px;
 }
 
-.horo.show-aspects :hover {
+.horo.show-aspects:hover {
 	box-shadow: 0.2px 0.3px 5px 3px var(--cc-color-10);
 }
 

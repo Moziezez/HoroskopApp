@@ -162,15 +162,27 @@ function setDatetimepicker() {
   $.datetimepicker.setLocale("de");
   $("#dat").datetimepicker({
     timepicker: false,
+    dayOfWeekStart: 1,
     format: "d.m.Y",
-    startDate: "1987/12/03",
-    theme: colorTheme
+    yearStart: 1930,
+    yearEnd: 2026,
+    //startDate: "2002/12/22",
+    theme: colorTheme,
+    inverseButton: false,
+    className: "horo dt-picker",
+    weeks: true,
+    closeOnWithoutClick: false
   });
   $("#hour").datetimepicker({
     datepicker: false,
     format: "H",
     step: 60,
-    theme: colorTheme
+    minTime: "00:00",
+    maxTime: "23:59",
+    formatTIme: "H:i",
+    theme: colorTheme,
+    className: "horo hour-picker",
+    closeOnWithoutClick: false
   });
   $("#minu").datetimepicker({
     datepicker: false,
@@ -178,7 +190,10 @@ function setDatetimepicker() {
     step: 1,
     minTime: "00:00",
     maxTime: "01:00",
-    theme: colorTheme
+    formatTime: "H:i",
+    theme: colorTheme,
+    className: "horo minu-picker",
+    closeOnWithoutClick: false
   });
 
   $('#che').click(function (event) {
