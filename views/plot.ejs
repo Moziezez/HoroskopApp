@@ -55,7 +55,7 @@
           Legende →
         </a>
       </div>
-      <div id="popupLegend" class="popupLegend hide">
+      <div id="popupLegend" class="horo popupLegend hide">
         <div class="flexLegend">
 
           <div class="horo itemLegend">
@@ -128,13 +128,13 @@
           </div>
           <h6 class="flexText2 horo">Dein Sternzeichen</h6>
           <h3 class="flexText3 horo"><%= sunSign %></h3>
-          <hr class="horo" />
+          <hr class="horo card" />
           <p class="flexText4 horo">
             Das Sonnenzeichen (Sternzeichen) repräsentiert den Kern der Persönlichkeit und die
             grundlegenden Charakterzüge, die das Wesen und die Selbstwahrnehmung eines Menschen
             prägen.
           </p>
-          <div id="popupSun" class="popup hide">
+          <div id="popupSun" class="horo popup hide">
             <% if ( !checked ) { %>
             <% var sign_key = userData.sunsign %>
             <%-	include('./partials/sunsign', { key: sign_key }) %>
@@ -152,12 +152,12 @@
           </div>
           <h6 class="flexText2 horo">Dein Aszendent</h6>
           <h3 class="flexText3 horo"><%= ascendant %></h3>
-          <hr class="horo" />
+          <hr class="horo card" />
           <p class="flexText4 horo">
             Der Aszendent beschreibt, wie ein Mensch nach außen hin wirkt und in der Welt auftritt, sowie die
             Art und Weise, wie er auf seine Umgebung reagiert und von anderen wahrgenommen wird
           </p>
-          <div id="popupAc" class="popup hide">
+          <div id="popupAc" class="horo popup hide">
             <% if ( !checked ) { %>
             <% var asc_link = './partials/houses/ascendant_signs'; %>
             <% var asc_key = houses[1].sign_key; %>
@@ -177,12 +177,12 @@
           </div>
           <h6 class="flexText2 horo">Dein Mondzeichen</h6>
           <h3 class="flexText3 horo"><%= moonSign %></h3>
-          <hr class="horo" />
+          <hr class="horo card" />
           <p class="flexText4 horo">
             Das Mondzeichen repräsentiert die emotionale Natur eines Menschen, seine inneren Bedürfnisse,
             Gefühle und unbewussten Reaktionen.
           </p>
-          <div id="popupMoon" class="popup hide">
+          <div id="popupMoon" class="horo popup hide">
             <% if ( !checked ) { %>
             <% var sign_key = userData.moonsign %>
             <%- include('./partials/moonsign', { key: sign_key }); %>
@@ -210,12 +210,12 @@
           </div>
           <h6 class="flexText2 horo">Kombination Sonne & Aszendent</h6>
           <h3 class="flexText3 horo"><%= sunSign %> & <%= ascendant %></h3>
-          <hr class="horo" />
+          <hr class="horo card" />
           <p class="flexText4 horo">
             Die kombinierte Deutung von Sternzeichen und Aszendent zeigt, wie der innere Wesenskern eines
             Menschen durch sein äußeres Erscheinungsbild und Verhalten zum Ausdruck kommt.
           </p>
-          <div id="popupSunAc" class="popup hide">
+          <div id="popupSunAc" class="horo popup hide">
             <% if ( !checked ) { %>
             <% var sun_key = userData.sunsign %>
             <% var asc_key = houses[1].sign_key; %>
@@ -242,12 +242,12 @@
           </div>
           <h6 class="flexText2 horo">Kombination Sonne & Mond</h6>
           <h3 class="flexText3 horo"><%= sunSign %> & <%= moonSign %></h3>
-          <hr class="horo" />
+          <hr class="horo card" />
           <p class="flexText4 horo">
             Die Kombination von Sonnenzeichen und Mondzeichen offenbart, wie der innere Wesenskern
             eines Menschen mit seinen emotionalen Bedürfnissen und Reaktionen harmoniert und interagiert.
           </p>
-          <div id="popupSunMoon" class="popup hide">
+          <div id="popupSunMoon" class="horo popup hide">
             <% if ( !checked ) { %>
             <% var sun_key = userData.sunsign %>
             <% var moon_key = userData.moonsign; %>

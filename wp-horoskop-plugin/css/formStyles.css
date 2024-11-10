@@ -42,11 +42,12 @@ body.horo {
 	border-color: var(--cc-color-15);
 	border-radius: 3px;
 	border-width: 0;
-	padding: 19px;
+	padding: 12px 17px;
 	opacity: 1;
 	animation-name: pop-in;
 	animation-duration: 1s;
 	animation-timing-function: ease-out;
+	box-shadow: 0 0 4px 4px var(--cc-bg-blue);
 }
 
 .border {
@@ -74,7 +75,7 @@ body.horo {
 
 .grid-item {
 	position: relative;
-	margin-bottom: 24px;
+	margin-bottom: 19px;
 }
 
 .dotted-line {
@@ -97,7 +98,7 @@ input.geoapify-autocomplete-input {
 	background-color: var(--cc-bg-blue);
 	color: var(--cc-color-1);
 	accent-color: var(--cc-color-26);
-	opacity: 1;
+	opacity: 0.89;
 	animation-name: pop-in;
 	animation-duration: 1s;
 	animation-timing-function: ease-out;
@@ -124,6 +125,7 @@ input.geoapify-autocomplete-input {
 	width: 108%;
 	cursor: pointer;
 	margin-left: -14px;
+	box-shadow: 1px 2px 7px 7px var(--cc-color-10);
 }
 
 .geoapify-autocomplete-item {
@@ -138,24 +140,12 @@ span.address>span.secondary-part {
 
 label {
 	display: block;
-	margin-bottom: 4px;
 	font-size: 14pt;
 }
 
 span.marTop {
 	display: block;
 	margin-top: 12px;
-}
-
-span.sublabel {
-	font-family: "Arial";
-	font-size: 9px;
-	color: var(--cc-color-2);
-}
-
-span.sublabel.bold {
-	font-weight: bold;
-	font-size: 9px;
 }
 
 .geoapify-close-button.visible {
@@ -184,16 +174,20 @@ span.sublabel.bold {
 }
 
 #but {
-	color: var(--cc-color-16);
-	/* rgb(255, 255, 255); */
+	color: var(--cc-color-14);
 	background-color: var(--cc-color-19);
 	border-color: var(--cc-color-15);
-	/* rgb(252, 169, 45); */
 	width: 100%;
 	height: 31px;
 	border-radius: 5px;
 	border-width: 1px;
 	cursor: pointer;
+	box-shadow: 0 0 2px 0.1px var(--cc-color-22);
+}
+
+#but:hover {
+	box-shadow: 0 0 3px 0.1px var(--cc-color-22),
+		0 0 2px 0.1px var(--cc-color-22) inset;
 }
 
 #House {
@@ -201,10 +195,15 @@ span.sublabel.bold {
 	width: 131px;
 	border-radius: 2px;
 	border-width: 1.5px;
-	color: var(--cc-color-1);
 	border-color: var(--cc-color-18);
+	box-shadow: 0.2px 0.3px 3px 1px var(--cc-color-10);
 	margin-left: 3px;
+	cursor: pointer;
 	text-align: center;
+}
+
+#House:hover {
+	box-shadow: 0.2px 0.3px 5px 3px var(--cc-color-10);
 }
 
 option {
@@ -231,11 +230,22 @@ option {
 .flex-radio {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 14px;
+	gap: 3px;
+}
+
+div.radio-item {
+	margin-right: 11px;
 }
 
 input[type="radio"] {
 	accent-color: var(--cc-color-26);
+	opacity: 0.89;
+	margin-left: 2px;
+	cursor: pointer;
+}
+
+input[type="checkbox"] {
+	cursor: pointer;
 }
 
 #signsSystem {
@@ -245,4 +255,16 @@ input[type="radio"] {
 
 span.ddot-time {
 	color: black;
+}
+
+.horo.show-aspects {
+	height: 25px;
+	width: 131px;
+	border: 1.5px solid black;
+	border-radius: 2px;
+	box-shadow: 0.2px 0.3px 3px 1px black;
+	margin-left: 3px;
+	cursor: pointer;
+	text-align: center;
+	margin-bottom: 12px;
 }

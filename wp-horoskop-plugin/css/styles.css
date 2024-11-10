@@ -1,12 +1,12 @@
 h1.horo {
 	margin: 0 auto 14px auto;
-	color: var(--cc-color-2);
+	color: var(--cc-color-1);
 }
 
 h2.horo {
 	margin: 12px auto 0 auto;
-	font-size: 22px;
-	color: var(--cc-color-2);
+	font-size: 33px;
+	color: var(--cc-color-1);
 }
 
 h3.horo {
@@ -22,7 +22,7 @@ h4.horo {
 
 h5.horo {
 	margin: 7px auto 7px auto;
-	color: var(--cc-color-2);
+	color: var(--cc-color-3);
 	font-size: 12pt;
 }
 
@@ -63,8 +63,29 @@ hr.horo {
 	margin: 14px 0;
 }
 
+hr.horo.card {
+	border: 1px solid var(--cc-color-16);
+	margin: 14px 0;
+}
+
+span.sublabel {
+	font-family: system-ui, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 11px;
+	color: var(--cc-color-2);
+	cursor: default;
+}
+
+span.sublabel.bold {
+	font-size: 12px;
+	font-weight: bold;
+}
+
 .subheader {
 	font-size: 111%;
 	text-align: center;
 	margin: 19px auto;
+}
+
+.horo.hide {
+	display: none;
 }

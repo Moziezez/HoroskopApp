@@ -131,7 +131,8 @@
 }
 
 #pUserInfo {
-	margin: 14px 0;
+	margin-top: 12px;
+	margin-bottom: 32px;
 }
 
 .flexLeg end {
@@ -173,7 +174,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin: 9px auto;
+	margin-bottom: 32px;
 }
 
 .flexItem2 {
@@ -245,10 +246,6 @@
 	overflow: auto;
 }
 
-.hide {
-	display: none;
-}
-
 div#infoForm {
 	margin-bottom: 14px;
 }
@@ -276,11 +273,6 @@ div#infoForm {
 	justify-content: center;
 	align-items: center;
 	gap: 3px;
-}
-
-.sublabel {
-	font-family: system-ui, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	color: var(--cc-color-2);
 }
 
 .grid1 {
@@ -311,7 +303,7 @@ div#infoForm {
 	grid-row-end: 3;
 	margin: -2px auto 0 0;
 	font-size: 16px;
-	color: va(--cc-color-2);
+	color: var(--cc-color-2);
 }
 
 #circularPlot {

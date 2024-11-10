@@ -395,6 +395,7 @@ async function mainFunc() {
   await fetchEnvironmentVariables();
   setDatetimepicker();
   addEventlistener();
+  toggleAspects();
 }
 
 // wp index func:
@@ -412,3 +413,10 @@ async function mainFunc() {
 //   }
 //   inputElement.reportValidity();
 // });
+
+function toggleAspects() {
+  $(".show-aspects").on("mousedown", function (event) {
+    event.preventDefault();
+    $(".horo.hide").toggle(); // Toggles visibility between "none" and "block"
+  });
+}

@@ -65,7 +65,7 @@
           <hr class="horo">
 
           <div class="grid-item">
-            <label for="House" class="horo" style="display: inline;"> Häuser-System: </label>
+            <label for="House" class="horo inline"> Häuser-System: </label>
             <select name="House" id="House">
               <option value="placidus"> Placidus </option>
               <option value="koch"> Koch </option>
@@ -79,19 +79,22 @@
           <div class="grid-item" id="signsSystem">
             <label for="zodi" class="horo" style="display: inline;"> Sternzeichen-System: </label>
             <div class="flex-radio">
-              <div>
+              <div class="radio-item">
                 <span class="horo sublabel bold"> TROPICAL </span>
                 <input type="radio" name="Zodiac" id="Trop" class="horo" checked>
               </div>
-              <div>
+              <div class="radio-item">
                 <span class="horo sublabel bold"> SIDEREAL </span>
                 <input type="radio" name="Zodiac" id="Side" class="horo">
               </div>
             </div>
           </div>
           <div class="grid-item">
-            <label for="Aspects" class="horo" style="display: inline;"> Aktive Aspekte: </label>
-            <div>
+            <label for="Aspects" class="horo inline"> Aktive Aspekte: </label>
+            <select class="horo show-aspects">
+              <option value="Anzeigen">Anzeigen</option>
+            </select>
+            <div class="horo hide">
               <span class="horo sublabel bold" id="opposition"> Opposition </span>
               <input type="checkbox" name="cheOpposition" class="horo-inpfield aspect-check" checked="true">
               <span class="horo sublabel bold" id="trine"> Trigon </span>
