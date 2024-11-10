@@ -76,17 +76,30 @@
 }
 
 @media only screen and (max-width: 605px) {
+	body.horo {
+		margin: 3px;
+	}
+
+	div.horo.form {
+		width: 94% !important;
+	}
+
 	#triggerLegend {
-		margin-left: 48px;
+		margin-left: 253px;
 	}
 
 	.flexLegend {
 		justify-content: center !important;
 		gap: 5px !important;
+		font-size: 9pt;
 	}
 
 	hr.horo {
 		display: none;
+	}
+
+	.signsBox {
+		width: 146px !important;
 	}
 
 	.signsTextBox {
@@ -98,9 +111,21 @@
 		flex-direction: column;
 	}
 
+	.flexItem2 {
+		margin-bottom: -63px;
+	}
+
 	.flexItem3 {
-		transform: scale(0.6);
-		margin: -108px 0;
+		margin-top: -108px;
+	}
+
+	div.horo.legendDiv {
+		margin-top: -169px;
+	}
+
+	#circularPlot {
+
+		transform: scale(0.515);
 	}
 
 	.flexItem4,
@@ -307,7 +332,6 @@ div#infoForm {
 }
 
 #circularPlot {
-	width: 667px;
 	opacity: 1;
 	border-width: 0;
 	padding: 2.5px;

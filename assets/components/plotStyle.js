@@ -7,8 +7,8 @@ const plotStyle = {
 		autosize: false,
 		paper_bgcolor: colors.bg,
 		plot_bgcolor: colors.bg,
-		width: 655,
-		height: 600,
+		width: 800,
+		height: 720,
 		margin: { l: 0, r: 0, b: 0, t: 39 },
 		showlegend: false,
 		dragmode: false,
@@ -130,7 +130,7 @@ const plotXyStyle = {
 		autosize: true,
 		dragmode: false,
 		showlegend: false,
-		margin: { l: 0, r: 0, b: 0, t: 9 },
+		margin: { l: 0, r: 0, b: 0, t: 0 },
 		paper_bgcolor: colors.bg,
 		plot_bgcolor: colors.bg,
 		domain: {
@@ -140,12 +140,10 @@ const plotXyStyle = {
 		xaxis: {
 			visible: false,
 			range: [0, 12.5],
-			// tickcolor: '#000',
 		},
 		yaxis: {
 			visible: false,
 			range: [0, 12.5],
-			// tickcolor: '#000',
 			scaleanchor: "x",
 			scaleratio: 1
 		},

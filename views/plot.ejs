@@ -50,64 +50,67 @@
 
     <div class="flexItem3">
       <div id="circularPlot"></div>
-      <div>
+      <div class="horo legendDiv">
         <a class="horo" id="triggerLegend">
           Legende →
         </a>
-      </div>
-      <div id="popupLegend" class="horo popupLegend hide">
-        <div class="flexLegend">
 
-          <div class="horo itemLegend">
-            <% var count = 0 %>
-            <% Object.entries(planets).forEach(([k, v], i) => { %>
-            <% if ( ['sirius', 'ascendant', 'midheaven', 'southnode'].includes(k) ) return; %>
+        <div id="popupLegend" class="horo popupLegend hide">
+          <div class="flexLegend">
 
-            <% var source = "../assets/components/svg/"+k+".svg"%>
-            <div class="flexItemLegend">
+            <div class="horo itemLegend">
+              <% var count = 0 %>
+              <% Object.entries(planets).forEach(([k, v], i) => { %>
+              <% if ( ['sirius', 'ascendant', 'midheaven', 'southnode'].includes(k) ) return; %>
 
-              <div><%=v.text %></div>
-              <div><img src=<%=source%> alt="svg" class="svgImgLegend" /></div>
+              <% var source = "../assets/components/svg/"+k+".svg"%>
+              <div class="flexItemLegend">
+
+                <% if (v.text === "Aufst. Mondknoten (R)" ) { v.text = "Mondknoten" } %>
+
+                <div><%=v.text %></div>
+                <div><img src=<%=source%> alt="svg" class="svgImgLegend" /></div>
+
+              </div>
+              <% count += 1 %>
+              <% if (count%4 == 0) { %>
 
             </div>
-            <% count += 1 %>
-            <% if (count%4 == 0) { %>
+            <div class="horo itemLegend">
+              <% } %>
+              <% }); %>
+              <div class="flexItemLegend">
+                <div>Aszendent</div>
+                <div>AC</div>
+              </div>
+              <div class="flexItemLegend">
+                <div>Himmelsmitte</div>
+                <div>MC</div>
+              </div>
+              <div class="flexItemLegend">
+                <div>Deszendent</div>
+                <div>DC</div>
+              </div>
+            </div>
 
           </div>
-          <div class="horo itemLegend">
-            <% } %>
-            <% }); %>
-            <div class="flexItemLegend">
-              <div>Aszendent</div>
-              <div>AC</div>
-            </div>
-            <div class="flexItemLegend">
-              <div>Himmelsmitte</div>
-              <div>MC</div>
-            </div>
-            <div class="flexItemLegend">
-              <div>Deszendent</div>
-              <div>DC</div>
-            </div>
-          </div>
+          <div class="flexLegend">
+            <div class="horo itemLegend">
+              <% var count = 0 %>
 
-        </div>
-        <div class="flexLegend">
-          <div class="horo itemLegend">
-            <% var count = 0 %>
-
-            <% Object.entries(signs).forEach(([k, v], i) => { %>
-            <% var source = "../assets/components/svg/"+k+".svg"%>
-            <div class="flexItemLegend">
-              <div><%=v.text %></div>
-              <div><img src=<%=source%> alt="svg" class="svgImgLegend" /></div>
+              <% Object.entries(signs).forEach(([k, v], i) => { %>
+              <% var source = "../assets/components/svg/"+k+".svg"%>
+              <div class="flexItemLegend">
+                <div><%=v.text %></div>
+                <div><img src=<%=source%> alt="svg" class="svgImgLegend" /></div>
+              </div>
+              <% count += 1 %>
+              <% if (count%3 == 0) { %>
             </div>
-            <% count += 1 %>
-            <% if (count%3 == 0) { %>
-          </div>
-          <div class="horo itemLegend">
-            <% } %>
-            <% }); %>
+            <div class="horo itemLegend">
+              <% } %>
+              <% }); %>
+            </div>
           </div>
         </div>
       </div>
