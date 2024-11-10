@@ -89,3 +89,7 @@ span.sublabel.bold {
 .horo.hide {
 	display: none;
 }
+
+.horo.inline {
+	display: inline;
+}

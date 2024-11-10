@@ -197,7 +197,7 @@ span.marTop {
 	border-width: 1.5px;
 	border-color: var(--cc-color-18);
 	box-shadow: 0.2px 0.3px 3px 1px var(--cc-color-10);
-	margin-left: 3px;
+	margin-left: 14px;
 	cursor: pointer;
 	text-align: center;
 }
@@ -208,6 +208,24 @@ span.marTop {
 
 option {
 	padding: 8px 2px;
+}
+
+.horo.show-aspects {
+	height: 25px;
+	width: 131px;
+	border-radius: 2px;
+	border-width: 1.5px;
+	border-color: var(--cc-color-18);
+	box-shadow: 0.2px 0.3px 3px 1px var(--cc-color-10);
+	margin-left: 3px;
+	cursor: pointer;
+	text-align: center;
+	margin-bottom: 12px;
+	margin-left: 5px;
+}
+
+.horo.show-aspects :hover {
+	box-shadow: 0.2px 0.3px 5px 3px var(--cc-color-10);
 }
 
 .input-time {
@@ -231,10 +249,12 @@ option {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 3px;
+	margin-left: 42px;
+	;
 }
 
 div.radio-item {
-	margin-right: 11px;
+	margin-right: 3px;
 }
 
 input[type="radio"] {
@@ -255,16 +275,4 @@ input[type="checkbox"] {
 
 span.ddot-time {
 	color: black;
-}
-
-.horo.show-aspects {
-	height: 25px;
-	width: 131px;
-	border: 1.5px solid black;
-	border-radius: 2px;
-	box-shadow: 0.2px 0.3px 3px 1px black;
-	margin-left: 3px;
-	cursor: pointer;
-	text-align: center;
-	margin-bottom: 12px;
 }
