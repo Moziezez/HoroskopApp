@@ -35,19 +35,13 @@ body.horo {
 .text-container {
 	height: auto;
 	background-color: var(--cc-bg-blue);
-	margin: 5px 5.5px;
+	margin: 4px 4px;
 	text-align: justify;
-	box-sizing: border-box;
-	border-style: outset;
-	border-color: var(--cc-color-15);
-	border-radius: 3px;
-	border-width: 0;
 	padding: 12px 17px;
-	opacity: 1;
 	animation-name: pop-in;
 	animation-duration: 1s;
 	animation-timing-function: ease-out;
-	box-shadow: 0 0 4px 4px var(--cc-bg-blue);
+	box-shadow: 0 0 5px 1px var(--cc-color-19);
 }
 
 .border {

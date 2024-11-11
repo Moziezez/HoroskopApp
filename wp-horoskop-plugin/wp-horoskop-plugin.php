@@ -9,7 +9,7 @@
 
 
 function enqueue_related_pages_scripts_and_styles() {
-	$version = 1;
+	$version = 2;
 	wp_enqueue_style('related-form-styles', plugins_url("css/formStyles.css?v={$version}", __FILE__), array(), '2.0.2');
     wp_enqueue_style('related-plot-styles', plugins_url("css/plotStyles.css?v={$version}", __FILE__), array(), '3.1.3');
 	wp_enqueue_style('related-styles', plugins_url("css/styles.css?v={$version}", __FILE__), array(), '2.0.3');	

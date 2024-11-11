@@ -28,25 +28,20 @@ body.horo {
 }
 
 .coord-input {
-	width: 43px !important;
+	width: 55px !important;
 	text-align: end;
 }
 
 .text-container {
 	height: auto;
-	background-color: white;
-	margin: 5px 5.5px;
-	text-align: justify;
-	box-sizing: border-box;
-	border-style: outset;
-	border-color: lightgray;
-	border-radius: 3px;
-	border-width: 0;
-	padding: 19px;
+	background-color: whitesmoke;
+	margin: 4px 4px;
+	padding: 12px 17px;
 	opacity: 1;
 	animation-name: pop-in;
 	animation-duration: 1s;
 	animation-timing-function: ease-out;
+	box-shadow: 0 0 4px 1px #fcd9a9;
 }
 
 .border {
@@ -69,11 +64,12 @@ body.horo {
 #che {
 	width: 14px;
 	height: 14px;
+	opacity: 0.78;
 }
 
 .grid-item {
 	position: relative;
-	margin-bottom: 24px;
+	margin-bottom: 19px;
 }
 
 .dotted-line {
@@ -90,10 +86,16 @@ input.horo-inpfield,
 input.geoapify-autocomplete-input {
 	border: none;
 	outline: none;
-	height: 29px;
+	padding: 0;
 	width: 100%;
 	margin-bottom: -5px;
-	background-color: white;
+	background-color: whitesmoke;
+	accent-color: rgb(109, 64, 109);
+	opacity: 0.89;
+	animation-name: pop-in;
+	animation-duration: 1s;
+	animation-timing-function: ease-out;
+	/* #9d3039; */
 }
 
 ::placeholder {
@@ -108,19 +110,15 @@ input.geoapify-autocomplete-input {
 
 .geoapify-autocomplete-items {
 	position: absolute;
-	border: 1px solid rgba(0, 0, 0, 0.3);
+	border: 1.5px solid rgba(0, 0, 0, 0.467);
 	border-top-width: 1px;
-	border-top-style: solid;
-	border-top-color: rgba(0, 0, 0, 0.3);
-	border-top: none;
-	border-radius: 5px;
-	background-color: #fff;
+	border-radius: 2px;
+	background-color: whitesmoke;
 	z-index: 99;
-	top: 100%;
-	left: 0;
-	right: 0;
-	width: 100%;
+	width: 108%;
 	cursor: pointer;
+	margin-left: -14px;
+	box-shadow: 1px 2px 7px 7px grey;
 }
 
 .geoapify-autocomplete-item {
@@ -135,30 +133,12 @@ span.address>span.secondary-part {
 
 label {
 	display: block;
-	margin-bottom: 4px;
+	font-size: 14pt;
 }
 
 span.marTop {
 	display: block;
 	margin-top: 12px;
-}
-
-span.sublabel {
-	font-family: "Arial";
-	font-size: 9px;
-	color: black;
-}
-
-span.sublabel.bold {
-	font-weight: bold;
-	font-size: 9px;
-}
-
-.geoapify-autocomplete-input {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	height: 31.5px !important;
 }
 
 .geoapify-close-button.visible {
@@ -194,6 +174,12 @@ span.sublabel.bold {
 	border-radius: 5px;
 	border-width: 1px;
 	cursor: pointer;
+	box-shadow: 0 0 2px 0.1px grey;
+}
+
+#but:hover {
+	box-shadow: 0 0 3px 0.1px grey,
+		0 0 2px 0.1px grey inset;
 }
 
 #House {
@@ -202,14 +188,36 @@ span.sublabel.bold {
 	border-radius: 2px;
 	border-width: 1.5px;
 	border-color: rgb(252, 169, 45);
-	background-color: white;
-	margin-left: 3px;
-	text-align: center;
+	box-shadow: 0.2px 0.3px 3px 1px grey;
+	margin-left: 14px;
 	cursor: pointer;
+	text-align: center;
+}
+
+#House:hover {
+	box-shadow: 0.2px 0.3px 5px 3px grey;
 }
 
 option {
 	padding: 8px 2px;
+}
+
+.horo.show-aspects {
+	height: 25px;
+	width: 131px;
+	border-radius: 2px;
+	border-width: 1.5px;
+	border-color: rgb(252, 169, 45);
+	box-shadow: 0.2px 0.3px 3px 1px grey;
+	margin-left: 3px;
+	cursor: pointer;
+	text-align: center;
+	margin-bottom: 12px;
+	margin-left: 5px;
+}
+
+.horo.show-aspects:hover {
+	box-shadow: 0.2px 0.3px 5px 3px grey;
 }
 
 .input-time {
@@ -232,7 +240,23 @@ option {
 .flex-radio {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 14px;
+	gap: 3px;
+	margin-left: 42px;
+}
+
+div.radio-item {
+	margin-right: 3px;
+}
+
+input[type="radio"] {
+	accent-color: rgb(97, 51, 97);
+	opacity: 0.89;
+	margin-left: 2px;
+	cursor: pointer;
+}
+
+input[type="checkbox"] {
+	cursor: pointer;
 }
 
 #signsSystem {
@@ -242,17 +266,4 @@ option {
 
 span.ddot-time {
 	color: black;
-}
-
-.horo.show-aspects {
-	height: 25px;
-	width: 131px;
-	border-radius: 2px;
-	border-width: 1.5px;
-	border-color: rgb(252, 169, 45);
-	background-color: white;
-	margin-left: 3px;
-	text-align: center;
-	cursor: pointer;
-	margin-bottom: 12px;
 }
