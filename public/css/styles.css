@@ -1,3 +1,10 @@
+body {
+	font-family: Iowan Old Style, Palatino, "Palatino Linotype", "Book Antiqua", "URW Palladio L", P052, serif;
+	font-size: 14pt;
+	line-height: 1.6;
+	color: black;
+}
+
 h1.horo {
 	margin: 0 auto 14px auto;
 }
@@ -62,6 +69,17 @@ hr.horo {
 	font-size: 111%;
 	text-align: center;
 	margin: 19px auto;
+}
+
+span.sublabel {
+	font-family: system-ui, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: black;
+	font-size: 11px;
+}
+
+span.sublabel.bold {
+	font-size: 12px;
+	font-weight: bold;
 }
 
 .horo.inline {

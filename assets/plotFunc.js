@@ -295,8 +295,8 @@ async function fetchHtmlData() {
         fetchEnvironmentVariables();
         addClickEvents();
         if ($("body").css("background-color") == "rgb(11, 10, 9)") {
-          document.getElementById("circularPlot").setAttribute("style", "filter: invert(1);");
-          document.getElementById("cartesianPlot").setAttribute("style", "filter: invert(1);");
+          document.getElementById("circularPlot").setAttribute("style", "filter: invert(0.987);");
+          document.getElementById("cartesianPlot").setAttribute("style", "filter: invert(0.987);");
           $("img.svgImgLegend").css("filter", "invert(0.67)");
         } else {
           document.getElementById("circularPlot").setAttribute("style", "filter: invert(0);");

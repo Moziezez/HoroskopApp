@@ -275,7 +275,8 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 
 	let { signs_traces, signsep_traces, signs_symbols } = signTraces(horoscope, offset, zodiacSys);
 	planet_symbols = planet_symbols.concat(signs_symbols);
-	let { houses_nums, housesep_traces } = houseTraces(horoscope, -155, isChecked);
+	let { houses_nums, housesep_traces, house_symbols } = houseTraces(horoscope, -155, isChecked, offset);
+	planet_symbols = planet_symbols.concat(house_symbols);
 	var traces_data = signsep_traces.concat(housesep_traces).concat(signs_traces).concat(connection_traces);
 
 	let aspect_radius = 54;
@@ -439,8 +440,8 @@ function signTraces(horoscope, offset, zodiacSys) {
 	return { signs_traces, signsep_traces, signs_symbols };
 }
 
-function houseTraces(horoscope, radius, isChecked) {
-	let housesep_traces = [], houses_nums = []; end_radius = 67; first_house_start = horoscope.Houses[0].ChartPosition.StartPosition.Ecliptic.DecimalDegrees;
+function houseTraces(horoscope, radius, isChecked, offset) {
+	let housesep_traces = [], houses_nums = []; house_symbols = []; end_radius = 67; first_house_start = horoscope.Houses[0].ChartPosition.StartPosition.Ecliptic.DecimalDegrees;
 
 	for (let i = 0; i < 12; i++) {
 		var house_sign_key = horoscope.Houses[i].Sign.key;
@@ -496,31 +497,61 @@ function houseTraces(horoscope, radius, isChecked) {
 		});
 		houses_style_dict[i + 1].sign = signs_style_dict[house_sign_key].utf8 + " " + house_sign;
 		houses_style_dict[i + 1].sign_key = house_sign_key;
+
+		var svgFile = house_sign_key + '.svg';
+		var svgDataURL = createDataURLFromSVG(svgFile);
+
+		var symbol_radius = 2.67;
+		var symbol_pos_x = symbol_radius * Math.cos(((house_mid + offset) / 360) * 2 * Math.PI);
+		var symbol_pos_y = symbol_radius * Math.sin(((house_mid + offset) / 360) * 2 * Math.PI);
+
+		// var svg_pos_x = (symbol_pos_x / 17.4) * 182;
+		// var svg_pos_y = -(symbol_pos_y / 17.4) * 182;
+
+		// signs_style_dict[house_sign_key].svgx = svg_pos_x;
+		// signs_style_dict[house_sign_key].svgy = svg_pos_y;
+
 		if (isChecked) {
 			houses_nums.push({
 				r: [-140],
 				theta: [house_mid],
-				mode: 'text',
-				text: signs_style_dict[horoscope.Houses[i].Sign.key].utf8,
-				textfont: { family: textfont, size: 12 },
+				mode: 'marker',
+				marker: {
+					color: 'black',
+					size: 12,
+					opacity: svgSymbolOpacity
+				},
 				type: 'scatterpolar',
 				hovertext: house_sign,
+				hoverlabel: { bgcolor: colors.bgSecondary, font: { color: 'black' } },
 				hoverinfo: 'text'
 			});
-			continue;
+			house_symbols.push({
+				x: symbol_pos_x,
+				y: symbol_pos_y,
+				sizex: 0.67,
+				sizey: 0.67,
+				source: svgDataURL,
+				xanchor: "center",
+				xref: "x",
+				yanchor: "middle",
+				yref: "y"
+			});
+			console.log(signs_style_dict[house_sign_key])
+		} else {
+			houses_nums.push({
+				r: [-140],
+				theta: [house_mid],
+				mode: 'text',
+				text: horoscope.Houses[i].id,
+				textfont: { family: textfont, size: 7, color: 'black' },
+				type: 'scatterpolar',
+				hovertext: houses_style_dict[i + 1].name + ": " + house_sign,
+				hoverinfo: 'text'
+			});
 		}
-		houses_nums.push({
-			r: [-140],
-			theta: [house_mid],
-			mode: 'text',
-			text: horoscope.Houses[i].id,
-			textfont: { family: textfont, size: 7, color: 'black' },
-			type: 'scatterpolar',
-			hovertext: houses_style_dict[i + 1].name + ": " + house_sign,
-			hoverinfo: 'text'
-		});
 	}
-	return { housesep_traces, houses_nums };
+	return { housesep_traces, houses_nums, house_symbols };
 }
 function classifyOrb(orbis) {
 	if (orbis > 0.66) {

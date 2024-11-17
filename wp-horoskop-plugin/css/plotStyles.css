@@ -90,7 +90,6 @@
 
 	.flexLegend {
 		justify-content: center !important;
-		gap: 5px !important;
 		font-size: 9pt;
 	}
 
@@ -160,11 +159,17 @@
 	margin-bottom: 32px;
 }
 
+#popupLegend {
+	padding: 7px;
+	display: flex;
+	gap: 55px;
+}
+
 .flexLegend {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
-	gap: 24px;
+	gap: 32px;
 }
 
 .itemLegend {
@@ -363,8 +368,7 @@ div#infoForm {
 }
 
 img.svgImgLegend {
-	width: auto;
-	height: 14px;
+	height: 14pt;
 }
 
 div.horo.form {
