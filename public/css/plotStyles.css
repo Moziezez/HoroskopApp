@@ -346,7 +346,7 @@ div#infoForm {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	height: auto;
+	height: 376px;
 }
 
 .half2 {

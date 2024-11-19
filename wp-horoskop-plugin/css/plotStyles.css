@@ -197,7 +197,7 @@
 	border-radius: 48px / 36px;
 	position: relative;
 	overflow: hidden;
-	background-color: var(--cc-bg-blue);
+	background-color: var(--cc-card-light);
 }
 
 .flexItem1 {

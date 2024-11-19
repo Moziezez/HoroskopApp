@@ -130,7 +130,7 @@ const plotXyStyle = {
 		autosize: true,
 		dragmode: false,
 		showlegend: false,
-		margin: { l: 0, r: 0, b: 0, t: 0 },
+		margin: { l: 7, r: 0, b: 20, t: 0 },
 		paper_bgcolor: colors.bg,
 		plot_bgcolor: colors.bg,
 		domain: {
