@@ -68,10 +68,11 @@ function popUpLegend() {
     },
   });
   $("#popupLegend").fadeIn(1234);
+  $("#popupLegend").css("display", "grid");
 }
 
 function closeLegend() {
-  $(".popupLegend").fadeOut(108);
+  $("#popupLegend").fadeOut(108);
   $("#infoLegend").animate({
     width: "50%",
   }, {
@@ -107,8 +108,8 @@ function popUp(key) {
     width: "100%",
     height: `${0.67 * window.innerHeight}px`,
   }, {
-    duration: 333,
-    complete: function () {
+    duration: 33,
+    start: function () {
       $("html, body").animate({
         scrollTop: $("#info" + key).offset().top - 12,
       },
@@ -120,24 +121,26 @@ function popUp(key) {
 }
 
 function closePopup(key) {
-  let $signsTextBox = $(".signsTextBox");
-  $signsTextBox.css("height", "auto");
-  let autoHeight = $signsTextBox.height(); // Get the "auto" height
+  $("#info" + key).fadeOut(100);
+  $("#info" + key).find(`*`).fadeOut(123);
+  $(".signsTextBox").css("height", "auto");
 
-  $(".flexText4, .popup").fadeOut(108);
-  $(".flexText4").fadeIn(666);
   $(".signsTextBox").animate({
     width: "20%",
-    height: autoHeight,
+    height: "auto",
   }, {
-    duration: 333,
-    complete: function () {
+    duration: 10,
+    start: function () {
+      $("#info" + key).fadeIn(123);
       $("html, body").animate({
-        scrollTop: $(".flexItem4").offset().top - 12,
-      },
-        111
-      );
+        scrollTop: $(".flexItem4").offset().top - 12
+      }, {
+        duration: 567,
+      });
+      $("#info" + key).find(`*:not(#popup${key})`).fadeIn(456);
     },
+    // complete: function () {
+    // },
   });
   $("#trigger" + key)
     .text("Zur Interpretation →")
@@ -145,6 +148,8 @@ function closePopup(key) {
 }
 
 function addClickEvents() {
+
+  $("#popupLegend").fadeOut(1);
   $("#triggerForm").attr("onclick", `popUpForm()`);
   $("#triggerLegend").attr("onclick", `popUpLegend()`);
   $("#triggerSun").attr("onclick", `popUp('Sun')`);
@@ -318,7 +323,11 @@ async function fetchHtmlData() {
     var response_data = resp.data;
 
     try {
-      Plotly.newPlot("circularPlot", response_data.data, response_data.layout, response_data.config);
+      Plotly.newPlot("circularPlot", response_data.data, response_data.layout, response_data.config).then(function () {
+        // Optionally clean up lingering tick labels
+        document.querySelectorAll(".plotly .polar > .xaxis text").forEach(el => el.remove());
+        document.querySelectorAll(".plotly .polar > .yaxis text").forEach(el => el.remove());
+      });
       Plotly.newPlot("cartesianPlot", response_data.aspects, response_data.layoutXy, response_data.configXy);
     } catch (error) {
       console.error("Error creating Plotly graph:", error);

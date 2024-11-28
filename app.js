@@ -170,7 +170,7 @@ app.get("/get-html", function (req, res) {
 		var date_string = `${user.day}.${user.month}.${user.year}`;
 		var time_string = `${user.hour}:${user.minute} Uhr`;
 
-		var loca_string = `${user.city} (${user.lat}°N, ${user.lon}°O)`;
+		var loca_string = `${user.city !== undefined ? user.city : ''} (${user.lat}°N, ${user.lon}°O)`;
 		var pUserInfoString = 'Geboren am ' + date_string + ' um ' + time_string + ' in ' + loca_string;
 
 		res.render("plot.ejs", {

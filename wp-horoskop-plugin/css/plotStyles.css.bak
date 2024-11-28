@@ -110,6 +110,11 @@
 		margin-top: -108px;
 	}
 
+	div.horo.legendDiv {
+		margin-top: -169px;
+	}
+
+
 	#circularPlot {
 		transform: scale(0.515);
 	}
@@ -140,7 +145,7 @@
 	.flexItem4,
 	.flexItem5,
 	.flexItem6 {
-		width: 94%;
+		width: 96%;
 	}
 
 	.cartesianDiv {
@@ -164,42 +169,32 @@
 	}
 }
 
+#pUserInfo {
+	margin-top: 12px;
+	margin-bottom: 32px;
+}
+
 #popupLegend {
-	font-size: 12pt;
-	margin-left: 96px;
-	margin-right: 96px;
-}
-
-#triggerLegend {
-	margin-left: 80px;
-}
-
-.legendDiv {
+	padding: 7px;
 	display: flex;
-	flex-direction: column;
+	gap: 55px;
 }
 
-.gridLegend1 {
-	display: grid;
-	grid-template-rows: 36px 36px 36px 36px;
-	grid-template-columns: 96px 101px 123px 145px;
-	grid-auto-flow: column;
-	gap: 0 44px;
-	margin-left: 3px;
+.flexLegend {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	gap: 32px;
 }
 
-.gridLegend2 {
-	display: grid;
-	grid-template-rows: 36px 36px 36px;
-	grid-template-columns: 96px 101px 123px 145px;
-	grid-auto-flow: column;
-	gap: 0 44px;
-	margin-left: 3px;
+.itemLegend {
+	margin: 3px;
 }
 
-.gridItemLegend {
+.flexItemLegend {
 	display: flex;
 	justify-content: space-between;
+	gap: 6px;
 }
 
 .cOrange {
@@ -212,18 +207,19 @@
 	align-items: center;
 	padding-top: 136px;
 	font-family: Iowan Old Style, Palatino, "Palatino Linotype", "Book Antiqua", "URW Palladio L", P052, serif;
-	background-color: #fcf4ea;
-	color: black;
+	/* background-color: #fcf4ea;
+	color: black; */
 	border-radius: 48px / 36px;
 	position: relative;
 	overflow: hidden;
+	background-color: var(--cc-card-light);
 }
 
 .flexItem1 {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin: 9px auto;
+	margin-bottom: 32px;
 }
 
 .flexItem2 {
@@ -244,12 +240,12 @@
 
 .flexItem6 {
 	margin-top: 32px;
-	margin-bottom: 32px;
 }
 
 .flexText {
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
 	gap: 9px;
 	margin-bottom: 36px;
 	flex-wrap: wrap;
@@ -257,7 +253,8 @@
 
 .flexText1 {
 	font-weight: bold;
-	background-color: #fae6c6;
+	background-color: var(--cc-card-dark);
+	color: var(--cc-color-16);
 	border-radius: 14px;
 	width: 31px;
 	height: 29px;
@@ -269,19 +266,20 @@
 }
 
 .flexText5 {
+	position: absolute;
+	bottom: 12px;
 	text-align: left;
 	color: orange;
-	margin-top: auto;
 }
 
 .signsTextBox {
+	position: relative;
 	width: 20%;
-	margin-top: 24px;
+	margin-top: 12px;
 	border-radius: 2px;
-	background-color: #fae6c6;
+	background-color: var(--cc-card-dark);
 	text-align: center;
-	padding: 14px;
-	padding-top: 0;
+	padding: 0 14px 42px 14px;
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
@@ -300,7 +298,7 @@ div#infoForm {
 .signsBox {
 	width: 185px;
 	height: 63px;
-	background-color: #fae6c6;
+	background-color: var(--cc-card-dark);
 	display: grid;
 	border-radius: 5px;
 	grid-template-columns: [first-col] 25% [second-col] 75%;
@@ -309,7 +307,8 @@ div#infoForm {
 
 .flexTextWw1 {
 	font-weight: bold;
-	background-color: #fae6c6;
+	background-color: var(--cc-card-dark);
+	color: var(--cc-color-16);
 	border-radius: 14px;
 	width: 101px;
 	height: 29px;
@@ -329,15 +328,15 @@ div#infoForm {
 	margin: auto auto;
 	font-size: 18px;
 	font-weight: bold;
+	color: var(--cc-color-16);
 }
 
 .grid2 {
-	margin-top: 12px;
+	margin-top: 7px;
 	grid-column-start: 2;
 	grid-column-end: 3;
 	grid-row-start: 1;
 	grid-row-end: 2;
-	margin: auto auto auto 0;
 	font-size: 12px;
 	padding-left: 3px;
 }
@@ -349,6 +348,7 @@ div#infoForm {
 	grid-row-end: 3;
 	margin: -2px auto 0 0;
 	font-size: 16px;
+	color: var(--cc-color-2);
 }
 
 #circularPlot {
@@ -361,89 +361,32 @@ div#infoForm {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	height: auto;
 }
 
 .half2 {
 	width: 50%;
 }
 
-.plot-text-container {
-	-webkit-hyphens: auto;
-	hyphens: auto;
-	text-align: justify;
-	margin-top: 22px;
-	margin-bottom: 9px;
-	box-sizing: border-box;
-	border-style: outset;
-	border-color: rgba(202, 187, 161, 0.747);
-	border-radius: 3px;
-	border-width: 0.1px;
-	padding: 0 19px;
-	background-color: rgb(255, 255, 255);
-	/* rgb(13, 0, 26); */
-	opacity: 0.9;
-	height: 90vh;
-	overflow-y: scroll;
-}
-
-.butn {
-	font-weight: bold;
-	color: white;
-	font-size: 16px;
-	background-color: rgb(171, 124, 253);
-	width: auto;
-	height: 26px;
-	border-radius: 7px;
-	cursor: pointer;
-}
-
-.butn:hover {
-	background-color: rgb(4, 2, 60);
-}
-
 .positions {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
 	flex-wrap: wrap;
-	font-size: 12pt;
 }
 
-.positions div div.posItem {
-	display: grid;
-	grid-template-rows: 33px;
-	grid-template-columns: 22px 194px 133px 67px;
-	grid-auto-flow: column;
-	gap: 0 5px;
-	margin-left: 3px;
+.leftPos {
+	width: 50%;
 }
 
-.horo.flexPlntPos {
-	display: flex;
-	justify-content: space-between;
-}
-
-.posHalf {
-	display: flex;
-	flex-direction: column;
-	box-sizing: border-box;
-}
-
-.name {
-	fill: black !important;
-}
-
-.hovertext rect {
-	border: 1px solid black !important;
+.rightPos {
+	width: 50%;
 }
 
 img.svgImgLegend {
-	vertical-align: middle;
-	height: 12pt;
+	height: 14pt;
 }
 
 div.horo.form {
-	background-color: #fae6c6;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 30%;
@@ -458,22 +401,4 @@ div.horo.form {
 div.horo.header {
 	display: flex;
 	justify-content: center;
-}
-
-.aspectOrbsGrid {
-	display: grid;
-	grid-template-columns: 22% 14% 16% 24% 20%;
-	grid-template-rows: 33px 33px 33px 33px;
-	grid-auto-flow: row;
-	gap: 0 5px;
-	margin-left: 3px;
-	font-size: 12pt;
-	font-weight: bold;
-}
-
-.aspectOrbs div.horo {
-	display: flex;
-	flex-direction: row;
-	justify-content: left;
-	gap: 24px;
 }

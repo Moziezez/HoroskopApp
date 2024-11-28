@@ -1,58 +1,95 @@
-
 h1.horo {
-	margin: 22px auto 0 auto;
+	margin: 0 auto 14px auto;
+	color: var(--cc-color-1);
 }
+
 h2.horo {
 	margin: 12px auto 0 auto;
-	font-size: 22px;
+	font-size: 33px;
+	color: var(--cc-color-1);
 }
+
 h3.horo {
-	margin: 0 auto 5px auto;
-	font-size: 14pt !important;
-	color: black !important;
+	margin: 0 auto;
+	font-size: 14pt;
+	color: var(--cc-color-2);
 }
+
 h4.horo {
 	margin: 0 auto 0 auto;
+	color: var(--cc-color-2);
 }
+
 h5.horo {
 	margin: 7px auto 7px auto;
-	color: rgb(145, 145, 145);
+	color: var(--cc-color-3);
 	font-size: 12pt;
 }
+
 h6.horo {
 	margin: 7px auto 7px auto;
 	font-size: 12pt;
+	color: var(--cc-color-2);
 }
+
 .cntr {
 	text-align: center;
 }
-.half{
+
+.half {
 	width: 50%;
 }
-p.horo {	
+
+p.horo {
 	font-size: 12pt;
 	text-align: justify !important;
-	color: black !important;
 }
+
 a.horo {
-	font-family: system-ui,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-family: system-ui, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: bold;
-	color: orange;
-	font-size: 15px;
+	color: var(--cc-color-32);
+	font-size: 12pt;
 	cursor: pointer;
 }
+
 hr.hrheader {
 	width: 222px;
 	margin: 1px auto;
 }
 
 hr.horo {
-	border: 1px solid #fcd9a9;
+	border: 1px solid var(--cc-color-18);
 	margin: 14px 0;
+}
+
+hr.horo.card {
+	border: 1px solid var(--cc-color-16);
+	margin: 14px 0;
+}
+
+span.sublabel {
+	font-family: system-ui, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 11px;
+	color: var(--cc-color-2);
+	cursor: default;
+}
+
+span.sublabel.bold {
+	font-size: 12px;
+	font-weight: bold;
 }
 
 .subheader {
 	font-size: 111%;
 	text-align: center;
 	margin: 19px auto;
+}
+
+.horo.hide {
+	display: none;
+}
+
+.horo.inline {
+	display: inline;
 }

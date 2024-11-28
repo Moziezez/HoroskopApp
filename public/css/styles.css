@@ -62,7 +62,7 @@ hr.hrheader {
 
 hr.horo {
 	border: 1px solid #fcd9a9;
-	margin: 14px 0;
+	margin: 7px 0;
 }
 
 .subheader {
@@ -80,6 +80,10 @@ span.sublabel {
 span.sublabel.bold {
 	font-size: 12px;
 	font-weight: bold;
+}
+
+.horo.hide {
+	display: none;
 }
 
 .horo.inline {

@@ -84,17 +84,9 @@
 		width: 94% !important;
 	}
 
-	#triggerLegend {
-		margin-left: 253px;
-	}
-
 	.flexLegend {
 		justify-content: center !important;
 		font-size: 9pt;
-	}
-
-	hr.horo {
-		display: none;
 	}
 
 	.signsBox {
@@ -122,15 +114,38 @@
 		margin-top: -169px;
 	}
 
-	#circularPlot {
 
+	#circularPlot {
 		transform: scale(0.515);
+	}
+
+	div.horo.legendDiv {
+		margin-top: -169px;
+		margin-left: 234px;
+	}
+
+	#popupLegend {
+		margin-left: 16px !important;
+		margin-right: 252px !important;
+		font-size: 11pt !important;
+	}
+
+	.gridLegend1 {
+		grid-template-rows: 24px 24px 24px 24px 24px 24px !important;
+		grid-template-columns: 74px 82px 112px !important;
+		gap: 0 12px !important;
+	}
+
+	.gridLegend2 {
+		grid-template-rows: 24px 24px 24px 24px !important;
+		grid-template-columns: 74px 82px 112px !important;
+		gap: 0 12px !important;
 	}
 
 	.flexItem4,
 	.flexItem5,
 	.flexItem6 {
-		width: 96%;
+		width: 94%;
 	}
 
 	.cartesianDiv {

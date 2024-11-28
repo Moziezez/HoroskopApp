@@ -55,63 +55,52 @@
           Legende →
         </a>
 
-        <div id="popupLegend" class="horo popupLegend hide">
-          <div class="flexLegend">
+        <div id="popupLegend" class="horo hide">
 
-            <div class="horo itemLegend">
-              <% var count = 0 %>
-              <% Object.entries(planets).forEach(([k, v], i) => { %>
-              <% if ( ['sirius', 'ascendant', 'midheaven', 'southnode'].includes(k) ) return; %>
+          <hr class="horo" />
 
-              <% var source = "../assets/components/svg/"+k+".svg"%>
-              <div class="flexItemLegend">
+          <div class="horo gridLegend1">
+            <% Object.entries(planets).forEach(([k, v], i) => { %>
+            <% if ( ['sirius', 'ascendant', 'midheaven', 'southnode'].includes(k) ) return; %>
 
-                <% if (v.text === "Aufst. Mondknoten (R)" ) { v.text = "Mondknoten" } %>
+            <% var source = "../assets/components/svg/"+k+".svg"%>
+            <div class="gridItemLegend">
 
-                <div><%=v.text %></div>
-                <div><img src=<%=source%> alt="svg" class="svgImgLegend" /></div>
-
-              </div>
-              <% count += 1 %>
-              <% if (count%8 == 0) { %>
+              <% if (v.text === "Aufst. Mondknoten (R)" ) { v.text = "Mondknoten" } %>
+              <div><%=v.text %></div>
+              <div><img src=<%=source%> alt="svg" class="svgImgLegend" /></div>
 
             </div>
-            <div class="horo itemLegend">
-              <% } %>
-              <% }); %>
-              <div class="flexItemLegend">
-                <div>Aszendent</div>
-                <div>AC</div>
-              </div>
-              <div class="flexItemLegend">
-                <div>Himmelsmitte</div>
-                <div>MC</div>
-              </div>
-              <div class="flexItemLegend">
-                <div>Deszendent</div>
-                <div>DC</div>
-              </div>
-            </div>
 
-          </div>
-          <div class="flexLegend">
-            <div class="horo itemLegend">
-              <% var count = 0 %>
-
-              <% Object.entries(signs).forEach(([k, v], i) => { %>
-              <% var source = "../assets/components/svg/"+k+".svg"%>
-              <div class="flexItemLegend">
-                <div><%=v.text %></div>
-                <div><img src=<%=source%> alt="svg" class="svgImgLegend" /></div>
-              </div>
-              <% count += 1 %>
-              <% if (count%6 == 0) { %>
+            <% }); %>
+            <div class="gridItemLegend">
+              <div>Aszendent</div>
+              <div>AC</div>
             </div>
-            <div class="horo itemLegend">
-              <% } %>
-              <% }); %>
+            <div class="gridItemLegend">
+              <div>Himmelsmitte</div>
+              <div>MC</div>
+            </div>
+            <div class="gridItemLegend">
+              <div>Deszendent</div>
+              <div>DC</div>
             </div>
           </div>
+
+          <hr class="horo" />
+
+          <div class="horo gridLegend2">
+            <% Object.entries(signs).forEach(([k, v], i) => { %>
+            <% var source = "../assets/components/svg/"+k+".svg"%>
+            <div class="gridItemLegend">
+              <div><%=v.text %></div>
+              <div><img src=<%=source%> alt="svg" class="svgImgLegend" /></div>
+            </div>
+            <% }); %>
+          </div>
+
+          <hr class="horo" />
+
         </div>
       </div>
     </div>
@@ -123,7 +112,7 @@
         Herausforderungen und das Lebenspotenzial eines Menschen geben, basierend auf der genauen
         Position der Planeten zum Zeitpunkt der Geburt.</p>
       <!-- <button class="butn" type="button" id="dlButton">DL</button> -->
-
+      <h4 class="horo">Hauptmerkmale</h4>
       <div class="flexText">
         <div class="signsTextBox" id="infoSun">
           <div class="flexText1 cOrange" style="line-height: 28px">
@@ -269,14 +258,29 @@
     <div class="flexItem5">
       <h4 class="horo">ASPEKTE</h4>
       <div class="cartesianDiv">
-        <p class="horo half">
-          Die Aspekte der Planeten untereinander zeigen die dynamischen Beziehungen und
-          Wechselwirkungen zwischen verschiedenen Bereichen des Lebens an, wobei harmonische
-          Aspekte positive Synergien und Wachstumschancen fördern, während Spannungsaspekte auf
-          Konflikte und Herausforderungen hinweisen. </br>
-          Der Orbis gibt an, um wie viel Grad der jeweilige Aspekt vom exakten Winkel abweicht.
-          Je höher dieser Wert, desto schwächer ist also die Wirkung des Aspekts.
-        </p>
+        <div class="horo half">
+          <p class="horo">
+            Die Aspekte der Planeten untereinander zeigen die dynamischen Beziehungen und
+            Wechselwirkungen zwischen verschiedenen Bereichen des Lebens an, wobei harmonische
+            Aspekte positive Synergien und Wachstumschancen fördern, während Spannungsaspekte auf
+            Konflikte und Herausforderungen hinweisen. </br>
+            Der Orbis gibt an, um wie viel Grad der jeweilige Aspekt vom exakten Winkel abweicht.
+            Je höher dieser Wert, desto schwächer ist also die Wirkung des Aspekts. </br>
+            Diese maximalen Orben sind Vorraussetzung für gerade noch gültige Aspekte:
+          </p>
+          <div class="aspectOrbsGrid">
+            <span class="horo aspectOrbsItem"> Konjunktion: 8° </span>
+            <span class="horo aspectOrbsItem"> Trigon: 8° </span>
+            <span class="horo aspectOrbsItem"> Quadrat: 7° </span>
+            <span class="horo aspectOrbsItem"> Semi-Quadrat: 1° </span>
+            <span class="horo aspectOrbsItem"> Quincunx: 5° </span>
+            <span class="horo aspectOrbsItem"> Opposition: 8° </span>
+            <span class="horo aspectOrbsItem"> Septil: 1° </span>
+            <span class="horo aspectOrbsItem"> Sextil: 6° </span>
+            <span class="horo aspectOrbsItem"> Semi-Sextil: 1° </span>
+            <span class="horo aspectOrbsItem"> Quintil: 1° </span>
+          </div>
+        </div>
         <div class="horo half2">
           <div id="cartesianPlot"></div>
         </div>
@@ -289,31 +293,51 @@
         Die Planeten und Himmelskörper bewohnen die 12 astrologischen Häuser, welche verschiedene Lebensbereiche darstellen.
         Dadurch beeinflussen sie diese Bereiche mit ihren charakteristischen Energien und zeigen vorherrschende Themen auf.
       </p>
-      <div class="positions">
-        <div class="leftPos">
+      <div class="horo positions">
+        <div class="horo posHalf">
           <% Object.entries(planets).forEach(([k, v], i) => { %>
           <% if ( ['sirius', 'ascendant', 'midheaven', 'southnode'].includes(k) ) return; %>
           <% var source = `assets/components/svg/${k}.svg`%>
-          <p class="horo" id="<%=k%>">
-            <% try { %>
-            <img src=<%=source%> alt="svg" class="svgImgLegend" onerror="console.error('SVG not found:', '<%= source %>');" />
-            <b><%=v.text%></b> in
-            <span class="pos">
-              <%= planets[k].pos_name; %>
-              <%= signs[v.sign_id].text; %>
-            </span>- Haus <%= v.house_id %>
-            <% } catch (error) { %>
-            <% console.log(v, "Has error with sign ID:", error); %>
-            <% } %>
-          </p>
+          <% let posName = planets[k].pos_name; %>
+          <% var match = posName.match(/(.*)\s(\p{So})$/u); if (match) { %>
+          <% var posCrd = match[1], utf8symbol = match[2]; }  %>
+          <div class="horo posItem" id="<%=k%>">
+            <div class="horo posGridItem" style="justify-self: center;">
+              <img src=<%=source%> alt="svg" class="svgImgLegend" onerror="console.error('SVG not found:', '<%= source %>');" />
+            </div>
+            <div class="horo posGridItem flexPlntPos">
+              <div><b><%=v.text%></b></div>
+              <div><%=posCrd%></div>
+            </div>
+            <div class="horo posGridItem">
+              <span class="horo pos">
+                <%= utf8symbol %>
+                <%= signs[v.sign_id].text; %>
+              </span>
+            </div>
+            <div class="horo posGridItem">
+              Haus <%= v.house_id %>
+            </div>
+          </div>
           <% if ( i == 6) { %>
         </div>
-        <div class="rightPos">
+        <div class="horo posHalf">
           <% } %>
           <% }); %>
-          <p class="horo" id="AC">
-            AC <b>Aszendent</b> in <%= userData.asc.ChartPosition.Ecliptic.ArcDegreesFormatted30 %> <%= ascendant %> - Haus 1
-          </p>
+          <div class="horo posItem" id="AC">
+            <div class="horo posGridItem">
+              AC
+            </div>
+            <div class="horo posGridItem flexPlntPos">
+              <b>Aszendent</b> <%= userData.asc.ChartPosition.Ecliptic.ArcDegreesFormatted30 %>
+            </div>
+            <div class="horo posGridItem">
+              <%= ascendant %>
+            </div>
+            <div class="horo posGridItem">
+              Haus 1
+            </div>
+          </div>
         </div>
       </div>
     </div>

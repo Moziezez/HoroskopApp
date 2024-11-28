@@ -248,27 +248,27 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 		planets_style_dict[planet_key].svgy = svg_pos_y;
 
 		planet_symbols.push({
+			source: svgDataURL,
 			x: symbol_pos_x,
 			y: symbol_pos_y,
+			xref: "x",
+			yref: "y",
+			xanchor: "center",
+			yanchor: "middle",
 			sizex: 1.4,
 			sizey: 1.4,
-			source: svgDataURL,
-			xanchor: "center",
-			xref: "x",
-			yanchor: "middle",
-			yref: "y"
 		});
 	});
 	planet_symbols.push({
+		source: createDataURLFromSVG("vedara_symbol.svg"),
 		x: 0,
 		y: 0,
+		xref: "x",
+		yref: "y",
+		xanchor: "center",
+		yanchor: "middle",
 		sizex: 3.9,
 		sizey: 3.9,
-		source: createDataURLFromSVG("vedara_symbol.svg"),
-		xanchor: "center",
-		xref: "x",
-		yanchor: "middle",
-		yref: "y"
 	});
 
 
@@ -329,7 +329,7 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 				mode: 'lines',
 				name: planets_style_dict[obj1_key].utf8 + " " + aspect_utf8 + " " + planets_style_dict[obj2_key].utf8,
 				hovertext: aspects_style_dict[aspect_type].name,
-				hoverlabel: { bgcolor: aspect_color },
+				hoverlabel: { bgcolor: aspect_color, font: { color: 'black' } },
 				text: aspect_name,
 				hoverinfo: 'none',
 				line: {
