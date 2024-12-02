@@ -14,9 +14,9 @@
 	}
 }
 
-@media only screen and (min-width: 382px) {
+@media only screen and (max-width: 444px) {
 	div.horo.form {
-		height: 114px !important;
+		height: 185px !important;
 	}
 }
 
@@ -127,24 +127,34 @@
 
 	.gridLegend1 {
 		grid-template-rows: 24px 24px 24px 24px 24px 24px !important;
-		grid-template-columns: 74px 82px 112px !important;
+		grid-template-columns: 84px 87px 126px !important;
 		gap: 0 12px !important;
 	}
 
 	.gridLegend2 {
 		grid-template-rows: 24px 24px 24px 24px !important;
-		grid-template-columns: 74px 82px 112px !important;
+		grid-template-columns: 84px 87px 126px !important;
 		gap: 0 12px !important;
 	}
 
 	.flexItem4,
-	.flexItem5,
+	.flexItem5 {
+		width: 94%;
+	}
+
 	.flexItem6 {
 		width: 94%;
+		margin-top: 345px !important;
 	}
 
 	.cartesianDiv {
 		height: 567px !important;
+	}
+
+	.positions div div.posItem {
+		grid-template-columns: 24px 164px 116px 60px !important;
+		gap: 0 !important;
+		font-size: 11pt !important;
 	}
 
 	.half,
@@ -161,6 +171,17 @@
 	#cartesianPlot {
 		width: 100% !important;
 		height: 100%;
+	}
+
+	.aspectOrbsGrid {
+		grid-template-columns: 38% 30% 33% !important;
+		grid-template-rows: 33px 33px 33px 33px !important;
+		gap: 0 5px;
+		margin-left: 3px;
+	}
+
+	h5.horo {
+		margin: -24px auto 7px auto;
 	}
 }
 

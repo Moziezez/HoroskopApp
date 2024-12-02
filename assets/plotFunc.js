@@ -91,6 +91,7 @@ function popUp(key) {
   $(".flexText4, .popup").fadeOut(108);
   $(".signsTextBox").css({
     width: "20%",
+    height: "auto",
   });
   $(".flexText5").children().text("Zur Interpretation →");
   $(".newInput").children().text("Eingabedaten ändern →");
@@ -108,12 +109,12 @@ function popUp(key) {
     width: "100%",
     height: `${0.67 * window.innerHeight}px`,
   }, {
-    duration: 33,
-    start: function () {
+    duration: 108,
+    complete: function () {
       $("html, body").animate({
         scrollTop: $("#info" + key).offset().top - 12,
       },
-        111
+        222
       );
     },
   });

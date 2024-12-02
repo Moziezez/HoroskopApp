@@ -6,6 +6,7 @@ body {
 }
 
 h1.horo {
+	hyphens: none;
 	margin: 0 auto 14px auto;
 }
 
