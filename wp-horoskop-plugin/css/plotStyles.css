@@ -285,14 +285,11 @@
 	margin: -7px auto 0 auto;
 }
 
-.flexText4 {
-	text-align: left;
-}
-
 .flexText5 {
 	text-align: left;
 	color: orange;
 	margin-top: auto;
+	padding-top: 24px;
 }
 
 .signsTextBox {
@@ -301,11 +298,11 @@
 	border-radius: 2px;
 	background-color: var(--cc-card-dark);
 	text-align: center;
-	padding: 14px;
-	padding-top: 0;
+	padding: 0 44px 24px 44px;
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
+	box-sizing: border-box;
 }
 
 .popup {
@@ -465,4 +462,17 @@ div.horo.header {
 	flex-direction: row;
 	justify-content: left;
 	gap: 24px;
+}
+
+p.card {
+	padding: 12px 24px;
+	border-radius: 3px;
+	border-width: 1px;
+	max-width: 693px;
+	margin-top: 17px;
+	overflow: auto;
+	box-sizing: border-box;
+	height: 264px;
+	scrollbar-width: thin;
+	scrollbar-color: #888 #b6b0b0;
 }

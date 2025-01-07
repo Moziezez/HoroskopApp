@@ -14,9 +14,9 @@
 	}
 }
 
-@media only screen and (min-width: 382px) {
+@media only screen and (max-width: 444px) {
 	div.horo.form {
-		height: 114px !important;
+		height: 185px !important;
 	}
 }
 
@@ -110,11 +110,6 @@
 		margin-top: -108px;
 	}
 
-	div.horo.legendDiv {
-		margin-top: -169px;
-	}
-
-
 	#circularPlot {
 		transform: scale(0.515);
 	}
@@ -143,13 +138,23 @@
 	}
 
 	.flexItem4,
-	.flexItem5,
+	.flexItem5 {
+		width: 94%;
+	}
+
 	.flexItem6 {
-		width: 96%;
+		width: 94%;
+		margin-top: 345px !important;
 	}
 
 	.cartesianDiv {
 		height: 567px !important;
+	}
+
+	.positions div div.posItem {
+		grid-template-columns: 24px 164px 116px 60px !important;
+		gap: 0 !important;
+		font-size: 11pt !important;
 	}
 
 	.half,
@@ -167,34 +172,55 @@
 		width: 100% !important;
 		height: 100%;
 	}
-}
 
-#pUserInfo {
-	margin-top: 12px;
-	margin-bottom: 32px;
+	.aspectOrbsGrid {
+		grid-template-columns: 38% 30% 33% !important;
+		grid-template-rows: 33px 33px 33px 33px !important;
+		gap: 0 5px;
+		margin-left: 3px;
+	}
+
+	h5.horo {
+		margin: -24px auto 7px auto;
+	}
 }
 
 #popupLegend {
-	padding: 7px;
+	font-size: 12pt;
+	margin-left: 96px;
+	margin-right: 96px;
+}
+
+#triggerLegend {
+	margin-left: 80px;
+}
+
+.legendDiv {
 	display: flex;
-	gap: 55px;
+	flex-direction: column;
 }
 
-.flexLegend {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	gap: 32px;
+.gridLegend1 {
+	display: grid;
+	grid-template-rows: 36px 36px 36px 36px;
+	grid-template-columns: 96px 101px 123px 145px;
+	grid-auto-flow: column;
+	gap: 0 44px;
+	margin-left: 3px;
 }
 
-.itemLegend {
-	margin: 3px;
+.gridLegend2 {
+	display: grid;
+	grid-template-rows: 36px 36px 36px;
+	grid-template-columns: 96px 101px 123px 145px;
+	grid-auto-flow: column;
+	gap: 0 44px;
+	margin-left: 3px;
 }
 
-.flexItemLegend {
+.gridItemLegend {
 	display: flex;
 	justify-content: space-between;
-	gap: 6px;
 }
 
 .cOrange {
@@ -207,8 +233,6 @@
 	align-items: center;
 	padding-top: 136px;
 	font-family: Iowan Old Style, Palatino, "Palatino Linotype", "Book Antiqua", "URW Palladio L", P052, serif;
-	/* background-color: #fcf4ea;
-	color: black; */
 	border-radius: 48px / 36px;
 	position: relative;
 	overflow: hidden;
@@ -219,7 +243,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-bottom: 32px;
+	margin: 9px auto;
 }
 
 .flexItem2 {
@@ -240,12 +264,12 @@
 
 .flexItem6 {
 	margin-top: 32px;
+	margin-bottom: 32px;
 }
 
 .flexText {
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
 	gap: 9px;
 	margin-bottom: 36px;
 	flex-wrap: wrap;
@@ -262,24 +286,25 @@
 }
 
 .flexText4 {
-	text-align: left;
+	margin: 0 7px;
+	margin-bottom: 0px;
+	margin-bottom: 12px;
 }
 
 .flexText5 {
-	position: absolute;
-	bottom: 12px;
 	text-align: left;
 	color: orange;
+	margin-top: auto;
 }
 
 .signsTextBox {
-	position: relative;
 	width: 20%;
-	margin-top: 12px;
+	margin-top: 24px;
 	border-radius: 2px;
 	background-color: var(--cc-card-dark);
 	text-align: center;
-	padding: 0 14px 42px 14px;
+	padding: 14px;
+	padding-top: 0;
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
@@ -332,11 +357,12 @@ div#infoForm {
 }
 
 .grid2 {
-	margin-top: 7px;
+	margin-top: 12px;
 	grid-column-start: 2;
 	grid-column-end: 3;
 	grid-row-start: 1;
 	grid-row-end: 2;
+	margin: auto auto auto 0;
 	font-size: 12px;
 	padding-left: 3px;
 }
@@ -361,7 +387,6 @@ div#infoForm {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	height: auto;
 }
 
 .half2 {
@@ -371,19 +396,42 @@ div#infoForm {
 .positions {
 	display: flex;
 	flex-direction: row;
+	justify-content: space-around;
 	flex-wrap: wrap;
+	font-size: 12pt;
 }
 
-.leftPos {
-	width: 50%;
+.positions div div.posItem {
+	display: grid;
+	grid-template-rows: 33px;
+	grid-template-columns: 22px 194px 133px 67px;
+	grid-auto-flow: column;
+	gap: 0 5px;
+	margin-left: 3px;
 }
 
-.rightPos {
-	width: 50%;
+.horo.flexPlntPos {
+	display: flex;
+	justify-content: space-between;
+}
+
+.posHalf {
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+}
+
+.name {
+	fill: black !important;
+}
+
+.hovertext rect {
+	border: 1px solid black !important;
 }
 
 img.svgImgLegend {
-	height: 14pt;
+	vertical-align: middle;
+	height: 12pt;
 }
 
 div.horo.form {
@@ -401,4 +449,31 @@ div.horo.form {
 div.horo.header {
 	display: flex;
 	justify-content: center;
+}
+
+.aspectOrbsGrid {
+	display: grid;
+	grid-template-columns: 22% 14% 16% 24% 20%;
+	grid-template-rows: 33px 33px 33px 33px;
+	grid-auto-flow: row;
+	gap: 0 5px;
+	margin-left: 3px;
+	font-size: 12pt;
+	font-weight: bold;
+}
+
+.aspectOrbs div.horo {
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+	gap: 24px;
+}
+
+p.card {
+	border-style: dashed;
+	padding: 12px 24px;
+	border-radius: 7px;
+	border-width: 1px;
+	max-width: 693px;
+	margin-top: 17px;
 }

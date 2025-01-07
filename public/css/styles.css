@@ -66,6 +66,10 @@ hr.horo {
 	margin: 7px 0;
 }
 
+hr.horo.card {
+	margin-top: 17px;
+}
+
 .subheader {
 	font-size: 111%;
 	text-align: center;

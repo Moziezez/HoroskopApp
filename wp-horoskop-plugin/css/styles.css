@@ -65,6 +65,10 @@ hr.horo {
 }
 
 hr.horo.card {
+	margin-top: 17px;
+}
+
+hr.horo.card {
 	border: 1px solid var(--cc-color-16);
 	margin: 14px 0;
 }
