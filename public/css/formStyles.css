@@ -1,11 +1,11 @@
 @keyframes pop-in {
 	from {
-		background-color: rgba(174, 134, 69, 0.703);
+		background-color: var(--cc-color-5);
 		opacity: 0.1;
 	}
 
 	to {
-		background-color: var(--background-color);
+		background-color: var(--cc-color-background);
 	}
 }
 
@@ -16,16 +16,19 @@
 }
 
 :root {
-	--background: #fcedd9;
-	--background-color: #fffcf8;
+	--cc-background: #fcedd9;
+	--cc-color-background: #fffcf8;
 	--main-color: #3498db;
 	--secondary-color: #2ecc71;
 	--font-size: 16px;
+	--cc-color-5: rgba(174, 134, 69, 0.703);
+	--cc-color-10: #dfd4c4;
+	--cc-color-18: #eaca98;
 }
 
 body.horo {
 	font-family: Iowan Old Style, Palatino, "Palatino Linotype", "Book Antiqua", "URW Palladio L", P052, serif;
-	background-color: var(--background);
+	background-color: var(--cc-background);
 }
 
 .coords-container {
@@ -41,7 +44,7 @@ body.horo {
 
 .text-container {
 	text-align: justify;
-	background-color: var(--background-color);
+	background-color: var(--cc-color-background);
 	margin: 4px 4px;
 	padding: 12px 17px;
 	opacity: 1;
@@ -74,8 +77,7 @@ body.horo {
 }
 
 .grid-item {
-	position: relative;
-	margin-bottom: 19px;
+	margin-bottom: 9px;
 }
 
 .dotted-line {
@@ -95,7 +97,7 @@ input.geoapify-autocomplete-input {
 	padding: 0;
 	width: 100%;
 	margin-bottom: -5px;
-	background-color: var(--background-color);
+	background-color: var(--cc-color-background);
 	accent-color: rgb(109, 64, 109);
 	opacity: 0.89;
 	animation-name: pop-in;
@@ -191,23 +193,22 @@ span.marTop {
 }
 
 #House {
-	height: 25px;
 	width: 131px;
-	border-radius: 4px;
+	border-radius: 2px;
 	border-width: 1.5px;
-	border-color: #eaca98;
-	box-shadow: 0.2px 0.3px 3px 1px #dfd4c4;
+	border-color: var(--cc-color-18);
+	box-shadow: 0.2px 0.3px 3px 1px var(--cc-color-10);
 	margin-left: 14px;
+	margin-top: 6px;
 	cursor: pointer;
 	text-align: center;
 	background: rgb(255, 253, 250);
 	font-size: 16px;
-	min-height: 39px;
-	border-style: solid;
+	min-height: 32px;
 }
 
 #House:hover {
-	box-shadow: 0.2px 0.3px 5px 3px #dfd4c4;
+	box-shadow: 0.2px 0.3px 5px 3px var(--cc-color-10);
 }
 
 option {
@@ -215,19 +216,16 @@ option {
 }
 
 .horo.show-aspects {
-	height: 25px;
 	width: 131px;
 	border-radius: 2px;
 	border-width: 1.5px;
-	border-color: #eaca98;
-	box-shadow: 0.2px 0.3px 3px 1px #dfd4c4;
+	border-color: var(--cc-color-18);
+	box-shadow: 0.2px 0.3px 3px 1px var(--cc-color-10);
 	cursor: pointer;
 	text-align: center;
 	background: rgb(255, 253, 250);
 	font-size: 16px;
-	min-height: 39px;
-	border-style: solid;
-	margin-bottom: 12px;
+	min-height: 32px;
 	margin-left: 5px;
 
 }

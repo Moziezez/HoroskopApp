@@ -13,24 +13,24 @@ h2.horo {
 h3.horo {
 	margin: 0 auto;
 	font-size: 14pt;
-	color: var(--cc-color-2);
+	color: var(--cc-color-1);
 }
 
 h4.horo {
-	margin: 0 auto 0 auto;
-	color: var(--cc-color-2);
+	margin: 0 auto 3px 7px;
+	color: var(--cc-color-1);
 }
 
 h5.horo {
 	margin: 7px auto 7px auto;
-	color: var(--cc-color-3);
+	color: var(--cc-color-2);
 	font-size: 12pt;
 }
 
 h6.horo {
 	margin: 7px auto 7px auto;
 	font-size: 12pt;
-	color: var(--cc-color-2);
+	color: var(--cc-color-1);
 }
 
 .cntr {
@@ -44,6 +44,7 @@ h6.horo {
 p.horo {
 	font-size: 12pt;
 	text-align: justify !important;
+	color: var(--cc-color-1);
 }
 
 a.horo {
@@ -61,7 +62,7 @@ hr.hrheader {
 
 hr.horo {
 	border: 1px solid var(--cc-color-18);
-	margin: 7px 0;
+	margin: 9px 0;
 }
 
 hr.horo.card {

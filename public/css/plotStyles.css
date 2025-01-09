@@ -119,6 +119,12 @@
 		margin-left: 234px;
 	}
 
+	p#pUserInfo {
+		/* color: var(--cc-color-2); */
+		margin-bottom: 24px;
+		margin-top: 9px;
+	}
+
 	#popupLegend {
 		margin-left: 16px !important;
 		margin-right: 252px !important;
@@ -307,10 +313,6 @@
 
 .popup {
 	text-align: left;
-}
-
-div#infoForm {
-	margin-bottom: 14px;
 }
 
 .signsBox {

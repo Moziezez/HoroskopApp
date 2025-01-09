@@ -21,7 +21,7 @@ h3.horo {
 }
 
 h4.horo {
-	margin: 0 auto 0 auto;
+	margin: 24px auto 3px 7px;
 }
 
 h5.horo {
@@ -63,7 +63,7 @@ hr.hrheader {
 
 hr.horo {
 	border: 1px solid #fcd9a9;
-	margin: 7px 0;
+	margin: 9px 0;
 }
 
 hr.horo.card {

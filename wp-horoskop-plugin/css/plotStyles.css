@@ -185,6 +185,12 @@
 	}
 }
 
+p#pUserInfo {
+	color: var(--cc-color-2);
+	margin-bottom: 24px;
+	margin-top: 9px;
+}
+
 #popupLegend {
 	font-size: 12pt;
 	margin-left: 96px;
@@ -311,10 +317,6 @@
 	overflow: auto;
 }
 
-div#infoForm {
-	margin-bottom: 14px;
-}
-
 .signsBox {
 	width: 185px;
 	height: 63px;
@@ -360,6 +362,7 @@ div#infoForm {
 	margin: auto auto auto 0;
 	font-size: 12px;
 	padding-left: 3px;
+	color: var(--cc-color-1);
 }
 
 .grid3 {
@@ -369,7 +372,7 @@ div#infoForm {
 	grid-row-end: 3;
 	margin: -2px auto 0 0;
 	font-size: 16px;
-	color: var(--cc-color-2);
+	color: var(--cc-color-1);
 }
 
 #circularPlot {
@@ -394,6 +397,8 @@ div#infoForm {
 	justify-content: space-around;
 	flex-wrap: wrap;
 	font-size: 12pt;
+	margin-top: 24px;
+	color: var(--cc-color-1);
 }
 
 .positions div div.posItem {

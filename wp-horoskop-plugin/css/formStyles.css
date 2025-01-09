@@ -17,8 +17,6 @@
 
 body.horo {
 	font-family: Iowan Old Style, Palatino, "Palatino Linotype", "Book Antiqua", "URW Palladio L", P052, serif;
-	/* background-color: #fcedd9; */
-	color: black;
 }
 
 .coords-container {
@@ -68,8 +66,7 @@ body.horo {
 }
 
 .grid-item {
-	position: relative;
-	margin-bottom: 19px;
+	margin-bottom: 9px;
 }
 
 .dotted-line {
@@ -187,15 +184,17 @@ span.marTop {
 }
 
 #House {
-	height: 25px;
 	width: 131px;
 	border-radius: 2px;
 	border-width: 1.5px;
 	border-color: var(--cc-color-18);
 	box-shadow: 0.2px 0.3px 3px 1px var(--cc-color-10);
 	margin-left: 14px;
+	margin-top: 7px;
 	cursor: pointer;
 	text-align: center;
+	font-size: 16px;
+	min-height: 32px;
 }
 
 #House:hover {
@@ -207,16 +206,13 @@ option {
 }
 
 .horo.show-aspects {
-	height: 25px;
 	width: 131px;
 	border-radius: 2px;
 	border-width: 1.5px;
 	border-color: var(--cc-color-18);
 	box-shadow: 0.2px 0.3px 3px 1px var(--cc-color-10);
-	margin-left: 3px;
 	cursor: pointer;
 	text-align: center;
-	margin-bottom: 12px;
 	margin-left: 5px;
 }
 
