@@ -26,4 +26,4 @@ const aspectColors = {
     quincunx: "#866fdb", // Medium Purple
 };
 
-module.exports = { colors, aspectColors };
+export { colors, aspectColors };

@@ -1,32 +1,48 @@
-require("dotenv").config();
-const funcs = require("./assets/func.js");
-const { plotXyStyle, circles } = require("./assets/components/plotStyle.js");
-const { signs_style_dict, houses_style_dict, planets_style_dict, house_system_dict } = require("./assets/components/planetStyles.js");
-var { plotStyle } = require("./assets/components/plotStyle.js");
-const path = require("path");
-const express = require("express");
-const fs = require("fs");
+//require("dotenv").config();
+import { userInput } from "./assets/func.js";
+import { plotXyStyle, circles } from "./assets/components/plotStyle.js";
+import { signs_style_dict, houses_style_dict, planets_style_dict, house_system_dict } from "./assets/components/planetStyles.js";
+import { plotStyle } from "./assets/components/plotStyle.js";
+import path from "path";
+import express from "express";
+import fs from "fs";
 // const pg = require("pg");
 // const PDFDocument = require("pdfkit");
 // const SVGtoPDF = require("svg-to-pdfkit");
-const { JSDOM } = require("jsdom");
-const env = require("dotenv");
+import { JSDOM } from "jsdom";
+import env from 'dotenv';
 env.config();
+import { router } from './app-use.js';
+import OpenAI from "openai";
+import { userDataConst } from './userData.js';
+
+// const openai = new OpenAI({
+// 	apiKey: "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",
+// });
+
+// const completion = await openai.chat.completions.create({
+// 	model: "gpt-4o-mini",
+// 	store: true,
+// 	messages: [
+// 		{ "role": "user", "content": "write a haiku about ai" },
+// 	],
+// });
+
+// console.log("MESSAGE", completion.choices[0].message);
 
 // function convertSVGtoPDF(svgFilePath, pdfFilePath) {
-//   const doc = new PDFDocument();
-//   const svg = fs.readFileSync(svgFilePath, 'utf8');
+// 	const doc = new PDFDocument();
+// 	const svg = fs.readFileSync(svgFilePath, 'utf8');
 
-//   SVGtoPDF(doc, svg, 0, 0);
-//   doc.pipe(fs.createWriteStream(pdfFilePath));
-//   doc.end();
+// 	SVGtoPDF(doc, svg, 0, 0);
+// 	doc.pipe(fs.createWriteStream(pdfFilePath));
+// 	doc.end();
 // }
-
 // const dbEntry = require( "./assets/dbEntry.js" );
 
 const app = express();
 app.set("view engine", "ejs");
-app.use(require('./app-use'));
+app.use(router);
 
 app.get("/authenticated", (req, res) => {
 	if (req.isAuthenticated()) {
@@ -39,21 +55,23 @@ app.get("/authenticated", (req, res) => {
 app.get("/plugin", (req, res) => {
 	res.setHeader("content-type", "text/html; charset=utf-8");
 	res.sendFile(
-		path.join(__dirname, 'wp-horoskop-plugin', 'plugin_index.html')
+		path.join('wp-horoskop-plugin', 'plugin_index.html')
 	);
 })
 
 app.get("/assets/plotFunc", (req, res) => {
 	res.setHeader("content-type", "text/javascript; charset=utf-8");
 	res.sendFile(
-		path.join(__dirname, 'assets', 'plotFunc.js')
+		path.join('assets', 'plotFunc.js') //  
 	);
 })
 
 app.get("/form", (req, res) => {
 	res.setHeader('Content-Type', 'text/html');
+	console.log("LOGGED", process.env.HOST);
 	if (process.env.HOST == "http://localhost:3030") {
-		var user_data = require("./userData.js");
+		var user_data = userDataConst;
+		console.log(userDataConst);
 		res.render("form", { userData: user_data });
 	} else {
 		res.render("form", {
@@ -122,7 +140,7 @@ app.get("/api/environment", (req, res) => {
 
 app.get("/create-plot", function (req, res) {
 
-	var { user, traces, aspects, symbols } = funcs.userInput(req.query);
+	var { user, traces, aspects, symbols } = userInput(req.query);
 
 	var config = plotStyle.config;
 	var layout = plotStyle.layout;
@@ -152,7 +170,7 @@ app.get("/get-html", function (req, res) {
 	var plot_style = plotStyle;
 
 	try {
-		var { user, traces, aspects, symbols } = funcs.userInput(req.query);
+		var { user, traces, aspects, symbols } = userInput(req.query);
 		// dbEntry.createEntry( user );
 		console.log(user);
 		var sun_utf8 = signs_style_dict[user.sunsign].utf8;
@@ -208,12 +226,12 @@ app.get("/render-pdf", async (req, res) => {
 
 app.get("/favicon.ico", function (req, res) {
 	res.type("image/x-icon");
-	res.sendFile(path.join(__dirname, "favicon.ico"));
+	res.sendFile(path.join(process.cwd(), "favicon.ico")); //  
 });
 
 app.get("/assets/components/svg/:filename", function (req, res) {
 	const filename = req.params.filename;
-	const filePath = path.join(__dirname, "assets", "components", "svg", filename);
+	const filePath = path.join(process.cwd(), "assets", "components", "svg", filename); //  
 	res.setHeader("content-type", "image/svg+xml; charset=utf-8");
 	res.sendFile(filePath, function (err) {
 		if (err) {
@@ -228,14 +246,14 @@ app.get("/assets/components/svg/:filename", function (req, res) {
 app.get("/assets/datetimepicker-master/jquery.js", function (req, res) {
 	res.setHeader("content-type", "text/javascript; charset=utf-8");
 	res.sendFile(
-		path.join(__dirname, "assets", "datetimepicker-master", "jquery.js")
+		path.join(process.cwd(), "assets", "datetimepicker-master", "jquery.js")
 	);
 });
 
 app.get("/assets/plotFunc.js", function (req, res) {
 	res.setHeader("content-type", "text/javascript; charset=utf-8");
 	res.sendFile(
-		path.join(__dirname, "assets", "plotFunc.js")
+		path.join(process.cwd(), "assets", "plotFunc.js")
 	);
 });
 app.get(
@@ -244,7 +262,7 @@ app.get(
 		res.setHeader("content-type", "text/javascript; charset=utf-8");
 		res.sendFile(
 			path.join(
-				__dirname,
+				process.cwd(),
 				"assets",
 				"datetimepicker-master",
 				"build",
@@ -259,7 +277,7 @@ app.get(
 		res.setHeader("content-type", "text/javascript; charset=utf-8");
 		res.sendFile(
 			path.join(
-				__dirname,
+				process.cwd(),
 				"assets",
 				"html2pdf.js-master",
 				"dist",
@@ -274,7 +292,7 @@ app.get(
 		res.setHeader("content-type", "text/javascript; charset=utf-8");
 		res.sendFile(
 			path.join(
-				__dirname,
+				process.cwd(),
 				"assets",
 				"html2pdf.js-master",
 				"dist",
@@ -286,31 +304,31 @@ app.get(
 app.get("/assets/jsPDF-master/dist/jspdf.umd.js", function (req, res) {
 	res.setHeader("content-type", "text/javascript; charset=utf-8");
 	res.sendFile(
-		path.join(__dirname, "assets", "jsPDF-master", "dist", "jspdf.umd.js")
+		path.join(process.cwd(), "assets", "jsPDF-master", "dist", "jspdf.umd.js")
 	);
 });
 app.get("/public/css/jquery.datetimepicker.min.css", function (req, res) {
 	res.setHeader("content-type", "text/css; charset=utf-8");
 	res.sendFile(
-		path.join(__dirname, "public", "css", "jquery.datetimepicker.min.css")
+		path.join(process.cwd(), "public", "css", "jquery.datetimepicker.min.css")
 	);
 });
 app.get("/public/css/styles.css", function (req, res) {
 	res.setHeader("content-type", "text/css");
-	res.sendFile(path.join(__dirname, "public", "css", "styles.css"));
+	res.sendFile(path.join(process.cwd(), "public", "css", "styles.css"));
 });
 app.get("/public/css/plotStyles.css", function (req, res) {
 	res.setHeader("content-type", "text/css");
-	res.sendFile(path.join(__dirname, "public", "css", "plotStyles.css"));
+	res.sendFile(path.join(process.cwd(), "public", "css", "plotStyles.css"));
 });
 app.get("/public/css/formStyles.css", function (req, res) {
 	res.setHeader("content-type", "text/css");
-	res.sendFile(path.join(__dirname, "public", "css", "formStyles.css"));
+	res.sendFile(path.join(process.cwd(), "public", "css", "formStyles.css"));
 });
 
 app.post("/svg-background", (req, res) => {
 	var { ident_key, svgtag, file_name } = req.body;
-	var viewport = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="655" height="600">`;
+	var viewport = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="725" height="700">`;
 	var svgContent2 = viewport + svgtag + `</svg>`;
 	const combinedSvgContent = `${svgContent2}`;
 	const combinedSvgFilePath = "assets/" + file_name + "Background.svg";
@@ -321,8 +339,8 @@ app.post("/svg-background", (req, res) => {
 	);
 	const domDocument = dom.window.document;
 	var svgHtml = ""; // init string for svg elements
-	var xCenter = 322;
-	var yCenter = 306; // xy-center position of planets in svg dl
+	var xCenter = 386;
+	var yCenter = 367; // xy-center position of planets in svg dl
 	var svgIconsPath = "assets/components/svg/";
 	Object.keys(planets_style_dict)
 		.filter((planet_element) => planet_element !== "sirius")
@@ -346,8 +364,8 @@ app.post("/svg-background", (req, res) => {
 				// console.log(error);
 			}
 		});
-	var xCenter = 318;
-	var yCenter = 303; // xy-center position signs in svg dl
+	var xCenter = 381;
+	var yCenter = 364; // xy-center position signs in svg dl
 	Object.keys(signs_style_dict).forEach((signs_element) => {
 		var svgFilePath = svgIconsPath + signs_element + ".svg";
 		var xSymbol = xCenter + signs_style_dict[signs_element].svgx;

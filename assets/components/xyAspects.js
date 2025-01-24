@@ -1,11 +1,11 @@
-var { planets_style_dict, signs_style_dict, aspects_style_dict } = require("./planetStyles");
-const { colors } = require("./colorCodes.js");
-const fs = require("fs");
-const path = require("path");
+import { planets_style_dict, signs_style_dict, aspects_style_dict } from "./planetStyles.js";
+import { colors } from "./colorCodes.js";
+import * as fs from "fs";
+import * as path from "path";
 
 function createDataURLFromSVG(svgPath) {
   // Read the SVG file content
-  const svgContent = fs.readFileSync(path.join(__dirname, 'svg', svgPath), 'utf8');
+  const svgContent = fs.readFileSync(path.join(process.cwd(), 'assets', 'components', 'svg', svgPath), 'utf8');
   // Convert SVG content to Base64
   const base64SVG = Buffer.from(svgContent).toString('base64');
   const dataURL = `data:image/svg+xml;base64,${base64SVG}`;
@@ -77,7 +77,7 @@ function getAspectTraces(horoscope, isChecked, valid_aspect_keys) {
 
 function createSymbols(filtered_objects) {
   var len = filtered_objects.length;
-  var aspect_planet_traces = []; planet_xy_symbols = [];
+  var aspect_planet_traces = [], planet_xy_symbols = [];
 
   filtered_objects.forEach((planet, i) => {
     var key = planet.key;
@@ -293,4 +293,4 @@ function createGrid(grid_len, isChecked) {
   return plot_grid_x.concat(plot_grid_y);
 }
 
-module.exports = { getAspectTraces };
+export { getAspectTraces };

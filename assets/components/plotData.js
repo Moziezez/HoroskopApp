@@ -1,16 +1,16 @@
 //recieve horoscope and return plot_data
 const textfont = 'Arial';
-const path = require("path");
-const fs = require('fs');
+import * as fs from "fs";
+import * as path from "path";
 
-const { planets_style_dict, signs_style_dict, aspects_style_dict, houses_style_dict } = require("./planetStyles.js");
-const { colors } = require("./colorCodes.js");
+import { planets_style_dict, signs_style_dict, aspects_style_dict, houses_style_dict } from "./planetStyles.js";
+import { colors } from "./colorCodes.js";
 const connection_traces_tickwidth = 1.5;
 const r1 = 58; const r2 = 74;
 
 function createDataURLFromSVG(svgPath) {
 	// Read the SVG file content
-	const svgContent = fs.readFileSync(path.join(__dirname, 'svg', svgPath), 'utf8');
+	const svgContent = fs.readFileSync(path.join(process.cwd(), 'assets', 'components', 'svg', svgPath), 'utf8');
 	// Convert SVG content to Base64
 	const base64SVG = Buffer.from(svgContent).toString('base64');
 	const dataURL = `data:image/svg+xml;base64,${base64SVG}`;
@@ -30,7 +30,7 @@ function plotData(horoscope, isChecked, zodiacSys, valid_keys) {
 		houses_style_dict[n].planet_text = [];
 	}
 	/* Calculate and store the following vars for each planet via for-loop */
-	let planet_traces = [], planets_pos = [], missing_ids = []; planet_symbols = [];
+	let planet_traces = [], planets_pos = [], missing_ids = [], planet_symbols = [];
 	var planet_obj = horoscope.CelestialBodies.all;
 
 	var connection_traces = [{
@@ -441,7 +441,7 @@ function signTraces(horoscope, offset, zodiacSys) {
 }
 
 function houseTraces(horoscope, radius, isChecked, offset) {
-	let housesep_traces = [], houses_nums = []; house_symbols = []; end_radius = 67; first_house_start = horoscope.Houses[0].ChartPosition.StartPosition.Ecliptic.DecimalDegrees;
+	let housesep_traces = [], houses_nums = [], house_symbols = [], end_radius = 67, first_house_start = horoscope.Houses[0].ChartPosition.StartPosition.Ecliptic.DecimalDegrees;
 
 	for (let i = 0; i < 12; i++) {
 		var house_sign_key = horoscope.Houses[i].Sign.key;
@@ -561,4 +561,4 @@ function classifyOrb(orbis) {
 	} else return 3;
 }
 
-module.exports = { plotData };
+export { plotData };

@@ -2,6 +2,7 @@
 	"emmet.includeLanguages": {
 		"ejs": "html"
 	},
+	"type": "module",
 	"name": "web-horoscope",
 	"version": "1.0.0",
 	"description": "Horoscope Project offline",
@@ -30,6 +31,7 @@
 		"jquery": "^3.7.1",
 		"jsdom": "^23.0.1",
 		"jspdf": "^2.5.1",
+		"openai": "^4.80.0",
 		"passport": "^0.7.0",
 		"passport-local": "^1.0.0",
 		"path": "^0.12.7",

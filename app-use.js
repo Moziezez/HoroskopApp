@@ -1,14 +1,14 @@
-const { Router } = require('express');
-const bodyParser = require("body-parser");
-const express = require("express");
-const path = require("path");
-// const session = require("express-session");
-// const passport = require("passport");
-const cors = require("cors");
-// const Strategy = require("passport-local");
-// const env = require("dotenv");
-
+import { Router } from 'express';
+import bodyParser from 'body-parser';
+import express from 'express';
+import * as path from 'path';
+import cors from 'cors';
 const router = Router();
+// import session from "express-session";
+// import passport from "passport";
+// import Strategy from "passport-local";
+// import env from "dotenv";
+
 
 // Use Cors Options
 const corsOptions = {
@@ -23,7 +23,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 // Use Static Dicts
 router.use(express.static('public'));
-const svgDirectory = path.join(__dirname, 'assets', 'components', 'svg');
+const svgDirectory = path.join('assets', 'components', 'svg'); //__dirname
 router.use('svg', express.static(svgDirectory));
 
 // Use Sessions
@@ -35,4 +35,4 @@ router.use('svg', express.static(svgDirectory));
 // router.use( passport.initialize() );
 // router.use( passport.session() );
 
-module.exports = router;
+export { router };

@@ -1,7 +1,14 @@
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
+
 const { Origin, Horoscope } = require('circular-natal-horoscope-js');
-var { getAspectTraces } = require('./components/xyAspects.js');
-var { plotData } = require('./components/plotData.js');
-var { plotStyle, plotXyStyle } = require('./components/plotStyle.js');
+
+// import { Origin, Horoscope } from "circular-natal-horoscope-js";
+
+import { getAspectTraces } from './components/xyAspects.js';
+import { plotData } from './components/plotData.js';
+import { plotStyle, plotXyStyle } from './components/plotStyle.js';
 
 function userInput(query) { // XXX random order mit svg loads
 	var date = query.date.split("."),
@@ -113,4 +120,4 @@ function userInput(query) { // XXX random order mit svg loads
 	};
 }
 
-module.exports = { userInput };	
+export { userInput };	

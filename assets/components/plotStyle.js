@@ -1,6 +1,6 @@
 const textfont = "Times New Roman";
 
-const { colors } = require("./colorCodes.js");
+import { colors } from "./colorCodes.js";
 
 const plotStyle = {
 	layout: {
@@ -253,4 +253,4 @@ for (var n = 0; n < theta360.length - 1; n++) {	//Append Scaling Degrees 360°
 }
 const circles = circ_data;
 
-module.exports = { plotStyle, plotXyStyle, circles };
+export { plotStyle, plotXyStyle, circles };

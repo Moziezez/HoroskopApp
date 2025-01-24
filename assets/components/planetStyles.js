@@ -1,4 +1,4 @@
-const { aspectColors } = require("./colorCodes.js");
+import { aspectColors } from "./colorCodes.js";
 
 var planets_style_dict = {	// Markers, Colors, Descriptions and Aspects for Planets
 	sun: {
@@ -232,4 +232,4 @@ var house_system_dict = {
 	topocentric: 'Topozentrisch'
 }
 
-module.exports = { planets_style_dict, signs_style_dict, aspects_style_dict, houses_style_dict, house_system_dict };
+export { planets_style_dict, signs_style_dict, aspects_style_dict, houses_style_dict, house_system_dict };

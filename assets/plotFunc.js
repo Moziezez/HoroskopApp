@@ -266,6 +266,46 @@ async function fetchEnvironmentVariables() {
   }
 }
 
+async function downloadSvgGraph(event) {
+  event.preventDefault();
+  var svgtag1 = document.querySelectorAll(".main-svg")[0].innerHTML;
+  // var svgtag2 = document.querySelectorAll('.main-svg')[1].innerHTML;
+  var svgtag = svgtag1;
+  svgtag = svgtag.replace(/<b>|<\/b>/g, "").replace(/<br>/g, "");
+  var filename = "testfile";
+  // user_data.name +
+  // "_" +
+  // user_data.year +
+  // "." +
+  // user_data.month +
+  // "." +
+  // user_data.day +
+  // "_" +
+  // user_data.hour +
+  // "_" +
+  // user_data.minute +
+  // "_" +
+  // user_data.lat +
+  // "N" +
+  // user_data.lon +
+  // "O";
+  const params = {
+    ident_key: "zbob3as8",
+    svgtag: svgtag,
+    file_name: filename,
+  };
+  try {
+    const response = await axios.post(
+      // getUri +
+      "/svg-background",
+      params
+    );
+    console.log(params, "svg bckground triggered");
+  } catch (error) {
+    console.error("Error fetching SVG background download:", error);
+  }
+}
+
 async function fetchHtmlData() {
   $(".fadeOutDiv").fadeOut(108);
 
@@ -300,6 +340,10 @@ async function fetchHtmlData() {
         setDatetimepicker();
         fetchEnvironmentVariables();
         addClickEvents();
+        document
+          .getElementById("dlButton")
+          .addEventListener("click", downloadSvgGraph);
+
         if ($("body").css("background-color") == "rgb(11, 10, 9)") {
           document.getElementById("circularPlot").setAttribute("style", "filter: invert(0.987);");
           document.getElementById("cartesianPlot").setAttribute("style", "filter: invert(0.987);");
@@ -363,48 +407,6 @@ function addEventlistener(getUri) {
   });
 }
 
-// async function downloadSvgGraph(event) {
-// 	event.preventDefault();
-// 	var svgtag1 = document.querySelectorAll(".main-svg")[0].innerHTML;
-// 	// var svgtag2 = document.querySelectorAll('.main-svg')[1].innerHTML;
-// 	var svgtag = svgtag1;
-// 	svgtag = svgtag.replace(/<b>|<\/b>/g, "").replace(/<br>/g, "");
-// 	var filename =
-// 		user_data.name +
-// 		"_" +
-// 		user_data.year +
-// 		"." +
-// 		user_data.month +
-// 		"." +
-// 		user_data.day +
-// 		"_" +
-// 		user_data.hour +
-// 		"_" +
-// 		user_data.minute +
-// 		"_" +
-// 		user_data.lat +
-// 		"N" +
-// 		user_data.lon +
-// 		"O";
-// 	const params = {
-// 		ident_key: "zbob3as8",
-// 		svgtag: svgtag,
-// 		file_name: filename,
-// 	};
-// 	try {
-// 		const response = await axios.post(
-//			<%=get_uri%> + 
-// 			"/svg-background",
-// 			params
-// 		);
-// 		console.log(params, "svg bckground triggered");
-// 	} catch (error) {
-// 		console.error("Error fetching SVG background download:", error);
-// 	}
-// }
-// document
-// 	.getElementById("dlButton")
-// 	.addEventListener("click", downloadSvgGraph);
 
 async function fetchForm() {
   try {
