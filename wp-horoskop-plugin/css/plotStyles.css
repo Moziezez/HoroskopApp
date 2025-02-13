@@ -26,15 +26,15 @@
 	}
 
 	.flexItem4 {
-		width: 90%;
+		width: 95%;
 	}
 
 	.flexItem5 {
-		width: 90%;
+		width: 95%;
 	}
 
 	.flexItem6 {
-		width: 90%;
+		width: 95%;
 	}
 }
 
@@ -44,16 +44,20 @@
 		border-bottom-left-radius: 50% !important;
 	}
 
+	.signsTextBox {
+		padding: 0 44px 24px 44px;
+	}
+
 	.flexItem4 {
-		width: 75%;
+		width: 90%;
 	}
 
 	.flexItem5 {
-		width: 75%;
+		width: 90%;
 	}
 
 	.flexItem6 {
-		width: 75%;
+		width: 90%;
 	}
 }
 
@@ -283,6 +287,7 @@ p#pUserInfo {
 
 .flexText1 {
 	font-weight: bold;
+	text-align: center;
 	background-color: var(--cc-card-dark);
 	color: var(--cc-color-16);
 	border-radius: 14px;
@@ -304,7 +309,7 @@ p#pUserInfo {
 	border-radius: 2px;
 	background-color: var(--cc-card-dark);
 	text-align: center;
-	padding: 0 44px 24px 44px;
+	padding: 0 22px 24px 22px;
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;

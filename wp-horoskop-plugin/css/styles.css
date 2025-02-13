@@ -99,3 +99,28 @@ span.sublabel.bold {
 .horo.inline {
 	display: inline;
 }
+
+@media print {
+	#print-graph1 {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding-top: 136px;
+		font-family: Iowan Old Style, Palatino, "Palatino Linotype", "Book Antiqua", "URW Palladio L", P052, serif;
+		background-color: #fcf4ea;
+		color: black;
+		border-radius: 48px / 36px;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.signs-text-box {
+		width: 100%;
+		height: auto;
+		display: flex;
+	}
+
+	p.card {
+		overflow: visible;
+	}
+}

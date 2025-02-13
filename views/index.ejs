@@ -23,34 +23,6 @@
 </head>
 
 <body class="horo">
-  <script>
-    // const apiKey = "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";
-    const apiKey = "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";
-    const endpoint = 'https://api.openai.com/v1/chat/completions';
-
-    async function askGPT(prompt) {
-      try {
-        const response = await axios.post(
-          endpoint, {
-            model: 'gpt-4o-mini', // oder 'gpt-4', falls verfügbar
-            prompt: prompt,
-            max_tokens: 150, // Maximale Länge der Antwort
-            temperature: 0.7, // Kreativitätsgrad
-          }, {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${apiKey}`,
-            },
-          }
-        );
-        console.log(response.data.choices[0].text.trim());
-      } catch (error) {
-        console.error('Fehler bei der Anfrage:', error.response?.data || error.message);
-      }
-    }
-    // console.log(askGPT("how are you?"));
-  </script>
-
   <h1 class="horo cntr fadeOutDiv"> Geburtshoroskop erstellen </h1>
 
   <div class="horo fadeOutDiv" id="popupForm">

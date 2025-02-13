@@ -1,4 +1,3 @@
-//require("dotenv").config();
 import { userInput } from "./assets/func.js";
 import { plotXyStyle, circles } from "./assets/components/plotStyle.js";
 import { signs_style_dict, houses_style_dict, planets_style_dict, house_system_dict } from "./assets/components/planetStyles.js";
@@ -6,38 +5,15 @@ import { plotStyle } from "./assets/components/plotStyle.js";
 import path from "path";
 import express from "express";
 import fs from "fs";
-// const pg = require("pg");
-// const PDFDocument = require("pdfkit");
-// const SVGtoPDF = require("svg-to-pdfkit");
 import { JSDOM } from "jsdom";
 import env from 'dotenv';
 env.config();
 import { router } from './app-use.js';
-import OpenAI from "openai";
 import { userDataConst } from './userData.js';
+import puppeteer from 'puppeteer';
 
-// const openai = new OpenAI({
-// 	apiKey: "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",
-// });
-
-// const completion = await openai.chat.completions.create({
-// 	model: "gpt-4o-mini",
-// 	store: true,
-// 	messages: [
-// 		{ "role": "user", "content": "write a haiku about ai" },
-// 	],
-// });
-
-// console.log("MESSAGE", completion.choices[0].message);
-
-// function convertSVGtoPDF(svgFilePath, pdfFilePath) {
-// 	const doc = new PDFDocument();
-// 	const svg = fs.readFileSync(svgFilePath, 'utf8');
-
-// 	SVGtoPDF(doc, svg, 0, 0);
-// 	doc.pipe(fs.createWriteStream(pdfFilePath));
-// 	doc.end();
-// }
+//require("dotenv").config();
+// const pg = require("pg");
 // const dbEntry = require( "./assets/dbEntry.js" );
 
 const app = express();
@@ -218,10 +194,49 @@ app.get("/get-html", function (req, res) {
 	}
 });
 
-app.get("/render-pdf", async (req, res) => {
-	const svgFilePath = "assets/undefined.svg";
-	const pdfFilePath = "assets/converted-image.pdf";
-	convertSVGtoPDF(svgFilePath, pdfFilePath);
+app.post("/render-pdf", async (req, res) => {
+	// const svgFilePath = "assets/undefined.svg";
+	// const pdfFilePath = "assets/converted-image.pdf";
+	const { htmlContent } = req.body;
+
+	if (!htmlContent) {
+		return res.status(400).send('HTML content is required');
+	}
+
+	try {
+		console.log("Received HTML Content:", htmlContent.slice(0, 2500));
+
+		const browser = await puppeteer.launch({ headless: true });
+		const page = await browser.newPage();
+
+		// Set page content from the request
+		await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+
+		await page.addStyleTag({ url: 'http://localhost:3030/public/css/formStyles.css' });
+		await page.addStyleTag({ url: 'http://localhost:3030/public/css/plotStyles.css' });
+		await page.addStyleTag({ url: 'http://localhost:3030/public/css/styles.css' });
+
+
+		// Generate PDF
+		// const pdfBuffer = await page.pdf({ path: 'output_test.pdf', format: 'A4', printBackground: true });
+		// const pdfBuffer = await page.pdf({ format: 'A4', printBackground: true });
+		// res.send(pdfBuffer);
+		// await new Promise(resolve => setTimeout(resolve, 2000));
+
+		const renderedHtml = await page.content();
+		await browser.close();
+		res.send(renderedHtml);
+
+		// Send the PDF as a response
+		// res.set({
+		// 	'Content-Type': 'application/pdf',
+		// 	'Content-Disposition': 'inline; filename="output.pdf"', //attachment  <- this when creating pdf, 'inline' elsewise
+		// });
+
+	} catch (error) {
+		console.error('Error generating PDF:', error);
+		res.status(500).send('Internal Server Error');
+	}
 });
 
 app.get("/favicon.ico", function (req, res) {
@@ -240,8 +255,6 @@ app.get("/assets/components/svg/:filename", function (req, res) {
 		}
 	});
 });
-
-// app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.get("/assets/datetimepicker-master/jquery.js", function (req, res) {
 	res.setHeader("content-type", "text/javascript; charset=utf-8");

@@ -1,348 +1,352 @@
 <!DOCTYPE html>
-<html lang="de" dir="ltr">
+<html lang="de">
 
 <body>
-  <div class="flexItem1">
-    <div class="newInput horo" id="infoForm">
-      <a class="horo" id="triggerForm">
-        Eingabedaten ändern →
-      </a>
-    </div>
-  </div>
-  <div class="plot-flex-container" id="plot-container">
-    <div class="horo header">
-      <div class="horo form">
-        <h1 class="horo cntr">Dein Geburtshoroskop</h1>
-        <h5 class="horo" id="hSystem" style="text-align: center"> Häusersystem: <%=userData.house%> </h5>
-      </div>
-    </div>
-
-
-
-    <div class="horo">
-      <h2 class="horo cntr" id="h3Name"><%=userData.name%></h2>
-      <p class="cntr" id="pUserInfo">
-        <%=pUserInfoString%>
-      </p>
-    </div>
-
-    <div class="flexItem2">
-      <div class="signsBox sunSign">
-        <div class="grid1 cOrange" style="font-size: 29px">☉</div>
-        <div class="grid2 sublabel">STERNZEICHEN</div>
-        <h4 class="grid3"><%= sunSign %></h4>
-      </div>
-
-      <div class="signsBox sunSign">
-        <div class="grid1 cOrange"><b>AC</b></div>
-        <div class="grid2 sublabel">ASZENDENT</div>
-        <h4 class="grid3"><%= ascendant %></h4>
-      </div>
-
-      <div class="signsBox sunSign">
-        <div class="grid1 cOrange" style="font-size: 25px; font-weight: bold">
-          ☽
-        </div>
-        <div class="grid2 sublabel">MONDZEICHEN</div>
-        <h4 class="grid3"><%= moonSign %></h4>
-      </div>
-    </div>
-
-    <div class="flexItem3">
-      <div id="circularPlot"></div>
-      <div class="horo legendDiv">
-        <a class="horo" id="triggerLegend">
-          Legende →
+  <div id="plot-container">
+    <div class="flexItem1">
+      <div class="newInput horo" id="infoForm">
+        <a class="horo" id="triggerForm">
+          Eingabedaten ändern →
         </a>
-
-        <div id="popupLegend" class="horo hide">
-
-          <hr class="horo" />
-
-          <div class="horo gridLegend1">
-            <% Object.entries(planets).forEach(([k, v], i) => { %>
-            <% if ( ['sirius', 'ascendant', 'midheaven', 'southnode'].includes(k) ) return; %>
-
-            <% var source = "../assets/components/svg/"+k+".svg"%>
-            <div class="gridItemLegend">
-
-              <% if (v.text === "Aufst. Mondknoten (R)" ) { v.text = "Mondknoten" } %>
-              <div><%=v.text %></div>
-              <div><img src=<%=source%> alt="svg" class="svgImgLegend" /></div>
-
-            </div>
-
-            <% }); %>
-            <div class="gridItemLegend">
-              <div>Aszendent</div>
-              <div>AC</div>
-            </div>
-            <div class="gridItemLegend">
-              <div>Himmelsmitte</div>
-              <div>MC</div>
-            </div>
-            <div class="gridItemLegend">
-              <div>Deszendent</div>
-              <div>DC</div>
-            </div>
-          </div>
-
-          <hr class="horo" />
-
-          <div class="horo gridLegend2">
-            <% Object.entries(signs).forEach(([k, v], i) => { %>
-            <% var source = "../assets/components/svg/"+k+".svg"%>
-            <div class="gridItemLegend">
-              <div><%=v.text %></div>
-              <div><img src=<%=source%> alt="svg" class="svgImgLegend" /></div>
-            </div>
-            <% }); %>
-          </div>
-
-          <hr class="horo" />
-
-        </div>
+        <button id="genPdf" class="horo"> PDF </button>
       </div>
     </div>
-
-    <div class="flexItem4">
-
-      <h4 class="horo">INTERPRETATION</h4>
-      <p class="horo">Das Geburtshoroskop kann umfassende und detaillierte Einsicht in die Persönlichkeit, Talente,
-        Herausforderungen und das Lebenspotenzial eines Menschen geben, basierend auf der genauen
-        Position der Planeten zum Zeitpunkt der Geburt.</p>
-      <button class="butn" type="button" id="dlButton">DL</button>
-      <h4 class="horo">Hauptmerkmale</h4>
-      <div class="flexText">
-        <div class="signsTextBox" id="infoSun">
-          <div class="flexText1 cOrange" style="line-height: 28px">
-            <div style="font-size: 33px">☉</div>
-          </div>
-          <h6 class="flexText2 horo">Dein Sternzeichen</h6>
-          <h3 class="flexText3 horo"><%= sunSign %></h3>
-          <hr class="horo card" />
-          <p class="flexText4 horo">
-            Das Sonnenzeichen (Sternzeichen) repräsentiert den Kern der Persönlichkeit und die
-            grundlegenden Charakterzüge, die das Wesen und die Selbstwahrnehmung eines Menschen
-            prägen.
-          </p>
-          <div id="popupSun" class="horo popup hide">
-            <% if ( !checked ) { %>
-            <% var sign_key = userData.sunsign %>
-            <%-	include('./partials/sunsign', { key: sign_key }) %>
-            <% } %>
-          </div>
-          <div class="flexText5 horo">
-            <a class="horo" id="triggerSun">
-              Zur Interpretation →
-            </a>
-          </div>
-        </div>
-        <div class="signsTextBox" id="infoAc">
-          <div class="flexText1 cOrange" style="line-height: 25px">
-            <div style="font-size: 16px; margin-right: 3px">AC</div>
-          </div>
-          <h6 class="flexText2 horo">Dein Aszendent</h6>
-          <h3 class="flexText3 horo"><%= ascendant %></h3>
-          <hr class="horo card" />
-          <p class="flexText4 horo">
-            Der Aszendent beschreibt, wie ein Mensch nach außen hin wirkt und in der Welt auftritt, sowie die
-            Art und Weise, wie er auf seine Umgebung reagiert und von anderen wahrgenommen wird
-          </p>
-          <div id="popupAc" class="horo popup hide">
-            <% if ( !checked ) { %>
-            <% var asc_link = './partials/houses/ascendant_signs'; %>
-            <% var asc_key = houses[1].sign_key; %>
-            <%- include( asc_link, { key: asc_key } ); %>
-            <% } %>
-          </div>
-          <div class="flexText5 horo">
-            <a class="horo" id="triggerAc">
-              Zur Interpretation →
-            </a>
+    <div class="plot-flex-container">
+      <div id="print-graph1">
+        <div class="horo header">
+          <div class="horo form">
+            <h1 class="horo cntr">Dein Geburtshoroskop</h1>
+            <h5 class="horo" id="hSystem" style="text-align: center"> Häusersystem: <%=userData.house%> </h5>
           </div>
         </div>
 
-        <div class="signsTextBox" id="infoMoon">
-          <div class="flexText1 cOrange" style="line-height: 26px">
-            <div style="font-size: 26px; margin-left: 3px">☽</div>
-          </div>
-          <h6 class="flexText2 horo">Dein Mondzeichen</h6>
-          <h3 class="flexText3 horo"><%= moonSign %></h3>
-          <hr class="horo card" />
-          <p class="flexText4 horo">
-            Das Mondzeichen repräsentiert die emotionale Natur eines Menschen, seine inneren Bedürfnisse,
-            Gefühle und unbewussten Reaktionen.
-          </p>
-          <div id="popupMoon" class="horo popup hide">
-            <% if ( !checked ) { %>
-            <% var sign_key = userData.moonsign %>
-            <%- include('./partials/moonsign', { key: sign_key }); %>
-            <% } %>
-          </div>
-          <div class="flexText5 horo">
-            <a class="horo" id="triggerMoon">
-              Zur Interpretation →
-            </a>
-          </div>
-        </div>
-      </div>
 
-      <h4 class="horo">Wechselwirkungen</h4>
-      <div class="flexText">
-        <div class="signsTextBox" id="infoSunAc">
-          <div class="flexTextWw1 cOrange">
-            <div style="font-size: 33px; display: inline; margin-top: -5px">
-              ☉
-            </div>
-            <div style="font-size: 25px; display: inline; margin-top: -2px">
-              ↔
-            </div>
-            <div style="font-size: 14pt; display: inline">AC</div>
-          </div>
-          <h6 class="flexText2 horo">Kombination Sonne & Aszendent</h6>
-          <h3 class="flexText3 horo"><%= sunSign %> & <%= ascendant %></h3>
-          <hr class="horo card" />
-          <p class="flexText4 horo">
-            Die kombinierte Deutung von Sternzeichen und Aszendent zeigt, wie der innere Wesenskern eines
-            Menschen durch sein äußeres Erscheinungsbild und Verhalten zum Ausdruck kommt.
+
+        <div class="horo">
+          <h2 class="horo cntr" id="h3Name"><%=userData.name%></h2>
+          <p class="cntr" id="pUserInfo">
+            <%=pUserInfoString%>
           </p>
-          <div id="popupSunAc" class="horo popup hide">
-            <% if ( !checked ) { %>
-            <% var sun_key = userData.sunsign %>
-            <% var asc_key = houses[1].sign_key; %>
-            <%-	include('./partials/asc_sun_' + sun_key, { key2: asc_key }); %>
-            <% } %>
-          </div>
-          <div class="flexText5 horo">
-            <a class="horo" id="triggerSunAc">
-              Zur Interpretation →
-            </a>
-          </div>
         </div>
-        <div class="signsTextBox" id="infoSunMoon">
-          <div class="flexTextWw1 cOrange">
-            <div style="font-size: 33px; display: inline; margin-top: -5px">
-              ☉
-            </div>
-            <div style="font-size: 25px; display: inline; margin-top: -2px">
-              ↔
-            </div>
-            <div style="font-size: 20pt; display: inline; margin-top: -3px">
+
+        <div class="flexItem2">
+          <div class="signsBox sunSign">
+            <div class="grid1 cOrange" style="font-size: 29px">☉</div>
+            <div class="grid2 sublabel">STERNZEICHEN</div>
+            <h4 class="grid3"><%= sunSign %></h4>
+          </div>
+
+          <div class="signsBox sunSign">
+            <div class="grid1 cOrange"><b>AC</b></div>
+            <div class="grid2 sublabel">ASZENDENT</div>
+            <h4 class="grid3"><%= ascendant %></h4>
+          </div>
+
+          <div class="signsBox sunSign">
+            <div class="grid1 cOrange" style="font-size: 25px; font-weight: bold">
               ☽
             </div>
+            <div class="grid2 sublabel">MONDZEICHEN</div>
+            <h4 class="grid3"><%= moonSign %></h4>
           </div>
-          <h6 class="flexText2 horo">Kombination Sonne & Mond</h6>
-          <h3 class="flexText3 horo"><%= sunSign %> & <%= moonSign %></h3>
-          <hr class="horo card" />
-          <p class="flexText4 horo">
-            Die Kombination von Sonnenzeichen und Mondzeichen offenbart, wie der innere Wesenskern
-            eines Menschen mit seinen emotionalen Bedürfnissen und Reaktionen harmoniert und interagiert.
-          </p>
-          <div id="popupSunMoon" class="horo popup hide">
-            <% if ( !checked ) { %>
-            <% var sun_key = userData.sunsign %>
-            <% var moon_key = userData.moonsign; %>
-            <%- include('./partials/moon_sun_' + sun_key, { key2: moon_key }); %>
-            <% } %>
-          </div>
-          <div class="flexText5 horo">
-            <a class="horo" id="triggerSunMoon">
-              Zur Interpretation →
+        </div>
+
+        <div class="flexItem3">
+          <div id="circularPlot"></div>
+          <div class="horo legendDiv">
+            <a class="horo" id="triggerLegend">
+              Legende →
             </a>
+
+            <div id="popupLegend" class="horo hide">
+
+              <hr class="horo" />
+
+              <div class="horo gridLegend1">
+                <% Object.entries(planets).forEach(([k, v], i) => { %>
+                <% if ( ['sirius', 'ascendant', 'midheaven', 'southnode'].includes(k) ) return; %>
+
+                <% var source = "../assets/components/svg/"+k+".svg"%>
+                <div class="gridItemLegend">
+
+                  <% if (v.text === "Aufst. Mondknoten (R)" ) { v.text = "Mondknoten" } %>
+                  <div><%=v.text %></div>
+                  <div><img src=<%=source%> alt="svg" class="svgImgLegend" /></div>
+
+                </div>
+
+                <% }); %>
+                <div class="gridItemLegend">
+                  <div>Aszendent</div>
+                  <div>AC</div>
+                </div>
+                <div class="gridItemLegend">
+                  <div>Himmelsmitte</div>
+                  <div>MC</div>
+                </div>
+                <div class="gridItemLegend">
+                  <div>Deszendent</div>
+                  <div>DC</div>
+                </div>
+              </div>
+
+              <hr class="horo" />
+
+              <div class="horo gridLegend2">
+                <% Object.entries(signs).forEach(([k, v], i) => { %>
+                <% var source = "../assets/components/svg/"+k+".svg"%>
+                <div class="gridItemLegend">
+                  <div><%=v.text %></div>
+                  <div><img src=<%=source%> alt="svg" class="svgImgLegend" /></div>
+                </div>
+                <% }); %>
+              </div>
+
+              <hr class="horo" />
+
+            </div>
           </div>
         </div>
       </div>
-      <h5 class="horo">KI Befragen:</h5>
-      <select class="horo ai">
-        <option value="F1">Fasse den Text zusammen.</option>
-        <option value="F2">Persönliche Handlungsanweisung.</option>
-      </select>
-      <button class="horo btn"> GO! </button>
+      <div class="flexItem4">
 
-    </div>
+        <h4 class="horo">INTERPRETATION</h4>
+        <p class="horo">Das Geburtshoroskop kann umfassende und detaillierte Einsicht in die Persönlichkeit, Talente,
+          Herausforderungen und das Lebenspotenzial eines Menschen geben, basierend auf der genauen
+          Position der Planeten zum Zeitpunkt der Geburt.</p>
+        <button class="butn" type="button" id="dlButton">DL</button>
+        <h4 class="horo">Hauptmerkmale</h4>
+        <div class="flexText">
+          <div class="signsTextBox" id="infoSun">
+            <div class="flexText1 cOrange" style="line-height: 28px">
+              <div style="font-size: 33px">☉</div>
+            </div>
+            <h6 class="flexText2 horo">Dein Sternzeichen</h6>
+            <h3 class="flexText3 horo"><%= sunSign %></h3>
+            <hr class="horo card" />
+            <p class="flexText4 horo">
+              Das Sonnenzeichen (Stern&shy;zeichen) repräsentiert den Kern der Persön&shy;lichkeit und die
+              grundlegenden Charakter&shy;züge, die das Wesen und die Selbst&shy;wahrnehmung eines Menschen
+              prägen.
+            </p>
+            <div id="popupSun" class="horo popup hide">
+              <% if ( !checked ) { %>
+              <% var sign_key = userData.sunsign %>
+              <%-	include('./partials/sunsign', { key: sign_key }) %>
+              <% } %>
+            </div>
+            <div class="flexText5 horo">
+              <a class="horo" id="triggerSun">
+                Zur Interpretation →
+              </a>
+            </div>
+          </div>
+          <div class="signsTextBox" id="infoAc">
+            <div class="flexText1 cOrange" style="line-height: 25px">
+              <div style="font-size: 16px; margin-right: 3px">AC</div>
+            </div>
+            <h6 class="flexText2 horo">Dein Aszendent</h6>
+            <h3 class="flexText3 horo"><%= ascendant %></h3>
+            <hr class="horo card" />
+            <p class="flexText4 horo">
+              Der Aszendent beschreibt, wie ein Mensch nach außen hin wirkt und in der Welt auftritt, sowie die
+              Art und Weise, wie er auf seine Umgebung reagiert und von anderen wahrgenom&shy;men wird
+            </p>
+            <div id="popupAc" class="horo popup hide">
+              <% if ( !checked ) { %>
+              <% var asc_link = './partials/houses/ascendant_signs'; %>
+              <% var asc_key = houses[1].sign_key; %>
+              <%- include( asc_link, { key: asc_key } ); %>
+              <% } %>
+            </div>
+            <div class="flexText5 horo">
+              <a class="horo" id="triggerAc">
+                Zur Interpretation →
+              </a>
+            </div>
+          </div>
 
-    <div class="flexItem5">
-      <h4 class="horo">ASPEKTE</h4>
-      <div class="cartesianDiv">
-        <div class="horo half">
-          <p class="horo">
-            Die Aspekte der Planeten untereinander zeigen die dynamischen Beziehungen und
-            Wechselwirkungen zwischen verschiedenen Bereichen des Lebens an, wobei harmonische
-            Aspekte positive Synergien und Wachstumschancen fördern, während Spannungsaspekte auf
-            Konflikte und Herausforderungen hinweisen. </br>
-            Der Orbis gibt an, um wie viel Grad der jeweilige Aspekt vom exakten Winkel abweicht.
-            Je höher dieser Wert, desto schwächer ist also die Wirkung des Aspekts. </br>
-            Diese maximalen Orben sind Vorraussetzung für gerade noch gültige Aspekte:
-          </p>
-          <div class="aspectOrbsGrid">
-            <span class="horo aspectOrbsItem"> Konjunktion: 8° </span>
-            <span class="horo aspectOrbsItem"> Trigon: 8° </span>
-            <span class="horo aspectOrbsItem"> Quadrat: 7° </span>
-            <span class="horo aspectOrbsItem"> Semi-Quadrat: 1° </span>
-            <span class="horo aspectOrbsItem"> Quincunx: 5° </span>
-            <span class="horo aspectOrbsItem"> Opposition: 8° </span>
-            <span class="horo aspectOrbsItem"> Septil: 1° </span>
-            <span class="horo aspectOrbsItem"> Sextil: 6° </span>
-            <span class="horo aspectOrbsItem"> Semi-Sextil: 1° </span>
-            <span class="horo aspectOrbsItem"> Quintil: 1° </span>
+          <div class="signsTextBox" id="infoMoon">
+            <div class="flexText1 cOrange" style="line-height: 26px">
+              <div style="font-size: 26px; margin-left: 3px">☽</div>
+            </div>
+            <h6 class="flexText2 horo">Dein Mondzeichen</h6>
+            <h3 class="flexText3 horo"><%= moonSign %></h3>
+            <hr class="horo card" />
+            <p class="flexText4 horo">
+              Das Mondzeichen reprä&shy;sentiert die emotionale Natur eines Menschen, seine inneren Bedürfnisse,
+              Gefühle und unbewussten Reaktionen.
+            </p>
+            <div id="popupMoon" class="horo popup hide">
+              <% if ( !checked ) { %>
+              <% var sign_key = userData.moonsign %>
+              <%- include('./partials/moonsign', { key: sign_key }); %>
+              <% } %>
+            </div>
+            <div class="flexText5 horo">
+              <a class="horo" id="triggerMoon">
+                Zur Interpretation →
+              </a>
+            </div>
           </div>
         </div>
-        <div class="horo half2">
-          <div id="cartesianPlot"></div>
+
+        <h4 class="horo">Wechselwirkungen</h4>
+        <div class="flexText">
+          <div class="signsTextBox" id="infoSunAc">
+            <div class="flexTextWw1 cOrange">
+              <div style="font-size: 33px; display: inline; margin-top: -5px">
+                ☉
+              </div>
+              <div style="font-size: 25px; display: inline; margin-top: -2px">
+                ↔
+              </div>
+              <div style="font-size: 14pt; display: inline">AC</div>
+            </div>
+            <h6 class="flexText2 horo">Kombination Sonne & Aszendent</h6>
+            <h3 class="flexText3 horo"><%= sunSign %> & <%= ascendant %></h3>
+            <hr class="horo card" />
+            <p class="flexText4 horo">
+              Die kombinierte Deutung von Sternzeichen und Aszendent zeigt, wie der innere Wesenskern eines
+              Menschen durch sein äußeres Erscheinungsbild und Verhalten zum Ausdruck kommt.
+            </p>
+            <div id="popupSunAc" class="horo popup hide">
+              <% if ( !checked ) { %>
+              <% var sun_key = userData.sunsign %>
+              <% var asc_key = houses[1].sign_key; %>
+              <%-	include('./partials/asc_sun_' + sun_key, { key2: asc_key }); %>
+              <% } %>
+            </div>
+            <div class="flexText5 horo">
+              <a class="horo" id="triggerSunAc">
+                Zur Interpretation →
+              </a>
+            </div>
+          </div>
+          <div class="signsTextBox" id="infoSunMoon">
+            <div class="flexTextWw1 cOrange">
+              <div style="font-size: 33px; display: inline; margin-top: -5px">
+                ☉
+              </div>
+              <div style="font-size: 25px; display: inline; margin-top: -2px">
+                ↔
+              </div>
+              <div style="font-size: 20pt; display: inline; margin-top: -3px">
+                ☽
+              </div>
+            </div>
+            <h6 class="flexText2 horo">Kombination Sonne & Mond</h6>
+            <h3 class="flexText3 horo"><%= sunSign %> & <%= moonSign %></h3>
+            <hr class="horo card" />
+            <p class="flexText4 horo">
+              Die Kombination von Sonnenzeichen und Mondzeichen offenbart, wie der innere Wesenskern
+              eines Menschen mit seinen emotionalen Bedürfnissen und Reaktionen harmoniert und interagiert.
+            </p>
+            <div id="popupSunMoon" class="horo popup hide">
+              <% if ( !checked ) { %>
+              <% var sun_key = userData.sunsign %>
+              <% var moon_key = userData.moonsign; %>
+              <%- include('./partials/moon_sun_' + sun_key, { key2: moon_key }); %>
+              <% } %>
+            </div>
+            <div class="flexText5 horo">
+              <a class="horo" id="triggerSunMoon">
+                Zur Interpretation →
+              </a>
+            </div>
+          </div>
+        </div>
+        <h5 class="horo">KI Befragen:</h5>
+        <select class="horo ai">
+          <option value="F1">Fasse den Text zusammen.</option>
+          <option value="F2">Persönliche Handlungsanweisung.</option>
+        </select>
+        <button class="horo btn"> GO! </button>
+
+      </div>
+
+      <div class="flexItem5">
+        <h4 class="horo">ASPEKTE</h4>
+        <div class="cartesianDiv">
+          <div class="horo half">
+            <p class="horo">
+              Die Aspekte der Planeten untereinander zeigen die dynamischen Beziehungen und
+              Wechselwirkungen zwischen verschiedenen Bereichen des Lebens an, wobei harmonische
+              Aspekte positive Synergien und Wachstumschancen fördern, während Spannungsaspekte auf
+              Konflikte und Herausforderungen hinweisen. </br>
+              Der Orbis gibt an, um wie viel Grad der jeweilige Aspekt vom exakten Winkel abweicht.
+              Je höher dieser Wert, desto schwächer ist also die Wirkung des Aspekts. </br>
+              Diese maximalen Orben sind Vorraussetzung für gerade noch gültige Aspekte:
+            </p>
+            <div class="aspectOrbsGrid">
+              <span class="horo aspectOrbsItem"> Konjunktion: 8° </span>
+              <span class="horo aspectOrbsItem"> Trigon: 8° </span>
+              <span class="horo aspectOrbsItem"> Quadrat: 7° </span>
+              <span class="horo aspectOrbsItem"> Semi-Quadrat: 1° </span>
+              <span class="horo aspectOrbsItem"> Quincunx: 5° </span>
+              <span class="horo aspectOrbsItem"> Opposition: 8° </span>
+              <span class="horo aspectOrbsItem"> Septil: 1° </span>
+              <span class="horo aspectOrbsItem"> Sextil: 6° </span>
+              <span class="horo aspectOrbsItem"> Semi-Sextil: 1° </span>
+              <span class="horo aspectOrbsItem"> Quintil: 1° </span>
+            </div>
+          </div>
+          <div class="horo half2">
+            <div id="cartesianPlot"></div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="flexItem6">
-      <h4 class="horo">POSITIONEN</h4>
-      <p class="horo">
-        Die Planeten und Himmelskörper bewohnen die 12 astrologischen Häuser, welche verschiedene Lebensbereiche darstellen.
-        Dadurch beeinflussen sie diese Bereiche mit ihren charakteristischen Energien und zeigen vorherrschende Themen auf.
-      </p>
-      <div class="horo positions">
-        <div class="horo posHalf">
-          <% Object.entries(planets).forEach(([k, v], i) => { %>
-          <% if ( ['sirius', 'ascendant', 'midheaven', 'southnode'].includes(k) ) return; %>
-          <% var source = `assets/components/svg/${k}.svg`%>
-          <% let posName = planets[k].pos_name; %>
-          <% var match = posName.match(/(.*)\s(\p{So})$/u); if (match) { %>
-          <% var posCrd = match[1], utf8symbol = match[2]; }  %>
-          <div class="horo posItem" id="<%=k%>">
-            <div class="horo posGridItem" style="justify-self: center;">
-              <img src=<%=source%> alt="svg" class="svgImgLegend" onerror="console.error('SVG not found:', '<%= source %>');" />
+      <div class="flexItem6">
+        <h4 class="horo">POSITIONEN</h4>
+        <p class="horo">
+          Die Planeten und Himmelskörper bewohnen die 12 astrologischen Häuser, welche verschiedene Lebensbereiche darstellen.
+          Dadurch beeinflussen sie diese Bereiche mit ihren charakteristischen Energien und zeigen vorherrschende Themen auf.
+        </p>
+        <div class="horo positions">
+          <div class="horo posHalf">
+            <% Object.entries(planets).forEach(([k, v], i) => { %>
+            <% if ( ['sirius', 'ascendant', 'midheaven', 'southnode'].includes(k) ) return; %>
+            <% var source = `assets/components/svg/${k}.svg`%>
+            <% let posName = planets[k].pos_name; %>
+            <% var match = posName.match(/(.*)\s(\p{So})$/u); if (match) { %>
+            <% var posCrd = match[1], utf8symbol = match[2]; }  %>
+            <div class="horo posItem" id="<%=k%>">
+              <div class="horo posGridItem" style="justify-self: center;">
+                <img src=<%=source%> alt="svg" class="svgImgLegend" onerror="console.error('SVG not found:', '<%= source %>');" />
+              </div>
+              <div class="horo posGridItem flexPlntPos">
+                <div><b><%=v.text%></b></div>
+                <div><%=posCrd%></div>
+              </div>
+              <div class="horo posGridItem">
+                <span class="horo pos">
+                  <%= utf8symbol %>
+                  <%= signs[v.sign_id].text; %>
+                </span>
+              </div>
+              <div class="horo posGridItem">
+                Haus <%= v.house_id %>
+              </div>
             </div>
-            <div class="horo posGridItem flexPlntPos">
-              <div><b><%=v.text%></b></div>
-              <div><%=posCrd%></div>
-            </div>
-            <div class="horo posGridItem">
-              <span class="horo pos">
-                <%= utf8symbol %>
-                <%= signs[v.sign_id].text; %>
-              </span>
-            </div>
-            <div class="horo posGridItem">
-              Haus <%= v.house_id %>
-            </div>
+            <% if ( i == 6) { %>
           </div>
-          <% if ( i == 6) { %>
-        </div>
-        <div class="horo posHalf">
-          <% } %>
-          <% }); %>
-          <div class="horo posItem" id="AC">
-            <div class="horo posGridItem">
-              AC
-            </div>
-            <div class="horo posGridItem flexPlntPos">
-              <b>Aszendent</b> <%= userData.asc.ChartPosition.Ecliptic.ArcDegreesFormatted30 %>
-            </div>
-            <div class="horo posGridItem">
-              <%= ascendant %>
-            </div>
-            <div class="horo posGridItem">
-              Haus 1
+          <div class="horo posHalf">
+            <% } %>
+            <% }); %>
+            <div class="horo posItem" id="AC">
+              <div class="horo posGridItem">
+                AC
+              </div>
+              <div class="horo posGridItem flexPlntPos">
+                <b>Aszendent</b> <%= userData.asc.ChartPosition.Ecliptic.ArcDegreesFormatted30 %>
+              </div>
+              <div class="horo posGridItem">
+                <%= ascendant %>
+              </div>
+              <div class="horo posGridItem">
+                Haus 1
+              </div>
             </div>
           </div>
         </div>

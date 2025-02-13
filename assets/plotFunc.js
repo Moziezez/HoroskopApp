@@ -94,7 +94,7 @@ function popUp(key) {
     height: "auto",
   });
   $(".flexText5").children().text("Zur Interpretation →");
-  $(".newInput").children().text("Eingabedaten ändern →");
+  // $(".newInput").children().text("Eingabedaten ändern →"); // ??
 
   // click events
   ["Sun", "Ac", "Moon", "SunAc", "SunMoon"].forEach((idKey) => {
@@ -107,7 +107,7 @@ function popUp(key) {
   $("#info" + key).css("width", "40%");
   $("#info" + key).animate({
     width: "100%",
-    height: `${0.67 * window.innerHeight}px`,
+    height: 'auto', //`${0.85 * window.innerHeight}px`,
   }, {
     duration: 108,
     complete: function () {
@@ -148,8 +148,43 @@ function closePopup(key) {
     .attr("onclick", `popUp("${key}")`);
 }
 
-function addClickEvents() {
+async function generatePdf(input_html) {
+  const htmlContent = `
+    <!DOCTYPE html>
+    <html lang="de">
+      <head>
+        <meta name="viewport" content="width=device-width" charset="UTF-8">
+        <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script><style id="plotly.js-style-global"></style>
+        <base href='http://localhost:3030/'>
+      </head>
 
+      <body class="horo" style="">
+        ${input_html}
+      </body>
+    </html>
+  `;
+
+  try {
+    const response = await axios.post('/render-pdf', {
+      htmlContent
+    }, {
+      // responseType: 'arraybuffer',  oder 'blob'
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    const blob = new Blob([response.data], { type: 'text/html' });
+    const previewUrl = URL.createObjectURL(blob);
+    window.open(previewUrl, '_blank'); // Open in new tab
+
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+function addClickEvents() {
+  $('#genPdf').click(() => { generatePdf(document.getElementsByClassName("plot-flex-container")[0].outerHTML) });
+  // $('#genPdf').click(() => { generatePdf(document.documentElement.outerHTML) });
+  //$('#genPdf').click(() => { generatePdf(document.getElementById("print-graph1").outerHTML) });
   $("#popupLegend").fadeOut(1);
   $("#triggerForm").attr("onclick", `popUpForm()`);
   $("#triggerLegend").attr("onclick", `popUpLegend()`);
