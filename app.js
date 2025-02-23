@@ -5,14 +5,15 @@ import { plotStyle } from "./assets/components/plotStyle.js";
 import path from "path";
 import express from "express";
 import fs from "fs";
-// import { JSDOM } from "jsdom";
+// global.ReadableStream = require('web-streams-polyfill').ReadableStream;
+import { JSDOM } from "jsdom";
 import env from 'dotenv';
 env.config();
 import { router } from './app-use.js';
 import { userDataConst } from './userData.js';
 import puppeteer from 'puppeteer';
-import axios from 'axios';
-import * as cheerio from 'cheerio';
+// import axios from 'axios';
+// import * as cheerio from 'cheerio';
 
 //require("dotenv").config();
 // const pg = require("pg");
@@ -24,31 +25,31 @@ app.use(router);
 
 
 
-async function fetchHTML(url) {
-	try {
-		const { data: html } = await axios.get(url); // Fetch the page's HTML
-		const $ = cheerio.load(html); // Load the HTML into cheerio
+// async function fetchHTML(url) {
+// 	try {
+// 		const { data: html } = await axios.get(url); // Fetch the page's HTML
+// 		const $ = cheerio.load(html); // Load the HTML into cheerio
 
-		// Example: Extract the page title
-		const title = $('title').text();
-		console.log('Page Title:', title);
+// 		// Example: Extract the page title
+// 		const title = $('title').text();
+// 		console.log('Page Title:', title);
 
-		// Example: Extract all links
-		const links = [];
-		$('a').each((i, elem) => {
-			links.push($(elem).attr('href'));
-		});
-		console.log('Links:', links);
+// 		// Example: Extract all links
+// 		const links = [];
+// 		$('a').each((i, elem) => {
+// 			links.push($(elem).attr('href'));
+// 		});
+// 		console.log('Links:', links);
 
-		return $; // Returning cheerio instance for further manipulation
-	} catch (error) {
-		console.error('Error fetching HTML:', error);
-	}
-}
+// 		return $; // Returning cheerio instance for further manipulation
+// 	} catch (error) {
+// 		console.error('Error fetching HTML:', error);
+// 	}
+// }
 
-app.post("/products/id", (req, res) => {
-	fetchHTML("https://vedara.de/produkt/talisman-aquarius/?via=7");
-})
+// app.post("/products/id", (req, res) => {
+// 	fetchHTML("https://vedara.de/produkt/talisman-aquarius/?via=7");
+// })
 
 app.get("/authenticated", (req, res) => {
 	if (req.isAuthenticated()) {

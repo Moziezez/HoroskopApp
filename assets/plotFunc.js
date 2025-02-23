@@ -12,9 +12,8 @@ function popUpForm() {
     .text("← Zurück")
     .attr("onclick", `closePopupForm()`);
 
-  $("#infoForm").css("width", "40%");
   $("#infoForm").animate({
-    width: "100%",
+    width: "396px",
     display: "block",
   }, {
     duration: 333,
