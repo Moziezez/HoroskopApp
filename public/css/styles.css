@@ -96,6 +96,22 @@ span.sublabel.bold {
 }
 
 @media print {
+	.horo.no-print {
+		display: none;
+	}
+
+	.horo.page-break {
+		page-break-before: always;
+		break-before: always;
+	}
+
+	p.horo.lrMar {
+		font-size: 11pt;
+		margin-left: 12px;
+		margin-right: 12px;
+
+	}
+
 	#print-graph1 {
 		display: flex;
 		flex-direction: column;
@@ -109,13 +125,60 @@ span.sublabel.bold {
 		overflow: hidden;
 	}
 
-	.signs-text-box {
-		width: 100%;
-		height: auto;
-		display: flex;
+	div.horo.legendDiv {
+		page-break-inside: avoid;
+		break-inside: avoid;
+		padding-top: 24px;
 	}
 
-	p.card {
+	#popUpLegend {
+		display: grid;
+	}
+
+	.horo.hide {
+		display: block;
+	}
+
+	h4.horo.hide {
+		margin-left: 108px;
+	}
+
+	.signsTextBox {
+		width: 100%;
+		height: 96vh;
+		display: flex;
+		page-break-before: always;
+		break-before: always;
+		break-inside: avoid;
+		margin-top: 24px;
+	}
+
+	p.horo.card {
+		font-size: 11pt;
 		overflow: visible;
+	}
+
+	.plot-flex-container {
+		width: 96%;
+		margin: auto;
+		padding: 0 5px;
+	}
+
+	.aspectOrbGrid {
+		width: 55%;
+	}
+
+	div.flexItem5,
+	div.flexItem6 {
+		margin-top: 0;
+		padding: 12px;
+	}
+
+	div.horo.half {
+		width: 100%;
+	}
+
+	div.horo.half2 {
+		width: 80%;
 	}
 }

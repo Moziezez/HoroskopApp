@@ -248,6 +248,8 @@
 	border-radius: 48px / 36px;
 	position: relative;
 	overflow: hidden;
+	width: 93%;
+	margin: auto;
 }
 
 .flexItem1 {
@@ -485,12 +487,13 @@ div.horo.header {
 .aspectOrbsGrid {
 	display: grid;
 	grid-template-columns: 22% 14% 16% 24% 20%;
-	grid-template-rows: 33px 33px 33px 33px;
+	grid-template-rows: 33px 33px;
 	grid-auto-flow: row;
 	gap: 0 5px;
-	margin-left: 3px;
+	margin-left: 12px;
 	font-size: 12pt;
 	font-weight: bold;
+	min-width: 552px;
 }
 
 .aspectOrbs div.horo {
@@ -511,4 +514,9 @@ p.card {
 	height: 264px;
 	scrollbar-width: thin;
 	scrollbar-color: #888 #b6b0b0;
+}
+
+p.horo.lrMar {
+	margin-left: 7px;
+	margin-right: 7px;
 }

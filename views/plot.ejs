@@ -8,7 +8,8 @@
         <a class="horo" id="triggerForm">
           Eingabedaten ändern →
         </a>
-        <button id="genPdf" class="horo"> PDF </button>
+        <!-- <button id="genPdf1" class="horo"> PDF1 </button>
+        <button id="genPdf2" class="horo"> PDF2 </button> -->
       </div>
     </div>
     <div class="plot-flex-container">
@@ -54,10 +55,10 @@
         <div class="flexItem3">
           <div id="circularPlot"></div>
           <div class="horo legendDiv">
-            <a class="horo" id="triggerLegend">
+            <a class="horo no-print" id="triggerLegend">
               Legende →
             </a>
-
+            <h4 class="horo legend hide"> Legende </h4>
             <div id="popupLegend" class="horo hide">
 
               <hr class="horo" />
@@ -111,11 +112,10 @@
       <div class="flexItem4">
 
         <h4 class="horo">INTERPRETATION</h4>
-        <p class="horo">Das Geburtshoroskop kann umfassende und detaillierte Einsicht in die Persönlichkeit, Talente,
+        <p class="horo lrMar">Das Geburtshoroskop kann umfassende und detaillierte Einsicht in die Persönlichkeit, Talente,
           Herausforderungen und das Lebenspotenzial eines Menschen geben, basierend auf der genauen
           Position der Planeten zum Zeitpunkt der Geburt.</p>
-        <button class="butn" type="button" id="dlButton">DL</button>
-        <h4 class="horo">Hauptmerkmale</h4>
+        <h4 class="horo no-print">Hauptmerkmale</h4>
         <div class="flexText">
           <div class="signsTextBox" id="infoSun">
             <div class="flexText1 cOrange" style="line-height: 28px">
@@ -125,7 +125,7 @@
             <h3 class="flexText3 horo"><%= sunSign %></h3>
             <hr class="horo card" />
             <p class="flexText4 horo">
-              Das Sonnenzeichen (Stern&shy;zeichen) repräsentiert den Kern der Persön&shy;lichkeit und die
+              Das Sternzeichen/Sonnenzeichen repräsen&shy;tiert den Kern der Persön&shy;lichkeit und die
               grundlegenden Charakter&shy;züge, die das Wesen und die Selbst&shy;wahrnehmung eines Menschen
               prägen.
             </p>
@@ -135,7 +135,7 @@
               <%-	include('./partials/sunsign', { key: sign_key }) %>
               <% } %>
             </div>
-            <div class="flexText5 horo">
+            <div class="flexText5 horo no-print">
               <a class="horo" id="triggerSun">
                 Zur Interpretation →
               </a>
@@ -159,7 +159,7 @@
               <%- include( asc_link, { key: asc_key } ); %>
               <% } %>
             </div>
-            <div class="flexText5 horo">
+            <div class="flexText5 horo no-print">
               <a class="horo" id="triggerAc">
                 Zur Interpretation →
               </a>
@@ -175,7 +175,7 @@
             <hr class="horo card" />
             <p class="flexText4 horo">
               Das Mondzeichen reprä&shy;sentiert die emotionale Natur eines Menschen, seine inneren Bedürfnisse,
-              Gefühle und unbewussten Reaktionen.
+              Gefühle und un&shy;bewussten Reaktionen.
             </p>
             <div id="popupMoon" class="horo popup hide">
               <% if ( !checked ) { %>
@@ -183,7 +183,7 @@
               <%- include('./partials/moonsign', { key: sign_key }); %>
               <% } %>
             </div>
-            <div class="flexText5 horo">
+            <div class="flexText5 horo no-print">
               <a class="horo" id="triggerMoon">
                 Zur Interpretation →
               </a>
@@ -191,7 +191,7 @@
           </div>
         </div>
 
-        <h4 class="horo">Wechselwirkungen</h4>
+        <h4 class="horo no-print">Wechselwirkungen</h4>
         <div class="flexText">
           <div class="signsTextBox" id="infoSunAc">
             <div class="flexTextWw1 cOrange">
@@ -217,7 +217,7 @@
               <%-	include('./partials/asc_sun_' + sun_key, { key2: asc_key }); %>
               <% } %>
             </div>
-            <div class="flexText5 horo">
+            <div class="flexText5 horo no-print">
               <a class="horo" id="triggerSunAc">
                 Zur Interpretation →
               </a>
@@ -249,36 +249,26 @@
               <%- include('./partials/moon_sun_' + sun_key, { key2: moon_key }); %>
               <% } %>
             </div>
-            <div class="flexText5 horo">
+            <div class="flexText5 horo no-print">
               <a class="horo" id="triggerSunMoon">
                 Zur Interpretation →
               </a>
             </div>
           </div>
         </div>
-        <h5 class="horo">KI Befragen:</h5>
-        <select class="horo ai">
-          <option value="F1">Fasse den Text zusammen.</option>
-          <option value="F2">Persönliche Handlungsanweisung.</option>
-        </select>
-        <button class="horo btn"> GO! </button>
-
       </div>
 
       <div class="flexItem5">
         <h4 class="horo">ASPEKTE</h4>
         <div class="cartesianDiv">
           <div class="horo half">
-            <p class="horo">
-              Die Aspekte der Planeten untereinander zeigen die dynamischen Beziehungen und
-              Wechselwirkungen zwischen verschiedenen Bereichen des Lebens an, wobei harmonische
-              Aspekte positive Synergien und Wachstumschancen fördern, während Spannungsaspekte auf
-              Konflikte und Herausforderungen hinweisen. </br>
+            <p class="horo lrMar">
+              Die Aspekte zeigen die dynamischen Beziehungen zwischen jeweils zwei Himmelskörpern an, welche widerum aktive Lebensbereiche symbolisieren.
+              Einige Aspekte fördern positive Synergien und Wachstumschancen, während andere auf Konflikte und Herausforderungen hinweisen. </br>
               Der Orbis gibt an, um wie viel Grad der jeweilige Aspekt vom exakten Winkel abweicht.
-              Je höher dieser Wert, desto schwächer ist also die Wirkung des Aspekts. </br>
-              Diese maximalen Orben sind Vorraussetzung für gerade noch gültige Aspekte:
+              Liegt er im angegebenen Bereich, ist der Aspekt gültig:
             </p>
-            <div class="aspectOrbsGrid">
+            <div class="horo lrMar aspectOrbsGrid">
               <span class="horo aspectOrbsItem"> Konjunktion: 8° </span>
               <span class="horo aspectOrbsItem"> Trigon: 8° </span>
               <span class="horo aspectOrbsItem"> Quadrat: 7° </span>
@@ -290,6 +280,8 @@
               <span class="horo aspectOrbsItem"> Semi-Sextil: 1° </span>
               <span class="horo aspectOrbsItem"> Quintil: 1° </span>
             </div>
+            <!-- <h4 class="horo"> Deine Aspekte </h4> -->
+
           </div>
           <div class="horo half2">
             <div id="cartesianPlot"></div>
@@ -298,8 +290,8 @@
       </div>
 
       <div class="flexItem6">
-        <h4 class="horo">POSITIONEN</h4>
-        <p class="horo">
+        <h4 class="horo page-break">POSITIONEN</h4>
+        <p class="horo lrMar">
           Die Planeten und Himmelskörper bewohnen die 12 astrologischen Häuser, welche verschiedene Lebensbereiche darstellen.
           Dadurch beeinflussen sie diese Bereiche mit ihren charakteristischen Energien und zeigen vorherrschende Themen auf.
         </p>

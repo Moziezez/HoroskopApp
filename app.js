@@ -5,12 +5,14 @@ import { plotStyle } from "./assets/components/plotStyle.js";
 import path from "path";
 import express from "express";
 import fs from "fs";
-import { JSDOM } from "jsdom";
+// import { JSDOM } from "jsdom";
 import env from 'dotenv';
 env.config();
 import { router } from './app-use.js';
 import { userDataConst } from './userData.js';
 import puppeteer from 'puppeteer';
+import axios from 'axios';
+import * as cheerio from 'cheerio';
 
 //require("dotenv").config();
 // const pg = require("pg");
@@ -19,6 +21,34 @@ import puppeteer from 'puppeteer';
 const app = express();
 app.set("view engine", "ejs");
 app.use(router);
+
+
+
+async function fetchHTML(url) {
+	try {
+		const { data: html } = await axios.get(url); // Fetch the page's HTML
+		const $ = cheerio.load(html); // Load the HTML into cheerio
+
+		// Example: Extract the page title
+		const title = $('title').text();
+		console.log('Page Title:', title);
+
+		// Example: Extract all links
+		const links = [];
+		$('a').each((i, elem) => {
+			links.push($(elem).attr('href'));
+		});
+		console.log('Links:', links);
+
+		return $; // Returning cheerio instance for further manipulation
+	} catch (error) {
+		console.error('Error fetching HTML:', error);
+	}
+}
+
+app.post("/products/id", (req, res) => {
+	fetchHTML("https://vedara.de/produkt/talisman-aquarius/?via=7");
+})
 
 app.get("/authenticated", (req, res) => {
 	if (req.isAuthenticated()) {
@@ -166,6 +196,7 @@ app.get("/get-html", function (req, res) {
 
 		var loca_string = `${user.city !== undefined ? user.city : ''} (${user.lat}°N, ${user.lon}°O)`;
 		var pUserInfoString = 'Geboren am ' + date_string + ' um ' + time_string + ' in ' + loca_string;
+		// console.log("ASPECTS?:", aspects)
 
 		res.render("plot.ejs", {
 			checked: isChecked,
@@ -194,7 +225,59 @@ app.get("/get-html", function (req, res) {
 	}
 });
 
-app.post("/render-pdf", async (req, res) => {
+app.post("/download/part-pdf", async (req, res) => {
+
+	const { input_html } = req.body;
+	const htmlContent = `
+		<!DOCTYPE html>
+		<html lang="de">
+		<head>
+			<meta name="viewport" content="width=device-width" charset="UTF-8">
+			<script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script><style id="plotly.js-style-global"></style>
+			<base href='http://localhost:3030/'>
+		</head>
+
+		<body class="horo" style="">
+			${input_html}
+		</body>
+		</html>
+	`;
+
+	if (!htmlContent) {
+		return res.status(400).send('HTML content is required');
+	}
+
+	try {
+		console.log("Received HTML Content:", htmlContent.slice(0, 500));
+
+		const browser = await puppeteer.launch({ headless: "true" });
+		const page = await browser.newPage();
+
+		// Set page content from the request
+		await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+
+		await page.addStyleTag({ url: 'http://localhost:3030/public/css/formStyles.css' });
+		await page.addStyleTag({ url: 'http://localhost:3030/public/css/plotStyles.css' });
+		await page.addStyleTag({ url: 'http://localhost:3030/public/css/styles.css' });
+
+		// Generate PDF
+		const pdfBuffer = await page.pdf({ path: 'pdf1.pdf', format: 'A4', printBackground: true }); // 
+
+
+		await browser.close();
+
+		res.set({
+			'Content-Type': 'application/pdf',
+			'Content-Disposition': 'inline; filename="pdf1.pdf"', // 'inline' to open in tab
+		});
+		res.send(pdfBuffer);
+	} catch (error) {
+		console.error('Error generating PDF1:', error);
+		res.status(500).send('Internal Server Error');
+	}
+});
+
+app.post("/download/full-pdf", async (req, res) => {
 	// const svgFilePath = "assets/undefined.svg";
 	// const pdfFilePath = "assets/converted-image.pdf";
 	const { htmlContent } = req.body;
@@ -204,7 +287,7 @@ app.post("/render-pdf", async (req, res) => {
 	}
 
 	try {
-		console.log("Received HTML Content:", htmlContent.slice(0, 2500));
+		console.log("Received HTML Content:", htmlContent.slice(0, 500));
 
 		const browser = await puppeteer.launch({ headless: true });
 		const page = await browser.newPage();
@@ -218,20 +301,28 @@ app.post("/render-pdf", async (req, res) => {
 
 
 		// Generate PDF
-		// const pdfBuffer = await page.pdf({ path: 'output_test.pdf', format: 'A4', printBackground: true });
-		// const pdfBuffer = await page.pdf({ format: 'A4', printBackground: true });
-		// res.send(pdfBuffer);
-		// await new Promise(resolve => setTimeout(resolve, 2000));
+		const pdfBuffer = await page.pdf({ path: 'output_test.pdf', format: 'A4', printBackground: true });
+		//res.send(pdfBuffer);
 
 		const renderedHtml = await page.content();
 		await browser.close();
-		res.send(renderedHtml);
+		// res.send(renderedHtml);
+
+		const responseData = {
+			pdf: pdfBuffer,
+			html: renderedHtml
+		}
+
+		res.json(responseData);
+
+		// await new Promise(resolve => setTimeout(resolve, 2000));
 
 		// Send the PDF as a response
 		// res.set({
 		// 	'Content-Type': 'application/pdf',
 		// 	'Content-Disposition': 'inline; filename="output.pdf"', //attachment  <- this when creating pdf, 'inline' elsewise
 		// });
+
 
 	} catch (error) {
 		console.error('Error generating PDF:', error);

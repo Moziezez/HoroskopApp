@@ -149,32 +149,56 @@ function closePopup(key) {
 }
 
 async function generatePdf(input_html) {
-  const htmlContent = `
-    <!DOCTYPE html>
-    <html lang="de">
-      <head>
-        <meta name="viewport" content="width=device-width" charset="UTF-8">
-        <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script><style id="plotly.js-style-global"></style>
-        <base href='http://localhost:3030/'>
-      </head>
-
-      <body class="horo" style="">
-        ${input_html}
-      </body>
-    </html>
-  `;
-
   try {
-    const response = await axios.post('/render-pdf', {
-      htmlContent
-    }, {
-      // responseType: 'arraybuffer',  oder 'blob'
+    const response = await axios.post('/download/part-pdf', { input_html }, {
+      responseType: 'arraybuffer',
       headers: { 'Content-Type': 'application/json' }
     });
 
-    const blob = new Blob([response.data], { type: 'text/html' });
-    const previewUrl = URL.createObjectURL(blob);
-    window.open(previewUrl, '_blank'); // Open in new tab
+    console.log(response.data);
+    // Check if the response is actually a Blob
+    console.log('Response Type:', response.data.constructor.name); // Should be 'Blob'
+
+    // Check the size of the Blob
+    console.log('PDF Blob Size:', response.data.size);
+
+    const pdfBlob = new Blob([response.data], { type: 'application/pdf' });
+    const pdfPreviewUrl = URL.createObjectURL(pdfBlob);
+    // window.location.href = pdfPreviewUrl;
+    // window.open(pdfPreviewUrl, '_blank');
+
+    setTimeout(() => {
+      URL.revokeObjectURL(pdfPreviewUrl);
+    }, 0.5 * 60 * 1000);
+
+  } catch (error) {
+    console.error('Error sending to /part-pdf:', error);
+  }
+};
+
+async function generateFullPdf(input_html) {
+  try {
+    const response = await axios.post('/download/part-pdf', {
+      input_html
+    }, {
+      responseType: 'json', // oder 'blob'
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    const { pdf, html } = response.data;
+
+    const htmlBlob = new Blob([html], { type: 'text/html' });
+    const htmlPreviewUrl = URL.createObjectURL(htmlBlob);
+    window.open(htmlPreviewUrl, '_blank');
+
+    const pdfBlob = new Blob([new Uint8Array(pdf.data)], { type: 'application/pdf' }); // new Blob([pdf], { type: 'application/pdf' });
+    const pdfPreviewUrl = URL.createObjectURL(pdfBlob);
+    window.open(pdfPreviewUrl, '_blank');
+
+    setTimeout(() => {
+      URL.revokeObjectURL(htmlPreviewUrl);
+      URL.revokeObjectURL(pdfPreviewUrl);
+    }, 0.5 * 60 * 1000);
 
   } catch (error) {
     console.error('Error:', error);
@@ -182,9 +206,19 @@ async function generatePdf(input_html) {
 };
 
 function addClickEvents() {
-  $('#genPdf').click(() => { generatePdf(document.getElementsByClassName("plot-flex-container")[0].outerHTML) });
+  $('#genPdf1').click(() => {
+    generatePdf(
+      document.getElementById("print-graph1").outerHTML.slice(0, -6) +
+      document.getElementsByClassName("flexItem5")[0].outerHTML +
+      '</div>'
+    )
+  });
+  $('#genPdf2').click(() => {
+    generatePdf(
+      document.getElementsByClassName("plot-flex-container")[0].outerHTML
+    )
+  });
   // $('#genPdf').click(() => { generatePdf(document.documentElement.outerHTML) });
-  //$('#genPdf').click(() => { generatePdf(document.getElementById("print-graph1").outerHTML) });
   $("#popupLegend").fadeOut(1);
   $("#triggerForm").attr("onclick", `popUpForm()`);
   $("#triggerLegend").attr("onclick", `popUpLegend()`);
@@ -301,7 +335,7 @@ async function fetchEnvironmentVariables() {
   }
 }
 
-async function downloadSvgGraph(event) {
+async function downloadSvgGraph(event) { // Idle function since pdf update 
   event.preventDefault();
   var svgtag1 = document.querySelectorAll(".main-svg")[0].innerHTML;
   // var svgtag2 = document.querySelectorAll('.main-svg')[1].innerHTML;
@@ -375,9 +409,7 @@ async function fetchHtmlData() {
         setDatetimepicker();
         fetchEnvironmentVariables();
         addClickEvents();
-        document
-          .getElementById("dlButton")
-          .addEventListener("click", downloadSvgGraph);
+        $("#dlButton").click(downloadSvgGraph);
 
         if ($("body").css("background-color") == "rgb(11, 10, 9)") {
           document.getElementById("circularPlot").setAttribute("style", "filter: invert(0.987);");
@@ -451,6 +483,21 @@ async function fetchForm() {
     console.error('Error fetching HTML data:', error.message);
   }
 }
+
+
+async function fetchProductHtml() {
+  try {
+    const response = await axios.post('/product/id', { input_html }, {
+      responseType: 'arraybuffer',
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    console.log(response.data);
+
+  } catch (error) {
+    console.error('Error sending to /part-pdf:', error);
+  }
+};
 
 async function mainFunc() {
   // const $ = jQuery;
