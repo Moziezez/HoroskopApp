@@ -75,10 +75,9 @@ app.get("/assets/plotFunc", (req, res) => {
 
 app.get("/form", (req, res) => {
 	res.setHeader('Content-Type', 'text/html');
-	console.log("LOGGED", process.env.HOST);
+	// console.log("LOGGED", process.env.HOST);
 	if (process.env.HOST == "http://localhost:3030") {
 		var user_data = userDataConst;
-		console.log(userDataConst);
 		res.render("form", { userData: user_data });
 	} else {
 		res.render("form", {
@@ -249,7 +248,7 @@ app.post("/download/part-pdf", async (req, res) => {
 	}
 
 	try {
-		console.log("Received HTML Content:", htmlContent.slice(0, 500));
+		// console.log("Received HTML Content:", htmlContent.slice(0, 500));
 
 		const browser = await puppeteer.launch({ headless: "true" });
 		const page = await browser.newPage();
@@ -272,6 +271,7 @@ app.post("/download/part-pdf", async (req, res) => {
 			'Content-Disposition': 'inline; filename="pdf1.pdf"', // 'inline' to open in tab
 		});
 		res.send(pdfBuffer);
+		console.log("PDF downloaded in app folder.")
 	} catch (error) {
 		console.error('Error generating PDF1:', error);
 		res.status(500).send('Internal Server Error');
@@ -288,7 +288,7 @@ app.post("/download/full-pdf", async (req, res) => {
 	}
 
 	try {
-		console.log("Received HTML Content:", htmlContent.slice(0, 500));
+		// console.log("Received HTML Content:", htmlContent.slice(0, 500));
 
 		const browser = await puppeteer.launch({ headless: true });
 		const page = await browser.newPage();

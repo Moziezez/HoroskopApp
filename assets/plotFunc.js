@@ -154,12 +154,12 @@ async function generatePdf(input_html) {
       headers: { 'Content-Type': 'application/json' }
     });
 
-    console.log(response.data);
+    // console.log(response.data);
     // Check if the response is actually a Blob
-    console.log('Response Type:', response.data.constructor.name); // Should be 'Blob'
+    // console.log('Response Type:', response.data.constructor.name); // Should be 'Blob'
 
     // Check the size of the Blob
-    console.log('PDF Blob Size:', response.data.size);
+    // console.log('PDF Blob Size:', response.data.size);
 
     const pdfBlob = new Blob([response.data], { type: 'application/pdf' });
     const pdfPreviewUrl = URL.createObjectURL(pdfBlob);
