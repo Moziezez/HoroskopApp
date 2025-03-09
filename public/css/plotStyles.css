@@ -16,7 +16,12 @@
 
 @media only screen and (max-width: 444px) {
 	div.horo.form {
-		height: 185px !important;
+		height: 108px !important;
+	}
+
+	div.horo.plot-flex-container {
+		width: auto;
+		padding-top: 101px;
 	}
 }
 
@@ -80,12 +85,14 @@
 }
 
 @media only screen and (max-width: 605px) {
+
 	body.horo {
-		margin: 3px;
+		margin-left: 3px;
+		margin-right: 4px;
 	}
 
 	div.horo.form {
-		width: 94% !important;
+		width: 100% !important;
 	}
 
 	.flexLegend {
@@ -108,42 +115,52 @@
 
 	.flexItem2 {
 		margin-bottom: -63px;
+		width: 100%;
 	}
 
 	.flexItem3 {
-		margin-top: -108px;
+		width: 100%;
+	}
+
+	#print-graph1 {
+		width: 100%;
 	}
 
 	#circularPlot {
 		transform: scale(0.515);
+		margin-left: -150px;
+		margin-top: -155px;
 	}
 
 	div.horo.legendDiv {
 		margin-top: -169px;
-		margin-left: 234px;
 	}
 
 	p#pUserInfo {
-		/* color: var(--cc-color-2); */
 		margin-bottom: 24px;
 		margin-top: 9px;
+		width: 100%;
+		font-size: 11pt;
+	}
+
+	#triggerLegend {
+		font-size: 10pt;
 	}
 
 	#popupLegend {
-		margin-left: 16px !important;
-		margin-right: 252px !important;
-		font-size: 11pt !important;
+		margin-left: 9px !important;
+		font-size: 10pt !important;
 	}
 
 	.gridLegend1 {
 		grid-template-rows: 24px 24px 24px 24px 24px 24px !important;
-		grid-template-columns: 84px 87px 126px !important;
+		grid-template-columns: 84px 99px 114px !important;
 		gap: 0 12px !important;
 	}
 
 	.gridLegend2 {
 		grid-template-rows: 24px 24px 24px 24px !important;
-		grid-template-columns: 84px 87px 126px !important;
+		grid-template-columns: 84px 99px 114px !important;
 		gap: 0 12px !important;
 	}
 
@@ -162,9 +179,10 @@
 	}
 
 	.positions div div.posItem {
-		grid-template-columns: 24px 164px 116px 60px !important;
+		grid-template-columns: 24px 154px 96px 60px !important;
 		gap: 0 !important;
 		font-size: 11pt !important;
+		margin-left: 0px !important;
 	}
 
 	.half,
@@ -184,10 +202,10 @@
 	}
 
 	.aspectOrbsGrid {
-		grid-template-columns: 38% 30% 33% !important;
+		grid-template-columns: 23% 18% auto !important;
 		grid-template-rows: 33px 33px 33px 33px !important;
-		gap: 0 5px;
-		margin-left: 3px;
+		font-size: 11pt !important;
+		margin-left: 0px !important;
 	}
 
 	h5.horo {

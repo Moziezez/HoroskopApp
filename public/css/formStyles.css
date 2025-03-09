@@ -13,6 +13,18 @@
 	.border {
 		width: 100% !important;
 	}
+
+	label.horo {
+		font-size: 12pt !important;
+	}
+
+	h1.horo {
+		font-size: x-large;
+	}
+
+	span.sublabel.bold {
+		font-size: 8pt !important;
+	}
 }
 
 :root {
@@ -203,7 +215,6 @@ span.marTop {
 	cursor: pointer;
 	text-align: center;
 	background: rgb(255, 253, 250);
-	font-size: 16px;
 	min-height: 32px;
 }
 
@@ -224,7 +235,6 @@ option {
 	cursor: pointer;
 	text-align: center;
 	background: rgb(255, 253, 250);
-	font-size: 16px;
 	min-height: 32px;
 	margin-left: 5px;
 

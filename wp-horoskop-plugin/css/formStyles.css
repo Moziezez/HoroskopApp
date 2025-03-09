@@ -13,6 +13,18 @@
 	.border {
 		width: 100% !important;
 	}
+
+	label.horo {
+		font-size: 12pt !important;
+	}
+
+	h1.horo {
+		font-size: x-large;
+	}
+
+	span.sublabel.bold {
+		font-size: 8pt !important;
+	}
 }
 
 body.horo {
@@ -193,7 +205,6 @@ span.marTop {
 	margin-top: 7px;
 	cursor: pointer;
 	text-align: center;
-	font-size: 16px;
 	min-height: 32px;
 }
 
