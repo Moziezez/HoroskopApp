@@ -17,7 +17,7 @@ h3.horo {
 }
 
 h4.horo {
-	margin: 0 auto 3px 7px;
+	margin: 24px auto 3px 7px;
 	color: var(--cc-color-1);
 }
 
@@ -112,9 +112,7 @@ span.sublabel.bold {
 
 	p.horo.lrMar {
 		font-size: 11pt;
-		margin-left: 12px;
-		margin-right: 12px;
-
+		margin: 12px 7px;
 	}
 
 	#print-graph1 {
@@ -163,14 +161,12 @@ span.sublabel.bold {
 		overflow: visible;
 	}
 
-	.plot-flex-container {
-		width: 96%;
-		margin: auto;
-		padding: 0 5px;
+	.cartesianDiv {
+		flex-wrap: wrap-reverse;
 	}
 
 	.aspectOrbGrid {
-		width: 55%;
+		width: 100%;
 	}
 
 	div.flexItem5,
@@ -184,6 +180,11 @@ span.sublabel.bold {
 	}
 
 	div.horo.half2 {
-		width: 80%;
+		width: 100%;
+	}
+
+	.horo.lMar-print {
+		margin-left: -12px;
+		margin-bottom: 12px;
 	}
 }

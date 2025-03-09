@@ -1,8 +1,8 @@
 const userDataConst = {
-    name: 'Maurice',
-    date: '23.04.1994',
-    hour: '12',
-    minu: '25',
+    name: 'Isabelle Rose Patterson',
+    date: '25.08.2024',
+    hour: '07',
+    minu: '50',
     longi: '33',
     lati: '22',
     house: 'placidus',
