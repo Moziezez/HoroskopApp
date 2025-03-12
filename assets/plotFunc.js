@@ -413,7 +413,7 @@ async function fetchHtmlData() {
         if ($("body").css("background-color") == "rgb(11, 10, 9)") {
           document.getElementById("circularPlot").setAttribute("style", "filter: invert(0.987);");
           document.getElementById("cartesianPlot").setAttribute("style", "filter: invert(0.987);");
-          $("img.svgImgLegend").css("filter", "invert(0.67)");
+          $("img.svgImgLegend").css("filter", "invert(0.987)");
         } else {
           document.getElementById("circularPlot").setAttribute("style", "filter: invert(0);");
           document.getElementById("cartesianPlot").setAttribute("style", "filter: invert(0);");

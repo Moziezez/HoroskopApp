@@ -1,3 +1,37 @@
+/* -- normalmode -- */
+/* :root {
+	--cc-bg-blue: #fefdfb;
+	--cc-color-2: #3e3a34;
+	--cc-color-4: #fefdfb;
+	--cc-color-5: #f6eddc;
+	--cc-color-10: #dfd4c4;
+	--cc-color-14: #875d22;
+	--cc-color-15: #af782c;
+	--cc-color-17: #e0af67;
+	--cc-color-18: #eaca98;
+	--cc-color-19: #f4e4c8;
+	--cc-color-20: #fefcf9;
+	--cc-color-22: #e85e19;
+	--cc-color-26: #7e76e8;
+} */
+
+/* -- darkmode -- */
+:root {
+	--cc-bg-blue: #050a13;
+	--cc-color-2: #bdb4a8;
+	--cc-color-4: #1d1a17;
+	--cc-color-5: #2f2a24;
+	--cc-color-10: #2f2c27;
+	--cc-color-14: #e0af67;
+	--cc-color-15: #d69336;
+	--cc-color-17: #875d22;
+	--cc-color-18: #604218;
+	--cc-color-19: #39270e;
+	--cc-color-20: #110c04;
+	--cc-color-22: #e85e19;
+	--cc-color-26: #7e76e8;
+}
+
 @keyframes pop-in {
 	from {
 		background-color: var(--cc-color-5);
@@ -27,20 +61,8 @@
 	}
 }
 
-:root {
-	--cc-background: #fcedd9;
-	--cc-color-background: #fffcf8;
-	--main-color: #3498db;
-	--secondary-color: #2ecc71;
-	--font-size: 16px;
-	--cc-color-5: rgba(174, 134, 69, 0.703);
-	--cc-color-10: #dfd4c4;
-	--cc-color-18: #eaca98;
-}
-
 body.horo {
 	font-family: Iowan Old Style, Palatino, "Palatino Linotype", "Book Antiqua", "URW Palladio L", P052, serif;
-	background-color: var(--cc-background);
 }
 
 .coords-container {
@@ -55,19 +77,19 @@ body.horo {
 }
 
 .text-container {
-	text-align: justify;
-	background-color: var(--cc-color-background);
+	height: auto;
+	background-color: var(--cc-bg-blue);
 	margin: 4px 4px;
+	text-align: justify;
 	padding: 12px 17px;
-	opacity: 1;
 	animation-name: pop-in;
 	animation-duration: 1s;
 	animation-timing-function: ease-out;
-	box-shadow: 0 0 4px 1px #fcd9a9;
+	box-shadow: 0 0 5px 1px var(--cc-color-19);
 }
 
 .border {
-	border: 1.5px solid #fcd9a9;
+	border: 1.5px solid var(--cc-color-18);
 	border-radius: 5px;
 	width: 401px;
 	margin: 12px auto;
@@ -96,7 +118,7 @@ body.horo {
 	position: relative;
 	width: 100%;
 	height: 1px;
-	background-image: linear-gradient(to right, #fcd9a9 50%, transparent 50%);
+	background-image: linear-gradient(to right, var(--cc-color-17) 50%, transparent 50%);
 	background-size: 2px 2px;
 	/* space between dots */
 	background-repeat: repeat-x;
@@ -109,8 +131,9 @@ input.geoapify-autocomplete-input {
 	padding: 0;
 	width: 100%;
 	margin-bottom: -5px;
-	background-color: var(--cc-color-background);
-	accent-color: rgb(109, 64, 109);
+	background-color: var(--cc-bg-blue);
+	color: var(--cc-color-1);
+	accent-color: var(--cc-color-26);
 	opacity: 0.89;
 	animation-name: pop-in;
 	animation-duration: 1s;
@@ -132,11 +155,11 @@ input.geoapify-autocomplete-input {
 	position: absolute;
 	width: 106%;
 	margin-left: -12px;
-	border: 1.5px solid #eaca98;
+	border: 1.5px solid var(--cc-color-18);
 	border-top-width: 1px;
 	border-radius: 4px;
-	box-shadow: 0.2px 0.3px 3px 1px #dfd4c4;
-	background: rgb(255, 253, 250);
+	background-color: var(--cc-color-20);
+	box-shadow: 1px 2px 7px 7px var(--cc-color-10);
 	font-size: 10pt;
 	text-align: left;
 	cursor: pointer;
@@ -189,59 +212,57 @@ span.marTop {
 }
 
 #but {
-	color: rgb(255, 255, 255);
-	background-color: rgb(252, 169, 45);
+	color: var(--cc-color-14);
+	background-color: var(--cc-color-19);
+	border-color: var(--cc-color-15);
 	width: 100%;
 	height: 31px;
 	border-radius: 5px;
 	border-width: 1px;
 	cursor: pointer;
-	box-shadow: 0 0 2px 0.1px grey;
+	box-shadow: 0 0 2px 0.1px var(--cc-color-22);
 }
 
 #but:hover {
-	box-shadow: 0 0 3px 0.1px grey,
-		0 0 2px 0.1px grey inset;
+	box-shadow: 0 0 3px 0.1px var(--cc-color-22),
+		0 0 2px 0.1px var(--cc-color-22) inset;
 }
 
 #House {
-	width: 131px;
-	border-radius: 2px;
-	border-width: 1.5px;
-	border-color: var(--cc-color-18);
-	box-shadow: 0.2px 0.3px 3px 1px var(--cc-color-10);
+	margin-top: 7px;
 	margin-left: 14px;
-	margin-top: 6px;
-	cursor: pointer;
-	text-align: center;
-	background: rgb(255, 253, 250);
-	min-height: 32px;
 }
 
 #House:hover {
 	box-shadow: 0.2px 0.3px 5px 3px var(--cc-color-10);
 }
 
+.horo.show-aspects {
+	margin-left: 5px;
+}
+
+select.horo {
+	border-color: var(--cc-color-18);
+	box-shadow: 0.2px 0.3px 3px 1px var(--cc-color-10);
+	width: 131px;
+	border-radius: 1px;
+	border-width: 1.5px;
+	background: var(--cc-color-4);
+	color: var(--cc-color-2);
+	min-height: 32px;
+	line-height: 25px;
+	cursor: pointer;
+	text-align: center;
+	font-family: 'Arial';
+}
+
 option {
 	padding: 8px 2px;
 }
 
-.horo.show-aspects {
-	width: 131px;
-	border-radius: 2px;
-	border-width: 1.5px;
-	border-color: var(--cc-color-18);
-	box-shadow: 0.2px 0.3px 3px 1px var(--cc-color-10);
-	cursor: pointer;
-	text-align: center;
-	background: rgb(255, 253, 250);
-	min-height: 32px;
-	margin-left: 5px;
-
-}
 
 .horo.show-aspects:hover {
-	box-shadow: 0.2px 0.3px 5px 3px #dfd4c4;
+	box-shadow: 0.2px 0.3px 5px 3px var(--cc-color-10);
 }
 
 .input-time {
@@ -273,7 +294,7 @@ div.radio-item {
 }
 
 input[type="radio"] {
-	accent-color: rgb(97, 51, 97);
+	accent-color: var(--cc-color-26);
 	opacity: 0.89;
 	margin-left: 2px;
 	cursor: pointer;

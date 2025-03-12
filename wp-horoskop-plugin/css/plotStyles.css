@@ -19,7 +19,7 @@
 		height: 108px !important;
 	}
 
-	.horo.plot-flex-container {
+	div.horo.plot-flex-container {
 		width: auto;
 		padding-top: 101px;
 	}
@@ -181,7 +181,7 @@
 		grid-template-columns: 24px 154px 96px 60px !important;
 		gap: 0 !important;
 		font-size: 11pt !important;
-		margin-left: 0px !important;
+		margin-left: 0 !important;
 	}
 
 	.half,
@@ -204,7 +204,7 @@
 		grid-template-columns: 17% 23% auto !important;
 		grid-template-rows: 33px 33px 33px 33px !important;
 		font-size: 11pt !important;
-		margin-left: 0px !important;
+		margin-left: 0 !important;
 	}
 
 	h5.horo {

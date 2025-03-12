@@ -1,3 +1,21 @@
+/* -- normalmode -- */
+/* :root {
+	--cc-card-light: #faf5ec;
+	--cc-card-dark: #fae6c6;
+	--cc-color-1: #211e1b;
+	--cc-color-2: #3e3a34;
+	--cc-color-16: #d69336;
+} */
+
+/* -- darkmode -- */
+:root {
+	--cc-card-light: #090d16;
+	--cc-card-dark: #081d3c;
+	--cc-color-1: #faf5ef;
+	--cc-color-2: #bdb4a8;
+	--cc-color-16: #af782c;
+}
+
 @keyframes pop-in5 {
 	from {
 		background-color: rgba(174, 134, 69, 0.703);
@@ -85,7 +103,6 @@
 }
 
 @media only screen and (max-width: 605px) {
-
 	body.horo {
 		margin-left: 3px;
 		margin-right: 4px;
@@ -114,7 +131,6 @@
 	}
 
 	.flexItem2 {
-		margin-bottom: -63px;
 		width: 100%;
 	}
 
@@ -137,6 +153,7 @@
 	}
 
 	p#pUserInfo {
+		color: var(--cc-color-2);
 		margin-bottom: 24px;
 		margin-top: 9px;
 		width: 100%;
@@ -182,7 +199,7 @@
 		grid-template-columns: 24px 154px 96px 60px !important;
 		gap: 0 !important;
 		font-size: 11pt !important;
-		margin-left: 0px !important;
+		margin-left: 0 !important;
 	}
 
 	.half,
@@ -249,6 +266,7 @@
 .gridItemLegend {
 	display: flex;
 	justify-content: space-between;
+	color: var(--cc-color-1);
 }
 
 .cOrange {
@@ -261,11 +279,10 @@
 	align-items: center;
 	padding-top: 136px;
 	font-family: Iowan Old Style, Palatino, "Palatino Linotype", "Book Antiqua", "URW Palladio L", P052, serif;
-	background-color: #fcf4ea;
-	color: black;
 	border-radius: 48px / 36px;
 	position: relative;
 	overflow: hidden;
+	background-color: var(--cc-card-light);
 	width: 93%;
 	margin: auto;
 }
@@ -309,7 +326,8 @@
 .flexText1 {
 	font-weight: bold;
 	text-align: center;
-	background-color: #fae6c6;
+	background-color: var(--cc-card-dark);
+	color: var(--cc-color-16);
 	border-radius: 14px;
 	width: 31px;
 	height: 29px;
@@ -327,7 +345,8 @@
 	width: 20%;
 	margin-top: 24px;
 	border-radius: 2px;
-	background-color: #fae6c6;
+	background-color: var(--cc-card-dark);
+	text-align: center;
 	padding: 0 22px 24px 22px;
 	flex-grow: 1;
 	display: flex;
@@ -337,12 +356,14 @@
 
 .popup {
 	text-align: left;
+	padding: 7px;
+	overflow: auto;
 }
 
 .signsBox {
 	width: 185px;
 	height: 63px;
-	background-color: #fae6c6;
+	background-color: var(--cc-card-dark);
 	display: grid;
 	border-radius: 5px;
 	grid-template-columns: [first-col] 25% [second-col] 75%;
@@ -351,7 +372,8 @@
 
 .flexTextWw1 {
 	font-weight: bold;
-	background-color: #fae6c6;
+	background-color: var(--cc-card-dark);
+	color: var(--cc-color-16);
 	border-radius: 14px;
 	width: 101px;
 	height: 29px;
@@ -371,6 +393,7 @@
 	margin: auto auto;
 	font-size: 18px;
 	font-weight: bold;
+	color: var(--cc-color-16);
 }
 
 .grid2 {
@@ -382,6 +405,7 @@
 	margin: auto auto auto 0;
 	font-size: 12px;
 	padding-left: 3px;
+	color: var(--cc-color-1);
 }
 
 .grid3 {
@@ -391,6 +415,7 @@
 	grid-row-end: 3;
 	margin: -2px auto 0 0;
 	font-size: 16px;
+	color: var(--cc-color-1);
 }
 
 #circularPlot {
@@ -409,46 +434,14 @@
 	width: 50%;
 }
 
-.plot-text-container {
-	-webkit-hyphens: auto;
-	hyphens: auto;
-	text-align: justify;
-	margin-top: 22px;
-	margin-bottom: 9px;
-	box-sizing: border-box;
-	border-style: outset;
-	border-color: rgba(202, 187, 161, 0.747);
-	border-radius: 3px;
-	border-width: 0.1px;
-	padding: 0 19px;
-	background-color: rgb(255, 255, 255);
-	/* rgb(13, 0, 26); */
-	opacity: 0.9;
-	height: 90vh;
-	overflow-y: scroll;
-}
-
-.butn {
-	font-weight: bold;
-	color: white;
-	font-size: 16px;
-	background-color: rgb(171, 124, 253);
-	width: auto;
-	height: 26px;
-	border-radius: 7px;
-	cursor: pointer;
-}
-
-.butn:hover {
-	background-color: rgb(4, 2, 60);
-}
-
 .positions {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
 	flex-wrap: wrap;
 	font-size: 12pt;
+	margin-top: 24px;
+	color: var(--cc-color-1);
 }
 
 .positions div div.posItem {
@@ -485,7 +478,7 @@ img.svgImgLegend {
 }
 
 div.horo.form {
-	background-color: #fae6c6;
+	background-color: var(--cc-card-dark);
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 30%;
@@ -522,7 +515,6 @@ div.horo.header {
 }
 
 p.card {
-	padding: 12px 24px;
 	border-radius: 3px;
 	border-width: 1px;
 	max-width: 693px;

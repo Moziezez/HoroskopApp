@@ -261,14 +261,32 @@ app.post("/download/part-pdf", async (req, res) => {
 		await page.addStyleTag({ url: 'http://localhost:3030/public/css/styles.css' });
 
 		// Generate PDF
-		const pdfBuffer = await page.pdf({ path: 'pdf1.pdf', format: 'A4', printBackground: true }); // 
+		const pdfBuffer = await page.pdf({
+			path: 'pdf1.pdf',
+			format: 'A4',
+			printBackground: true,
+			displayHeaderFooter: true,
+			footerTemplate: `       
+				<div style="
+					width:100%; 
+					text-align:right;
+					font-size:10pt;
+					font-weight:bold;
+					padding-right:27px;
+					padding-bottom:3px;
+					color:white;
+					opacity:1;
+				">
+					<span class="pageNumber"></span> 
+				</div>
+			`,
+		});
 
 
 		await browser.close();
 
 		res.set({
 			'Content-Type': 'application/pdf',
-			'Content-Disposition': 'inline; filename="pdf1.pdf"', // 'inline' to open in tab
 		});
 		res.send(pdfBuffer);
 		console.log("PDF downloaded in app folder.")

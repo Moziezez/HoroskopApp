@@ -1,38 +1,67 @@
+/* -- normalmode -- */
+
+/* :root {
+	--cc-color-background: #f8efdf;
+	--cc-card-light: #faf5ec;
+	--cc-color-1: #211e1b;
+	--cc-color-2: #3e3a34;
+	--cc-color-16: #d69336;
+	--cc-color-18: #eaca98;
+	--cc-color-32: #ebad10;
+} */
+
+
+/* -- darkmode -- */
+:root {
+	--cc-color-background: #0b0a09;
+	--cc-card-light: #090d16;
+	--cc-color-1: #faf5ef;
+	--cc-color-2: #bdb4a8;
+	--cc-color-16: #af782c;
+	--cc-color-18: #604218;
+	--cc-color-32: #ebad10;
+}
+
 body {
 	font-family: Iowan Old Style, Palatino, "Palatino Linotype", "Book Antiqua", "URW Palladio L", P052, serif;
 	font-size: 14pt;
 	line-height: 1.6;
-	color: black;
+	background-color: var(--cc-color-background);
+	color: var(--cc-color-2);
 }
 
 h1.horo {
 	hyphens: none;
 	margin: 0 auto 14px auto;
+	color: var(--cc-color-1);
 }
 
 h2.horo {
 	margin: 24px auto 0 auto;
-	font-size: 22px;
+	font-size: 31px;
+	color: var(--cc-color-1);
 }
 
 h3.horo {
 	margin: 0 auto;
 	font-size: 14pt;
+	color: var(--cc-color-1);
 }
 
 h4.horo {
 	margin: 24px auto 3px 7px;
+	color: var(--cc-color-1);
 }
 
 h5.horo {
 	margin: 7px auto 7px auto;
-	color: rgb(145, 145, 145);
 	font-size: 12pt;
 }
 
 h6.horo {
 	margin: 7px auto 7px auto;
 	font-size: 12pt;
+	color: var(--cc-color-1);
 }
 
 .cntr {
@@ -46,12 +75,13 @@ h6.horo {
 p.horo {
 	font-size: 12pt;
 	text-align: justify !important;
+	color: var(--cc-color-1);
 }
 
 a.horo {
 	font-family: system-ui, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: bold;
-	color: orange;
+	color: var(--cc-color-32);
 	font-size: 12pt;
 	cursor: pointer;
 }
@@ -62,7 +92,7 @@ hr.hrheader {
 }
 
 hr.horo {
-	border: 1px solid #fcd9a9;
+	border: 1px solid var(--cc-color-18);
 	margin: 9px 0;
 }
 
@@ -70,21 +100,27 @@ hr.horo.card {
 	margin-top: 17px;
 }
 
-.subheader {
-	font-size: 111%;
-	text-align: center;
-	margin: 19px auto;
+hr.horo.card {
+	border: 1px solid var(--cc-color-16);
+	margin-top: 14px;
 }
 
 span.sublabel {
 	font-family: system-ui, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	color: black;
 	font-size: 11px;
+	color: var(--cc-color-2);
+	cursor: default;
 }
 
 span.sublabel.bold {
 	font-size: 12px;
 	font-weight: bold;
+}
+
+.subheader {
+	font-size: 111%;
+	text-align: center;
+	margin: 19px auto;
 }
 
 .horo.hide {
@@ -96,6 +132,31 @@ span.sublabel.bold {
 }
 
 @media print {
+	@page: first {
+		@bottom-center {
+			content: none;
+		}
+	}
+
+	@page {
+		margin-left: 3mm;
+		margin-right: 3mm;
+		margin-top: 3mm;
+		margin-bottom: 3mm;
+	}
+
+	body {
+		background-color: white;
+		padding-right: 15px;
+		padding-left: 25px;
+	}
+
+	.horo.plot-flex-container {
+		margin-top: -132px;
+		padding-left: 36px;
+		padding-right: 36px;
+	}
+
 	.horo.no-print {
 		display: none;
 	}
@@ -108,7 +169,6 @@ span.sublabel.bold {
 	p.horo.lrMar {
 		font-size: 11pt;
 		margin: 12px 7px;
-
 	}
 
 	#print-graph1 {
@@ -117,8 +177,8 @@ span.sublabel.bold {
 		align-items: center;
 		padding-top: 136px;
 		font-family: Iowan Old Style, Palatino, "Palatino Linotype", "Book Antiqua", "URW Palladio L", P052, serif;
-		background-color: #fcf4ea;
-		color: black;
+		background-color: var(--cc-card-light);
+		color: var(--cc-color-2);
 		border-radius: 48px / 36px;
 		position: relative;
 		overflow: hidden;
@@ -155,6 +215,8 @@ span.sublabel.bold {
 	p.horo.card {
 		font-size: 11pt;
 		overflow: visible;
+		height: auto;
+		padding: 0;
 	}
 
 	.cartesianDiv {
